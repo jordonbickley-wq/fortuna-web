@@ -72,6 +72,31 @@ const STRINGS = {
     open_in_maps: 'Open in Google Maps →',
     temples_disclaimer: 'These are real, documented pilgrimage sites — included here as cultural context, not as a claim that visiting predicts Government Lottery outcomes.',
     choose_zodiac_default: 'Choose your year animal...',
+    nav_checker: 'Check', nav_journal: 'Journal',
+    checker_heading: 'Check Your Lottery Ticket',
+    checker_sub: 'Official Government Lottery results — free, no sign-up',
+    ticket_placeholder: '123456',
+    check_ticket_btn: 'Check',
+    no_results_yet: 'No draw results published here yet — check back after the next draw.',
+    prize_first: '1st Prize', prize_near: 'Either side of 1st',
+    prize_front3: 'Front 3 digits', prize_last3: 'Last 3 digits', prize_last2: 'Last 2 digits',
+    draw_of: (date) => `Draw of ${date}`,
+    win_headline: '🎉 You won!',
+    lose_headline: 'Not this time',
+    lose_body: 'No match on this ticket. There\'s always the next draw!',
+    enter_6_digits: 'Please enter your 6-digit ticket number.',
+    verify_official: 'Always verify against the official GLO announcement before claiming any prize.',
+    journal_heading: 'My Dream Journal',
+    journal_sub: 'Saved dreams, checked against real results after each draw',
+    journal_empty: 'No saved dreams yet. Get a reading above, then tap "Save to journal" — after the draw we\'ll check whether those numbers actually came up, and show you honestly either way.',
+    journal_stat_total: 'saved', journal_stat_checked: 'checked', journal_stat_hits: 'hits',
+    journal_badge_pending: 'Awaiting draw', journal_badge_hit: 'Hit', journal_badge_miss: 'No match',
+    journal_for_draw: (d) => `For draw ${d}`,
+    save_to_journal: '📓 Save to journal',
+    saved_to_journal: '✓ Saved to journal',
+    hot_numbers_title: 'Most-drawn last-2 numbers',
+    hot_numbers_caveat: 'Real observed counts from the draws published here. Past frequency does not make a number more likely next time — every draw is independent.',
+    entertainment_disclaimer: 'Dream readings and lucky numbers are for entertainment. No number can predict a lottery result.',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -145,6 +170,31 @@ const STRINGS = {
     open_in_maps: 'เปิดใน Google Maps →',
     temples_disclaimer: 'สถานที่เหล่านี้มีอยู่จริงและมีชื่อเสียงตามที่กล่าวถึง — นำมาให้ข้อมูลเชิงวัฒนธรรมเท่านั้น ไม่ได้การันตีว่าจะทำนายผลหวยรัฐบาลได้',
     choose_zodiac_default: 'เลือกปีนักษัตรของคุณ...',
+    nav_checker: 'ตรวจหวย', nav_journal: 'สมุดความฝัน',
+    checker_heading: 'ตรวจสลากกินแบ่งรัฐบาล',
+    checker_sub: 'ผลรางวัลอย่างเป็นทางการ — ฟรี ไม่ต้องสมัครสมาชิก',
+    ticket_placeholder: '123456',
+    check_ticket_btn: 'ตรวจ',
+    no_results_yet: 'ยังไม่มีผลรางวัลที่เผยแพร่ที่นี่ — กลับมาดูใหม่หลังงวดถัดไป',
+    prize_first: 'รางวัลที่ 1', prize_near: 'ข้างเคียงรางวัลที่ 1',
+    prize_front3: 'เลขหน้า 3 ตัว', prize_last3: 'เลขท้าย 3 ตัว', prize_last2: 'เลขท้าย 2 ตัว',
+    draw_of: (date) => `งวดวันที่ ${date}`,
+    win_headline: '🎉 คุณถูกรางวัล!',
+    lose_headline: 'งวดนี้ยังไม่ถูก',
+    lose_body: 'สลากใบนี้ไม่ตรงกับรางวัลใด ยังมีงวดหน้าเสมอ!',
+    enter_6_digits: 'กรุณากรอกเลขสลาก 6 หลัก',
+    verify_official: 'กรุณาตรวจสอบกับประกาศอย่างเป็นทางการของสำนักงานสลากฯ อีกครั้งก่อนขึ้นเงินรางวัล',
+    journal_heading: 'สมุดความฝันของฉัน',
+    journal_sub: 'ความฝันที่บันทึกไว้ ตรวจกับผลรางวัลจริงหลังหวยออก',
+    journal_empty: 'ยังไม่มีความฝันที่บันทึกไว้ ทำนายฝันด้านบน แล้วกด "บันทึกลงสมุด" — หลังหวยออก เราจะตรวจให้ว่าเลขนั้นออกจริงไหม และบอกคุณตามตรงทั้งถูกและไม่ถูก',
+    journal_stat_total: 'บันทึกไว้', journal_stat_checked: 'ตรวจแล้ว', journal_stat_hits: 'ตรงเลข',
+    journal_badge_pending: 'รอผลรางวัล', journal_badge_hit: 'ตรงเลข', journal_badge_miss: 'ไม่ตรง',
+    journal_for_draw: (d) => `สำหรับงวด ${d}`,
+    save_to_journal: '📓 บันทึกลงสมุด',
+    saved_to_journal: '✓ บันทึกแล้ว',
+    hot_numbers_title: 'เลขท้าย 2 ตัวที่ออกบ่อยที่สุด',
+    hot_numbers_caveat: 'นับจากผลรางวัลจริงที่เผยแพร่บนเว็บนี้ — การที่เลขเคยออกบ่อยไม่ได้ทำให้มีโอกาสออกมากขึ้นในงวดหน้า ทุกงวดเป็นอิสระต่อกัน',
+    entertainment_disclaimer: 'คำทำนายฝันและเลขนำโชคมีไว้เพื่อความบันเทิง ไม่มีเลขใดทำนายผลรางวัลได้',
   },
 };
 
@@ -191,6 +241,8 @@ function setLang(lang) {
   loadDraw();
   loadToday();
   populateZodiacOptions();
+  loadLatestResult();
+  loadJournal();
   // Note: a currently-displayed dream/module result stays in whatever
   // language it was fetched in until the next action - re-translating
   // live server content isn't attempted here.
@@ -302,6 +354,16 @@ function renderResult(data) {
 
   const needsUnlock = readings.some((r) => r.locked);
 
+  // Capture this reading so it can be saved to the journal and checked
+  // against the real draw result later.
+  lastReadingForJournal = {
+    dreamText: dreamInput.value,
+    symbolIds: readings.map((r) => r.id),
+    numbers: readings.flatMap((r) => r.luckyNumbers || []).concat(personalNumber ? [personalNumber] : []),
+  };
+
+  const journalBtnHtml = `<button class="save-journal-btn" id="save-journal-btn">${t('save_to_journal')}</button>`;
+
   const paywallHtml = !needsUnlock
     ? ''
     : pendingManual
@@ -317,13 +379,18 @@ function renderResult(data) {
   resultCard.innerHTML = `
     <div class="result-tag">${t('reading_tag')}</div>
     ${readingsHtml}
+    ${journalBtnHtml}
     ${paywallHtml}
     <div class="result-footer">
       <span>${hasUnlock ? t('unlocked_note') : t('personal_note')}</span>
       <span class="draw-pill">📅 ${draw.isToday ? t('draw_today') : t('draw_days_to', draw.daysAway)}</span>
     </div>
+    <p style="font-size:11px;color:#8a7a5f;margin-top:12px;text-align:center;">${t('entertainment_disclaimer')}</p>
   `;
   resultCard.classList.remove('hidden');
+
+  const saveBtn = document.getElementById('save-journal-btn');
+  if (saveBtn) saveBtn.addEventListener('click', saveToJournal);
 
   const unlockBtn = document.getElementById('unlock-btn');
   if (unlockBtn) {
@@ -788,3 +855,210 @@ loadTrends();
 renderTemples();
 loadSymbolGrid();
 populateZodiacOptions();
+
+/* ================= lottery result checker ================= */
+let latestDrawCache = null;
+
+async function loadLatestResult() {
+  const box = document.getElementById('latest-result');
+  if (!box) return;
+  try {
+    const res = await fetch('/api/results/latest');
+    const data = await res.json();
+
+    if (!data.available) {
+      box.innerHTML = `<div class="no-results">${t('no_results_yet')}</div>`;
+      return;
+    }
+
+    latestDrawCache = data.result;
+    const r = data.result;
+    const listOrDash = (arr) => (arr && arr.length ? arr.join('  ') : '—');
+
+    box.innerHTML = `
+      <div class="result-banner">
+        <div class="draw-date">${t('draw_of', r.drawDate)}</div>
+        <div class="prize-row">
+          <span class="prize-label">${t('prize_first')}</span>
+          <span class="prize-value">${escapeHtml(r.first || '—')}</span>
+        </div>
+        <div class="prize-row">
+          <span class="prize-label">${t('prize_last2')}</span>
+          <span class="prize-value">${escapeHtml(r.lastTwo || '—')}</span>
+        </div>
+        <div class="prize-row">
+          <span class="prize-label">${t('prize_front3')}</span>
+          <span class="prize-value small">${escapeHtml(listOrDash(r.frontThree))}</span>
+        </div>
+        <div class="prize-row">
+          <span class="prize-label">${t('prize_last3')}</span>
+          <span class="prize-value small">${escapeHtml(listOrDash(r.lastThree))}</span>
+        </div>
+        <div class="prize-row">
+          <span class="prize-label">${t('prize_near')}</span>
+          <span class="prize-value small">${escapeHtml(listOrDash(r.nearFirst))}</span>
+        </div>
+      </div>
+    `;
+    loadHotNumbers();
+  } catch (e) {
+    box.innerHTML = `<div class="no-results">${t('no_results_yet')}</div>`;
+  }
+}
+
+async function loadHotNumbers() {
+  const box = document.getElementById('latest-result');
+  if (!box) return;
+  try {
+    const res = await fetch('/api/results/stats');
+    const data = await res.json();
+    if (!data.ranked || data.ranked.length < 3) return; // not enough data to be meaningful
+
+    const top = data.ranked.slice(0, 6);
+    const html = `
+      <div class="hot-numbers">
+        <h4>${t('hot_numbers_title')}</h4>
+        <p class="caveat">${t('hot_numbers_caveat')}</p>
+        <div class="hot-row">
+          ${top.map((h) => `<div class="hot-num"><span class="n">${escapeHtml(h.number)}</span><span class="c">×${h.count}</span></div>`).join('')}
+        </div>
+      </div>
+    `;
+    box.insertAdjacentHTML('beforeend', html);
+  } catch (e) {}
+}
+
+async function checkTicket() {
+  const input = document.getElementById('ticket-input');
+  const out = document.getElementById('ticket-result');
+  if (!input || !out) return;
+
+  const ticket = input.value.replace(/\D/g, '');
+  if (ticket.length !== 6) {
+    out.innerHTML = `<div class="check-outcome lose"><p>${t('enter_6_digits')}</p></div>`;
+    return;
+  }
+
+  const res = await fetch('/api/results/check', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ticket }),
+  });
+  const data = await res.json();
+
+  if (!data.available) {
+    out.innerHTML = `<div class="check-outcome lose"><p>${t('no_results_yet')}</p></div>`;
+    return;
+  }
+
+  const tierLabels = {
+    first: t('prize_first'), nearFirst: t('prize_near'),
+    frontThree: t('prize_front3'), lastThree: t('prize_last3'), lastTwo: t('prize_last2'),
+  };
+
+  if (data.won) {
+    const totalAmount = data.wins.reduce((sum, w) => sum + w.amount, 0);
+    out.innerHTML = `
+      <div class="check-outcome win">
+        <h3>${t('win_headline')}</h3>
+        <div class="amount">${totalAmount.toLocaleString()} ฿</div>
+        <div>${data.wins.map((w) => `<span class="win-tier">${tierLabels[w.tier] || w.tier}</span>`).join('')}</div>
+        <p style="margin-top:12px;">${t('verify_official')}</p>
+      </div>
+    `;
+  } else {
+    out.innerHTML = `
+      <div class="check-outcome lose">
+        <h3>${t('lose_headline')}</h3>
+        <p>${t('lose_body')}</p>
+      </div>
+    `;
+  }
+}
+
+/* ================= dream journal ================= */
+let lastReadingForJournal = null;
+
+async function saveToJournal() {
+  const btn = document.getElementById('save-journal-btn');
+  if (!lastReadingForJournal || !btn) return;
+  btn.disabled = true;
+
+  const res = await fetch('/api/journal/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(lastReadingForJournal),
+  });
+  const data = await res.json();
+
+  if (data.saved) {
+    btn.textContent = t('saved_to_journal');
+    loadJournal();
+  } else {
+    btn.disabled = false;
+  }
+}
+
+async function loadJournal() {
+  const summaryBox = document.getElementById('journal-summary');
+  const listBox = document.getElementById('journal-list');
+  if (!summaryBox || !listBox) return;
+
+  try {
+    const res = await fetch('/api/journal');
+    const data = await res.json();
+
+    if (!data.entries || data.entries.length === 0) {
+      summaryBox.innerHTML = '';
+      listBox.innerHTML = `<div class="journal-empty">${t('journal_empty')}</div>`;
+      return;
+    }
+
+    summaryBox.innerHTML = `
+      <div class="journal-summary">
+        <div class="journal-stat"><div class="num">${data.summary.total}</div><div class="lbl">${t('journal_stat_total')}</div></div>
+        <div class="journal-stat"><div class="num">${data.summary.checked}</div><div class="lbl">${t('journal_stat_checked')}</div></div>
+        <div class="journal-stat"><div class="num">${data.summary.hits}</div><div class="lbl">${t('journal_stat_hits')}</div></div>
+      </div>
+    `;
+
+    listBox.innerHTML = data.entries.map((e) => {
+      const badgeClass = e.status;
+      const badgeText = e.status === 'pending' ? t('journal_badge_pending')
+        : e.status === 'hit' ? t('journal_badge_hit') : t('journal_badge_miss');
+
+      const numbersHtml = (e.numbers || []).map((n) => {
+        const check = (e.numberChecks || []).find((c) => c.number === n);
+        const isHit = check && check.hit;
+        return `<span class="jnum ${isHit ? 'hit' : ''}">${escapeHtml(n)}</span>`;
+      }).join('');
+
+      return `
+        <div class="journal-entry">
+          <div class="journal-entry-head">
+            <div class="journal-dream">${escapeHtml(e.dreamText || '—')}</div>
+            <span class="journal-badge ${badgeClass}">${badgeText}</span>
+          </div>
+          <div class="journal-numbers">${numbersHtml}</div>
+          <div class="journal-meta">${t('journal_for_draw', e.drawDate)}</div>
+        </div>
+      `;
+    }).join('');
+  } catch (e) {}
+}
+
+/* ================= wire up new controls ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const checkBtn = document.getElementById('check-ticket-btn');
+  if (checkBtn) checkBtn.addEventListener('click', checkTicket);
+
+  const ticketInput = document.getElementById('ticket-input');
+  if (ticketInput) {
+    ticketInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkTicket();
+    });
+  }
+});
+
+loadLatestResult();
+loadJournal();

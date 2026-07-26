@@ -241,3 +241,60 @@ footer .draw-note{ font-size:13px; color:var(--gold-bright); }
 }
 .symbol-chip:hover{ border-color:rgba(201,162,39,0.6); background:rgba(244,233,208,0.1); }
 .symbol-chip .emoji{ font-size:15px; }
+
+/* ---------- LOTTERY CHECKER ---------- */
+.checker{ margin-top:60px; }
+.checker-card{ background:linear-gradient(160deg, rgba(244,233,208,0.06), rgba(244,233,208,0.02)); border:1px solid rgba(201,162,39,0.3); border-radius:20px; padding:26px; max-width:640px; margin:0 auto; }
+.result-banner{ background:rgba(110,20,35,0.25); border:1px solid rgba(201,162,39,0.3); border-radius:14px; padding:16px; margin-bottom:18px; }
+.result-banner .draw-date{ font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--marigold); font-weight:700; margin-bottom:10px; }
+.prize-row{ display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; border-bottom:1px dashed rgba(244,233,208,0.12); gap:12px; }
+.prize-row:last-child{ border-bottom:none; }
+.prize-label{ font-size:12.5px; color:var(--parchment-dim); }
+.prize-value{ font-family:var(--font-display); font-weight:700; font-size:18px; color:var(--gold-bright); letter-spacing:0.04em; }
+.prize-value.small{ font-size:15px; }
+.no-results{ text-align:center; font-size:13px; color:var(--parchment-dim); padding:14px; }
+
+.checker-input-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.checker-input-row input{ flex:1; min-width:160px; background:rgba(244,233,208,0.06); border:1px solid rgba(201,162,39,0.3); color:var(--parchment); border-radius:999px; padding:13px 20px; font-family:var(--font-display); font-size:20px; letter-spacing:0.15em; text-align:center; outline:none; }
+.checker-input-row input::placeholder{ color:rgba(244,233,208,0.25); letter-spacing:0.15em; }
+
+.check-outcome{ margin-top:18px; padding:20px; border-radius:14px; text-align:center; }
+.check-outcome.win{ background:linear-gradient(135deg, rgba(201,162,39,0.3), rgba(232,135,58,0.2)); border:1px solid var(--gold-bright); }
+.check-outcome.lose{ background:rgba(244,233,208,0.04); border:1px solid rgba(244,233,208,0.12); }
+.check-outcome h3{ font-family:var(--font-display); font-size:20px; margin-bottom:6px; }
+.check-outcome .amount{ font-family:var(--font-display); font-size:30px; font-weight:700; color:var(--gold-bright); margin:8px 0; }
+.check-outcome p{ font-size:12.5px; color:var(--parchment-dim); }
+.win-tier{ display:inline-block; background:rgba(0,0,0,0.25); padding:4px 12px; border-radius:999px; font-size:12px; margin:3px; }
+
+/* ---------- DREAM JOURNAL ---------- */
+.journal{ margin-top:60px; }
+.journal-card{ background:linear-gradient(160deg, rgba(244,233,208,0.05), rgba(244,233,208,0.015)); border:1px solid rgba(201,162,39,0.22); border-radius:20px; padding:26px; max-width:720px; margin:0 auto; }
+.journal-summary{ display:flex; gap:14px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+.journal-stat{ text-align:center; padding:12px 20px; background:rgba(244,233,208,0.04); border-radius:14px; min-width:90px; }
+.journal-stat .num{ font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--gold-bright); }
+.journal-stat .lbl{ font-size:11px; color:var(--parchment-dim); margin-top:2px; }
+.journal-empty{ text-align:center; font-size:13px; color:var(--parchment-dim); padding:20px; line-height:1.7; }
+
+.journal-entry{ background:rgba(244,233,208,0.03); border:1px solid rgba(201,162,39,0.15); border-radius:14px; padding:16px; margin-bottom:12px; }
+.journal-entry-head{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.journal-dream{ font-size:13.5px; flex:1; min-width:150px; }
+.journal-badge{ font-size:10.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:4px 10px; border-radius:999px; white-space:nowrap; }
+.journal-badge.pending{ background:rgba(232,135,58,0.2); color:var(--marigold); }
+.journal-badge.hit{ background:rgba(201,162,39,0.3); color:var(--gold-bright); }
+.journal-badge.miss{ background:rgba(244,233,208,0.07); color:var(--parchment-dim); }
+.journal-numbers{ display:flex; gap:8px; flex-wrap:wrap; }
+.jnum{ font-family:var(--font-display); font-weight:700; font-size:14px; padding:6px 12px; border-radius:999px; background:rgba(244,233,208,0.06); color:var(--parchment-dim); }
+.jnum.hit{ background:linear-gradient(135deg,var(--gold-bright),var(--marigold)); color:var(--ink); }
+.journal-meta{ font-size:11px; color:var(--parchment-dim); margin-top:8px; }
+.save-journal-btn{ font-size:12.5px; font-weight:600; color:var(--gold-bright); background:none; border:1px solid rgba(201,162,39,0.35); padding:9px 16px; border-radius:999px; cursor:pointer; margin-bottom:14px; }
+.save-journal-btn:hover{ background:rgba(201,162,39,0.1); }
+.save-journal-btn:disabled{ opacity:0.6; cursor:default; }
+
+/* ---------- HOT NUMBERS (real stats) ---------- */
+.hot-numbers{ margin-top:18px; padding-top:18px; border-top:1px dashed rgba(244,233,208,0.12); }
+.hot-numbers h4{ font-family:var(--font-display); font-size:14px; margin-bottom:4px; }
+.hot-numbers .caveat{ font-size:11px; color:var(--parchment-dim); margin-bottom:12px; line-height:1.6; }
+.hot-row{ display:flex; gap:8px; flex-wrap:wrap; }
+.hot-num{ display:flex; flex-direction:column; align-items:center; background:rgba(244,233,208,0.05); border-radius:12px; padding:8px 14px; }
+.hot-num .n{ font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--gold-bright); }
+.hot-num .c{ font-size:10px; color:var(--parchment-dim); }

@@ -17,6 +17,7 @@ const numerologyContent = require('./config/numerology-content.json');
 const products = require('./config/products.json');
 const { createRateLimiter } = require('./lib/rateLimiter');
 const { getMoonPhase } = require('./lib/moonPhase');
+const drawResults = require('./lib/drawResults');
 
 // 20 requests per minute per IP on the free-text endpoints - generous for
 // a real user clicking around, tight enough to blunt casual spam/scraping.
@@ -545,6 +546,24 @@ app.get('/admin', (req, res) => {
     )
     .join('');
 
+  const latestDraw = store.getLatestDrawResult();
+  const drawSection = `
+    <h2 style="margin-top:40px;">Publish Draw Results</h2>
+    <p style="color:#666;">Copy the official numbers from <a href="https://www.glo.or.th" target="_blank">glo.or.th</a> after each draw.
+    Double-check before saving — people will trust these to check real tickets.</p>
+    ${latestDraw ? `<p style="color:#080;">Latest published: <strong>${latestDraw.drawDate}</strong> (first prize ${latestDraw.first})</p>` : '<p style="color:#a00;">No results published yet.</p>'}
+    <form method="POST" action="/admin/draw" style="background:#f6f6f6;padding:16px;border-radius:8px;">
+      <input type="hidden" name="password" value="${password}">
+      <label>Draw date (YYYY-MM-DD)<br><input name="drawDate" required placeholder="2026-08-01" style="padding:6px;width:200px;"></label><br><br>
+      <label>1st prize (6 digits)<br><input name="first" required placeholder="123456" style="padding:6px;width:200px;"></label><br><br>
+      <label>Numbers either side of 1st (comma separated)<br><input name="nearFirst" placeholder="123455,123457" style="padding:6px;width:300px;"></label><br><br>
+      <label>Front 3 digits (comma separated)<br><input name="frontThree" placeholder="111,222" style="padding:6px;width:300px;"></label><br><br>
+      <label>Last 3 digits (comma separated)<br><input name="lastThree" placeholder="888,999" style="padding:6px;width:300px;"></label><br><br>
+      <label>Last 2 digits<br><input name="lastTwo" placeholder="56" style="padding:6px;width:100px;"></label><br><br>
+      <button type="submit" style="padding:10px 20px;font-weight:bold;">Publish Results</button>
+    </form>
+  `;
+
   res.send(`
     <html><body style="font-family:sans-serif;max-width:800px;margin:40px auto;">
       <h2>Pending Manual Payments (${pending.length})</h2>
@@ -560,8 +579,32 @@ app.get('/admin', (req, res) => {
         <tr><th>Visitor</th><th>Item</th><th>Note from buyer</th><th>Submitted</th><th>Action</th></tr>
         ${orderRows || '<tr><td colspan="5">No pending orders right now.</td></tr>'}
       </table>
+
+      ${drawSection}
     </body></html>
   `);
+});
+
+app.post('/admin/draw', (req, res) => {
+  const { password } = req.body;
+  if (!checkAdminPassword(password)) return res.status(403).send('Wrong password');
+
+  const splitList = (v) =>
+    String(v || '')
+      .split(',')
+      .map((s) => s.trim().replace(/\D/g, ''))
+      .filter(Boolean);
+
+  store.saveDrawResult({
+    drawDate: String(req.body.drawDate || '').trim(),
+    first: String(req.body.first || '').replace(/\D/g, ''),
+    nearFirst: splitList(req.body.nearFirst),
+    frontThree: splitList(req.body.frontThree),
+    lastThree: splitList(req.body.lastThree),
+    lastTwo: String(req.body.lastTwo || '').replace(/\D/g, ''),
+  });
+
+  res.redirect(`/admin?password=${encodeURIComponent(password)}`);
 });
 
 app.post('/admin/shop/handle', (req, res) => {
@@ -576,6 +619,109 @@ app.post('/admin/confirm', (req, res) => {
   if (!checkAdminPassword(password)) return res.status(403).send('Wrong password');
   store.confirmManualEntitlement(id);
   res.redirect(`/admin?password=${encodeURIComponent(password)}`);
+});
+
+// ---------- official draw results & ticket checking ----------
+
+app.get('/api/results/latest', (req, res) => {
+  const latest = store.getLatestDrawResult();
+  if (!latest) return res.json({ available: false });
+  res.json({ available: true, result: latest });
+});
+
+app.get('/api/results/all', (req, res) => {
+  const all = store.getAllDrawResults();
+  const sorted = [...all].sort((a, b) => (a.drawDate < b.drawDate ? 1 : -1));
+  res.json({ results: sorted });
+});
+
+// Check a full 6-digit ticket against a specific (or the latest) draw.
+app.post('/api/results/check', readingLimiter, (req, res) => {
+  const ticket = (req.body.ticket || '').trim().slice(0, 20);
+  const drawDate = (req.body.drawDate || '').trim();
+
+  const result = drawDate ? store.getDrawResult(drawDate) : store.getLatestDrawResult();
+  if (!result) {
+    return res.json({ available: false, message: 'No draw results have been published here yet.' });
+  }
+
+  const check = drawResults.checkTicket(ticket, result);
+  res.json({ available: true, drawDate: result.drawDate, ...check });
+});
+
+// Real, verifiable statistics from the stored draw archive. This is
+// genuine observed data (unlike the dream "lucky numbers"), so it's
+// labelled as such in the UI.
+app.get('/api/results/stats', (req, res) => {
+  const all = store.getAllDrawResults();
+  const freq = drawResults.getDigitFrequency(all);
+  res.json(freq);
+});
+
+// ---------- dream journal (save a reading, check it after the draw) ----------
+
+app.post('/api/journal/save', readingLimiter, (req, res) => {
+  const userId = currentUserId(req);
+  const dreamText = (req.body.dreamText || '').trim().slice(0, MAX_INPUT_LENGTH);
+  const symbolIds = Array.isArray(req.body.symbolIds) ? req.body.symbolIds.slice(0, 10) : [];
+  const numbers = Array.isArray(req.body.numbers)
+    ? req.body.numbers.map((n) => String(n).replace(/\D/g, '').slice(0, 6)).filter(Boolean).slice(0, 10)
+    : [];
+
+  if (!dreamText && numbers.length === 0) {
+    return res.status(400).json({ error: 'Nothing to save' });
+  }
+
+  const entry = store.saveJournalEntry({
+    userId,
+    dreamText,
+    symbolIds,
+    numbers,
+    drawDate: currentDrawDate(),
+  });
+  res.json({ saved: true, entry });
+});
+
+// Returns the user's saved dreams, each annotated with whether its
+// numbers actually came up - once that draw's results have been
+// published. This is the honest follow-up loop: it shows real outcomes,
+// including misses.
+app.get('/api/journal', (req, res) => {
+  const userId = currentUserId(req);
+  const entries = store.getJournalForUser(userId, 30);
+
+  const annotated = entries.map((e) => {
+    const result = store.getDrawResult(e.drawDate);
+    if (!result) {
+      return { ...e, status: 'pending', checked: false };
+    }
+    const numberChecks = (e.numbers || []).map((n) => ({
+      number: n,
+      ...drawResults.checkShortNumber(n, result),
+    }));
+    const anyHit = numberChecks.some((c) => c.hit);
+    return { ...e, status: anyHit ? 'hit' : 'miss', checked: true, numberChecks, result };
+  });
+
+  // A user's own honest hit-rate across checked entries.
+  const checkedEntries = annotated.filter((e) => e.checked);
+  const hits = checkedEntries.filter((e) => e.status === 'hit').length;
+
+  res.json({
+    entries: annotated,
+    summary: {
+      total: annotated.length,
+      checked: checkedEntries.length,
+      hits,
+    },
+  });
+});
+
+app.post('/api/journal/delete', readingLimiter, (req, res) => {
+  const userId = currentUserId(req);
+  const id = (req.body.id || '').trim();
+  const ok = store.deleteJournalEntry(userId, id);
+  res.json({ deleted: ok });
 });
 
 app.listen(PORT, () => {
