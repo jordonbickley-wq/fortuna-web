@@ -1,176 +1,434 @@
 [
   {
     "id": "snake",
-    "keywords": ["งู", "งูเห่า", "งูใหญ่", "snake"],
+    "keywords": [
+      "งู",
+      "งูเห่า",
+      "งูใหญ่",
+      "snake"
+    ],
     "interpretation": "ฝันเห็นงู ตำนานกล่าวว่าหมายถึงโชคลาภที่กำลังจะมาถึง หรืออาจหมายถึงคู่แข่งที่กำลังจะเข้ามาในชีวิต",
-    "luckyNumbers": ["56", "65", "5"]
+    "luckyNumbers": [
+      "56",
+      "65",
+      "5"
+    ],
+    "interpretation_en": "Dreaming of a snake traditionally points to fortune on its way — or sometimes a rival entering your life."
   },
   {
     "id": "teeth_falling",
-    "keywords": ["ฟันหัก", "ฟันหลุด", "teeth"],
+    "keywords": [
+      "ฟันหัก",
+      "ฟันหลุด",
+      "teeth"
+    ],
     "interpretation": "ฝันฟันหักหรือหลุด ตำนานสมัยก่อนมักตีความว่าหมายถึงคนใกล้ชิดหรือเรื่องที่ต้องระวังเรื่องสุขภาพของครอบครัว",
-    "luckyNumbers": ["09", "90", "9"]
+    "luckyNumbers": [
+      "09",
+      "90",
+      "9"
+    ],
+    "interpretation_en": "Losing or breaking teeth in a dream is traditionally tied to worry about a family member's health, or news from someone close to you."
   },
   {
     "id": "water",
-    "keywords": ["น้ำ", "น้ำท่วม", "แม่น้ำ", "water"],
+    "keywords": [
+      "น้ำ",
+      "น้ำท่วม",
+      "แม่น้ำ",
+      "water"
+    ],
     "interpretation": "ฝันเห็นน้ำ มักสื่อกันว่าหมายถึงโชคลาภและความราบรื่น น้ำใสหมายถึงโชคดี น้ำขุ่นหมายถึงอุปสรรคเล็กน้อย",
-    "luckyNumbers": ["23", "32", "2"]
+    "luckyNumbers": [
+      "23",
+      "32",
+      "2"
+    ],
+    "interpretation_en": "Water in a dream generally signals good fortune and smooth sailing. Clear water means good luck; murky water suggests a small obstacle first."
   },
   {
     "id": "flying",
-    "keywords": ["บิน", "เหิน", "flying"],
+    "keywords": [
+      "บิน",
+      "เหิน",
+      "flying"
+    ],
     "interpretation": "ฝันว่าตัวเองบินได้ มักหมายถึงความอิสระที่กำลังจะมาถึง หรือความสำเร็จที่กำลังจะได้มา",
-    "luckyNumbers": ["19", "91", "1"]
+    "luckyNumbers": [
+      "19",
+      "91",
+      "1"
+    ],
+    "interpretation_en": "Dreaming that you can fly usually points to freedom on the way, or success you've been working toward."
   },
   {
     "id": "finding_money",
-    "keywords": ["เก็บเงิน", "เจอเงิน", "เงิน", "money"],
+    "keywords": [
+      "เก็บเงิน",
+      "เจอเงิน",
+      "เงิน",
+      "money"
+    ],
     "interpretation": "ฝันเก็บเงินได้ ตำนานกล่าวว่าอาจหมายถึงการสูญเสียโชคลาภเล็กน้อย หรือเป็นการเตือนใจเรื่องการเงิน",
-    "luckyNumbers": ["78", "87", "7"]
+    "luckyNumbers": [
+      "78",
+      "87",
+      "7"
+    ],
+    "interpretation_en": "Finding money in a dream is traditionally said to mean a small loss is coming, or a reminder to be careful with money."
   },
   {
     "id": "dead_relative",
-    "keywords": ["คนตาย", "ผี", "ญาติที่เสียชีวิต", "dead"],
+    "keywords": [
+      "คนตาย",
+      "ผี",
+      "ญาติที่เสียชีวิต",
+      "dead"
+    ],
     "interpretation": "ฝันเห็นญาติที่เสียชีวิตแล้ว ตำนานกล่าวว่าอาจหมายถึงท่านมาเตือนเรื่องโชคลาภ หรือส่งสัญญาณบางอย่าง",
-    "luckyNumbers": ["45", "54", "4"]
+    "luckyNumbers": [
+      "45",
+      "54",
+      "4"
+    ],
+    "interpretation_en": "Seeing a deceased relative is traditionally said to mean they're visiting to bring luck, or sending you a message."
   },
   {
     "id": "wedding",
-    "keywords": ["แต่งงาน", "งานแต่ง", "wedding"],
+    "keywords": [
+      "แต่งงาน",
+      "งานแต่ง",
+      "wedding"
+    ],
     "interpretation": "ฝันเรื่องแต่งงาน มักหมายถึงการเปลี่ยนแปลงครั้งใหญ่ในชีวิต ไม่จำเป็นต้องเกี่ยวกับความรัก",
-    "luckyNumbers": ["12", "21", "1"]
+    "luckyNumbers": [
+      "12",
+      "21",
+      "1"
+    ],
+    "interpretation_en": "Dreaming of a wedding points to a big change coming in your life — not necessarily related to romance."
   },
   {
     "id": "chased",
-    "keywords": ["ถูกไล่", "โดนไล่", "chased"],
+    "keywords": [
+      "ถูกไล่",
+      "โดนไล่",
+      "chased"
+    ],
     "interpretation": "ฝันถูกไล่ มักสะท้อนความเครียดหรือเรื่องที่กำลังหลีกเลี่ยงในชีวิตจริง",
-    "luckyNumbers": ["36", "63", "3"]
+    "luckyNumbers": [
+      "36",
+      "63",
+      "3"
+    ],
+    "interpretation_en": "Being chased in a dream often reflects stress, or something in real life you're avoiding."
   },
   {
     "id": "elephant",
-    "keywords": ["ช้าง", "elephant"],
+    "keywords": [
+      "ช้าง",
+      "elephant"
+    ],
     "interpretation": "ฝันเห็นช้าง ตำนานกล่าวว่าหมายถึงความมั่งคั่งและเกียรติยศ อาจมีข่าวดีเรื่องงาน",
-    "luckyNumbers": ["89", "98", "8"]
+    "luckyNumbers": [
+      "89",
+      "98",
+      "8"
+    ],
+    "interpretation_en": "Seeing an elephant traditionally points to abundance and prestige — possibly good news at work."
   },
   {
     "id": "fire",
-    "keywords": ["ไฟไหม้", "ไฟ", "fire"],
+    "keywords": [
+      "ไฟไหม้",
+      "ไฟ",
+      "fire"
+    ],
     "interpretation": "ฝันเห็นไฟ มีสองทาง คือความโกรธที่ควบคุมไม่ได้ หรือโชคลาภที่มาเร็วเหมือนไฟลุก",
-    "luckyNumbers": ["67", "76", "6"]
+    "luckyNumbers": [
+      "67",
+      "76",
+      "6"
+    ],
+    "interpretation_en": "Fire can go two ways in a dream: anger burning out of control, or fortune arriving as fast as flames catch."
   },
   {
     "id": "fish",
-    "keywords": ["ปลา", "fish"],
+    "keywords": [
+      "ปลา",
+      "fish"
+    ],
     "interpretation": "ฝันเห็นปลา ตำนานกล่าวว่าหมายถึงความอุดมสมบูรณ์และโชคลาภด้านการเงิน",
-    "luckyNumbers": ["34", "43", "3"]
+    "luckyNumbers": [
+      "34",
+      "43",
+      "3"
+    ],
+    "interpretation_en": "Seeing fish traditionally signals abundance and good fortune around money."
   },
   {
     "id": "falling",
-    "keywords": ["ตก", "ตกจากที่สูง", "falling"],
+    "keywords": [
+      "ตก",
+      "ตกจากที่สูง",
+      "falling"
+    ],
     "interpretation": "ฝันตกจากที่สูง มักสะท้อนความกังวลเรื่องสถานะหรือความมั่นคงในชีวิต",
-    "luckyNumbers": ["50", "05", "0"]
+    "luckyNumbers": [
+      "50",
+      "05",
+      "0"
+    ],
+    "interpretation_en": "Falling from a height often reflects anxiety about your status or stability in life."
   },
   {
     "id": "house",
-    "keywords": ["บ้าน", "house", "home"],
+    "keywords": [
+      "บ้าน",
+      "house",
+      "home"
+    ],
     "interpretation": "ฝันเห็นบ้าน มักหมายถึงความมั่นคงในชีวิต หรือการเปลี่ยนแปลงเรื่องที่อยู่อาศัยที่กำลังจะมาถึง",
-    "luckyNumbers": ["14", "41", "4"]
+    "luckyNumbers": [
+      "14",
+      "41",
+      "4"
+    ],
+    "interpretation_en": "Dreaming of a house usually points to stability in your life, or a change in living situation on the way."
   },
   {
     "id": "car",
-    "keywords": ["รถ", "รถยนต์", "car"],
+    "keywords": [
+      "รถ",
+      "รถยนต์",
+      "car"
+    ],
     "interpretation": "ฝันเห็นรถหรือขับรถ มักหมายถึงความก้าวหน้าในชีวิตหรือการเดินทางที่กำลังจะมาถึง",
-    "luckyNumbers": ["28", "82", "2"]
+    "luckyNumbers": [
+      "28",
+      "82",
+      "2"
+    ],
+    "interpretation_en": "Dreaming of a car or driving usually points to progress in your life, or a journey on the way."
   },
   {
     "id": "baby",
-    "keywords": ["เด็กทารก", "ทารก", "เด็กแรกเกิด", "baby"],
+    "keywords": [
+      "เด็กทารก",
+      "ทารก",
+      "เด็กแรกเกิด",
+      "baby"
+    ],
     "interpretation": "ฝันเห็นเด็กทารก มักหมายถึงจุดเริ่มต้นใหม่ โอกาสใหม่ หรือความบริสุทธิ์ที่กำลังเข้ามาในชีวิต",
-    "luckyNumbers": ["01", "10", "1"]
+    "luckyNumbers": [
+      "01",
+      "10",
+      "1"
+    ],
+    "interpretation_en": "Dreaming of a baby usually points to a fresh start, a new opportunity, or innocence entering your life."
   },
   {
     "id": "monk",
-    "keywords": ["พระ", "พระสงฆ์", "monk"],
+    "keywords": [
+      "พระ",
+      "พระสงฆ์",
+      "monk"
+    ],
     "interpretation": "ฝันเห็นพระสงฆ์ ตำนานกล่าวว่าหมายถึงพรและโชคดีที่กำลังจะมาถึง เป็นสัญญาณที่ดี",
-    "luckyNumbers": ["39", "93", "3"]
+    "luckyNumbers": [
+      "39",
+      "93",
+      "3"
+    ],
+    "interpretation_en": "Dreaming of a monk traditionally points to a blessing and good fortune on the way — a good sign."
   },
   {
     "id": "hair_falling",
-    "keywords": ["ผมร่วง", "ผมหลุด", "hair falling"],
+    "keywords": [
+      "ผมร่วง",
+      "ผมหลุด",
+      "hair falling"
+    ],
     "interpretation": "ฝันผมร่วงหรือหลุด มักสะท้อนความกังวลเรื่องภาพลักษณ์หรือการสูญเสียบางอย่างที่ให้ความสำคัญ",
-    "luckyNumbers": ["60", "06", "6"]
+    "luckyNumbers": [
+      "60",
+      "06",
+      "6"
+    ],
+    "interpretation_en": "Dreaming that your hair is falling out often reflects worry about your image, or the loss of something you value."
   },
   {
     "id": "funeral",
-    "keywords": ["งานศพ", "funeral"],
+    "keywords": [
+      "งานศพ",
+      "funeral"
+    ],
     "interpretation": "ฝันเห็นงานศพ ตำนานกล่าวว่ากลับกันกับความหมายตรงตัว มักหมายถึงการเริ่มต้นใหม่หรืออายุยืนของคนที่ฝันถึง",
-    "luckyNumbers": ["27", "72", "7"]
+    "luckyNumbers": [
+      "27",
+      "72",
+      "7"
+    ],
+    "interpretation_en": "Dreaming of a funeral traditionally means the opposite of what it looks like — often pointing to a fresh start or long life for the person you dreamed of."
   },
   {
     "id": "police",
-    "keywords": ["ตำรวจ", "police"],
+    "keywords": [
+      "ตำรวจ",
+      "police"
+    ],
     "interpretation": "ฝันเห็นตำรวจ มักหมายถึงเรื่องที่เกี่ยวกับกฎระเบียบหรือความยุติธรรมที่กำลังเข้ามาในชีวิต",
-    "luckyNumbers": ["48", "84", "8"]
+    "luckyNumbers": [
+      "48",
+      "84",
+      "8"
+    ],
+    "interpretation_en": "Dreaming of police usually points to a matter involving rules or justice entering your life."
   },
   {
     "id": "egg",
-    "keywords": ["ไข่", "egg"],
+    "keywords": [
+      "ไข่",
+      "egg"
+    ],
     "interpretation": "ฝันเห็นไข่ ตำนานกล่าวว่าหมายถึงโอกาสใหม่หรือความอุดมสมบูรณ์ที่กำลังจะเริ่มต้น",
-    "luckyNumbers": ["02", "20", "2"]
+    "luckyNumbers": [
+      "02",
+      "20",
+      "2"
+    ],
+    "interpretation_en": "Dreaming of eggs traditionally points to a new opportunity or abundance about to begin."
   },
   {
     "id": "bird",
-    "keywords": ["นก", "bird"],
+    "keywords": [
+      "นก",
+      "bird"
+    ],
     "interpretation": "ฝันเห็นนก มักหมายถึงข่าวดีที่กำลังจะมาถึง หรือความเป็นอิสระที่ปรารถนา",
-    "luckyNumbers": ["17", "71", "1"]
+    "luckyNumbers": [
+      "17",
+      "71",
+      "1"
+    ],
+    "interpretation_en": "Dreaming of a bird usually points to good news on the way, or a longing for freedom."
   },
   {
     "id": "dog",
-    "keywords": ["หมา", "สุนัข", "dog"],
+    "keywords": [
+      "หมา",
+      "สุนัข",
+      "dog"
+    ],
     "interpretation": "ฝันเห็นหมา ตำนานกล่าวว่าหมายถึงมิตรภาพและความซื่อสัตย์ที่มีคนคอยดูแล",
-    "luckyNumbers": ["58", "85", "5"]
+    "luckyNumbers": [
+      "58",
+      "85",
+      "5"
+    ],
+    "interpretation_en": "Dreaming of a dog traditionally points to friendship and loyalty — someone is looking out for you."
   },
   {
     "id": "cat",
-    "keywords": ["แมว", "cat"],
+    "keywords": [
+      "แมว",
+      "cat"
+    ],
     "interpretation": "ฝันเห็นแมว มักหมายถึงความเป็นตัวของตัวเองหรือเรื่องลับบางอย่างที่กำลังจะถูกเปิดเผย",
-    "luckyNumbers": ["46", "64", "4"]
+    "luckyNumbers": [
+      "46",
+      "64",
+      "4"
+    ],
+    "interpretation_en": "Dreaming of a cat often points to independence, or a secret about to come to light."
   },
   {
     "id": "rain",
-    "keywords": ["ฝนตก", "rain"],
+    "keywords": [
+      "ฝนตก",
+      "rain"
+    ],
     "interpretation": "ฝันเห็นฝนตก มักหมายถึงการชำระล้างสิ่งไม่ดีออกไป หรือความโล่งใจทางอารมณ์ที่กำลังจะมาถึง",
-    "luckyNumbers": ["23", "32", "3"]
+    "luckyNumbers": [
+      "23",
+      "32",
+      "3"
+    ],
+    "interpretation_en": "Dreaming of rain usually points to washing away something negative, or emotional relief on the way."
   },
   {
     "id": "gold_jewelry",
-    "keywords": ["ทอง", "เครื่องประดับ", "gold", "jewelry"],
+    "keywords": [
+      "ทอง",
+      "เครื่องประดับ",
+      "gold",
+      "jewelry"
+    ],
     "interpretation": "ฝันเห็นทองหรือเครื่องประดับ ตำนานกล่าวว่าหมายถึงความมั่งคั่งและเกียรติยศที่กำลังจะมาถึง",
-    "luckyNumbers": ["79", "97", "9"]
+    "luckyNumbers": [
+      "79",
+      "97",
+      "9"
+    ],
+    "interpretation_en": "Dreaming of gold or jewelry traditionally points to wealth and prestige on the way."
   },
   {
     "id": "thief",
-    "keywords": ["โจร", "ขโมย", "thief"],
+    "keywords": [
+      "โจร",
+      "ขโมย",
+      "thief"
+    ],
     "interpretation": "ฝันเห็นโจรหรือถูกขโมยของ มักเป็นคำเตือนให้ระมัดระวังเรื่องการเงินหรือความไว้ใจคน",
-    "luckyNumbers": ["35", "53", "5"]
+    "luckyNumbers": [
+      "35",
+      "53",
+      "5"
+    ],
+    "interpretation_en": "Dreaming of a thief or being robbed is usually a warning to be careful with money or who you trust."
   },
   {
     "id": "pregnant",
-    "keywords": ["ท้อง", "ตั้งครรภ์", "pregnant"],
+    "keywords": [
+      "ท้อง",
+      "ตั้งครรภ์",
+      "pregnant"
+    ],
     "interpretation": "ฝันว่าตั้งครรภ์หรือเห็นคนท้อง มักหมายถึงการเติบโตของโครงการหรือความคิดใหม่ที่กำลังก่อตัว",
-    "luckyNumbers": ["08", "80", "8"]
+    "luckyNumbers": [
+      "08",
+      "80",
+      "8"
+    ],
+    "interpretation_en": "Dreaming of pregnancy usually points to a project or new idea that's growing and taking shape."
   },
   {
     "id": "airplane",
-    "keywords": ["เครื่องบิน", "airplane", "plane"],
+    "keywords": [
+      "เครื่องบิน",
+      "airplane",
+      "plane"
+    ],
     "interpretation": "ฝันเห็นเครื่องบินหรือนั่งเครื่องบิน มักหมายถึงความทะเยอทะยานหรือการเดินทางไกลที่กำลังจะเกิดขึ้น",
-    "luckyNumbers": ["16", "61", "6"]
+    "luckyNumbers": [
+      "16",
+      "61",
+      "6"
+    ],
+    "interpretation_en": "Dreaming of a plane or flying in one usually points to ambition, or a long journey on the way."
   },
   {
     "id": "spider",
-    "keywords": ["แมงมุม", "spider"],
+    "keywords": [
+      "แมงมุม",
+      "spider"
+    ],
     "interpretation": "ฝันเห็นแมงมุม มักหมายถึงความคิดสร้างสรรค์ หรือสถานการณ์ที่ซับซ้อนพัวพันในชีวิต",
-    "luckyNumbers": ["29", "92", "2"]
+    "luckyNumbers": [
+      "29",
+      "92",
+      "2"
+    ],
+    "interpretation_en": "Dreaming of a spider usually points to creativity, or a complicated situation you're tangled up in."
   }
 ]

@@ -18,29 +18,35 @@
       <div class="logo-word">Fortu<span>na</span></div>
     </div>
     <div class="nav-links">
-      <a href="#dream">Dream</a>
-      <a href="#modules">Modules</a>
-      <a href="#shop">Shop</a>
-      <a href="#temples">Temples</a>
+      <a href="#dream" data-i18n="nav_dream">Dream</a>
+      <a href="#modules" data-i18n="nav_modules">Modules</a>
+      <a href="#shop" data-i18n="nav_shop">Shop</a>
+      <a href="#temples" data-i18n="nav_temples">Temples</a>
     </div>
-    <div id="auth-area">
-      <button class="nav-cta" id="login-btn">Sign in with LINE</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div id="lang-toggle" style="display:flex; border:1px solid rgba(201,162,39,0.35); border-radius:999px; overflow:hidden;">
+        <button id="lang-en-btn" style="padding:8px 14px; font-size:12.5px; font-weight:600; border:none; cursor:pointer; background:transparent; color:var(--parchment-dim);">EN</button>
+        <button id="lang-th-btn" style="padding:8px 14px; font-size:12.5px; font-weight:600; border:none; cursor:pointer; background:transparent; color:var(--parchment-dim);">TH</button>
+      </div>
+      <div id="auth-area">
+        <button class="nav-cta" id="login-btn">Sign in with LINE</button>
+      </div>
     </div>
   </nav>
 
   <section class="hero" id="dream">
-    <div class="eyebrow">Dream reading · Lucky numbers · Fortune</div>
-    <h1>What did you dream<br>about <em>last night?</em></h1>
-    <p>Type your dream and get an instant reading, plus your personal lucky numbers before the next Government Lottery draw.</p>
+    <div class="eyebrow" data-i18n="hero_eyebrow">Dream reading · Lucky numbers · Fortune</div>
+    <h1 data-i18n-html="hero_h1">What did you dream<br>about <em>last night?</em></h1>
+    <p data-i18n="hero_p">Type your dream and get an instant reading, plus your personal lucky numbers before the next Government Lottery draw.</p>
 
     <div class="fortune-card">
       <div class="fortune-card-inner">
-        <input type="text" id="dream-input" placeholder="e.g. I dreamed about a big snake...">
-        <button class="predict-btn" id="reveal-btn">Reveal ✦</button>
+        <input type="text" id="dream-input" placeholder="e.g. I dreamed about a big snake..." data-i18n-placeholder="dream_input_placeholder">
+        <button class="predict-btn" id="reveal-btn" data-i18n="reveal_btn">Reveal ✦</button>
       </div>
     </div>
 
-    <p class="symbol-grid-label">หรือเลือกจากหมวดหมู่ความฝัน (or pick a category)</p>
+    <p class="symbol-grid-label" data-i18n="symbol_grid_label">Or pick a category</p>
     <div class="symbol-grid" id="symbol-grid"></div>
 
     <p class="hint hidden" id="login-hint"></p>
@@ -48,23 +54,23 @@
     <div class="result hidden" id="result-card"></div>
 
     <div class="stats-strip">
-      <div class="stat-pill"><div class="stat-num" id="stat-dreams">—</div><div class="stat-label">dreams read today</div></div>
-      <div class="stat-pill"><div class="stat-num" id="stat-unlocks">—</div><div class="stat-label">draw passes unlocked</div></div>
-      <div class="stat-pill"><div class="stat-num" id="stat-days">—</div><div class="stat-label">days to next draw</div></div>
+      <div class="stat-pill"><div class="stat-num" id="stat-dreams">—</div><div class="stat-label" data-i18n="stat_dreams">dreams read today</div></div>
+      <div class="stat-pill"><div class="stat-num" id="stat-unlocks">—</div><div class="stat-label" data-i18n="stat_unlocks">draw passes unlocked</div></div>
+      <div class="stat-pill"><div class="stat-num" id="stat-days">—</div><div class="stat-label" data-i18n="stat_days">days to next draw</div></div>
     </div>
   </section>
 
   <section class="today-strip">
     <div class="section-head">
-      <h2>Today's Fortune</h2>
-      <p>A quick daily read before you go about your day</p>
+      <h2 data-i18n="today_heading">Today's Fortune</h2>
+      <p data-i18n="today_sub">A quick daily read before you go about your day</p>
     </div>
     <div class="today-grid">
       <div class="today-card">
         <div class="today-swatch" id="color-swatch"></div>
         <div>
           <h4 id="color-name">Color of the Day</h4>
-          <p>Traditional Thai day-color — worn for good fortune</p>
+          <p data-i18n="color_desc">Traditional Thai day-color — worn for good fortune</p>
         </div>
       </div>
       <div class="today-card">
@@ -72,8 +78,8 @@
           <svg viewBox="0 0 24 24"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg>
         </div>
         <div>
-          <h4 id="moon-phase">Moon Phase</h4>
-          <p>Approximate — for the fun of it 🌙</p>
+          <h4 id="moon-phase" data-i18n="moon_label">Moon Phase</h4>
+          <p data-i18n="moon_desc">Approximate — for the fun of it 🌙</p>
         </div>
       </div>
       <div class="today-card">
@@ -81,7 +87,7 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
         </div>
         <div>
-          <h4>Government Lottery Countdown</h4>
+          <h4 data-i18n="countdown_label">Government Lottery Countdown</h4>
           <p id="countdown-sub">—</p>
         </div>
       </div>
@@ -90,73 +96,73 @@
 
   <section class="modules" id="modules">
     <div class="section-head">
-      <h2>Everything luck, in one place</h2>
-      <p>Tap "Try it" on any card</p>
+      <h2 data-i18n="modules_heading">Everything luck, in one place</h2>
+      <p data-i18n="modules_sub">Tap "Try it" on any card</p>
     </div>
     <div class="module-grid">
 
       <div class="module-card">
         <div class="module-icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="12" x2="17" y2="12"/></svg></div>
-        <h3>Lucky License Plate</h3>
-        <p>Check what your car's plate number means for love, money, and work.</p>
-        <button class="try-btn" data-panel="plate-panel">Try it</button>
+        <h3 data-i18n="plate_title">Lucky License Plate</h3>
+        <p data-i18n="plate_desc">Check what your car's plate number means for love, money, and work.</p>
+        <button class="try-btn" data-panel="plate-panel" data-i18n="try_it_btn">Try it</button>
         <div class="mini-panel" id="plate-panel">
           <input type="text" id="plate-input" placeholder="e.g. 1กข 2345">
-          <button class="mini-go" data-action="plate">Check plate</button>
+          <button class="mini-go" data-action="plate" data-i18n="plate_go_btn">Check plate</button>
           <div class="mini-result" id="plate-result"></div>
         </div>
       </div>
 
       <div class="module-card">
         <div class="module-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="10" y1="18" x2="14" y2="18"/></svg></div>
-        <h3>Lucky Phone Number</h3>
-        <p>Analyze your phone number's digit pattern for fortune.</p>
-        <button class="try-btn" data-panel="phone-panel">Try it</button>
+        <h3 data-i18n="phone_title">Lucky Phone Number</h3>
+        <p data-i18n="phone_desc">Analyze your phone number's digit pattern for fortune.</p>
+        <button class="try-btn" data-panel="phone-panel" data-i18n="try_it_btn">Try it</button>
         <div class="mini-panel" id="phone-panel">
           <input type="text" id="phone-input" placeholder="e.g. 081-234-5678">
-          <button class="mini-go" data-action="phone">Check number</button>
+          <button class="mini-go" data-action="phone" data-i18n="phone_go_btn">Check number</button>
           <div class="mini-result" id="phone-result"></div>
         </div>
       </div>
 
       <div class="module-card">
         <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18 22l-6-3.6L6 22l1.5-7.2L2 10l7.1-1.1L12 2Z"/></svg></div>
-        <h3>Daily Zodiac Reading</h3>
-        <p>Pick your Chinese zodiac year for a quick daily read.</p>
-        <button class="try-btn" data-panel="zodiac-panel">Try it</button>
+        <h3 data-i18n="zodiac_title">Daily Zodiac Reading</h3>
+        <p data-i18n="zodiac_desc">Pick your Chinese zodiac year for a quick daily read.</p>
+        <button class="try-btn" data-panel="zodiac-panel" data-i18n="try_it_btn">Try it</button>
         <div class="mini-panel" id="zodiac-panel">
           <select id="zodiac-select"></select>
-          <button class="mini-go" data-action="zodiac">Get today's reading</button>
+          <button class="mini-go" data-action="zodiac" data-i18n="zodiac_go_btn">Get today's reading</button>
           <div class="mini-result" id="zodiac-result"></div>
         </div>
       </div>
 
       <div class="module-card">
         <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M4 19c6-1 9-9 15-15M4 19l4-1 -3-3z"/></svg></div>
-        <h3>Name Numerology</h3>
-        <p>Your name reduces to a power number with its own meaning.</p>
-        <button class="try-btn" data-panel="name-panel">Try it</button>
+        <h3 data-i18n="name_title">Name Numerology</h3>
+        <p data-i18n="name_desc">Your name reduces to a power number with its own meaning.</p>
+        <button class="try-btn" data-panel="name-panel" data-i18n="try_it_btn">Try it</button>
         <div class="mini-panel" id="name-panel">
           <input type="text" id="name-input" placeholder="e.g. Somchai">
-          <button class="mini-go" data-action="name">Reveal number</button>
+          <button class="mini-go" data-action="name" data-i18n="name_go_btn">Reveal number</button>
           <div class="mini-result" id="name-result"></div>
         </div>
       </div>
 
       <div class="module-card">
         <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.5-8.8C.6 8.6 2.6 4.8 6.2 4.2c2-.3 3.7.8 5.8 3 2.1-2.2 3.8-3.3 5.8-3 3.6.6 5.6 4.4 3.7 8-2.5 4.4-9.5 8.8-9.5 8.8Z"/></svg></div>
-        <h3>Amulet Match</h3>
-        <p>Get a suggested amulet type based on what you're seeking luck for.</p>
-        <button class="try-btn" data-panel="amulet-panel">Try it</button>
+        <h3 data-i18n="amulet_title">Amulet Match</h3>
+        <p data-i18n="amulet_desc">Get a suggested amulet type based on what you're seeking luck for.</p>
+        <button class="try-btn" data-panel="amulet-panel" data-i18n="try_it_btn">Try it</button>
         <div class="mini-panel" id="amulet-panel">
           <select id="amulet-select">
-            <option value="">What are you seeking?</option>
-            <option value="wealth">Wealth & money</option>
-            <option value="love">Love & relationships</option>
-            <option value="protection">Protection & safety</option>
-            <option value="career">Career success</option>
+            <option value="" data-i18n="amulet_select_default">What are you seeking?</option>
+            <option value="wealth" data-i18n="amulet_opt_wealth">Wealth & money</option>
+            <option value="love" data-i18n="amulet_opt_love">Love & relationships</option>
+            <option value="protection" data-i18n="amulet_opt_protection">Protection & safety</option>
+            <option value="career" data-i18n="amulet_opt_career">Career success</option>
           </select>
-          <button class="mini-go" data-action="amulet">Find my match</button>
+          <button class="mini-go" data-action="amulet" data-i18n="amulet_go_btn">Find my match</button>
           <div class="mini-result" id="amulet-result"></div>
         </div>
       </div>
@@ -166,37 +172,37 @@
 
   <section class="shop" id="shop">
     <div class="section-head">
-      <h2>Shop Lucky Items</h2>
-      <p>Traditional amulets and charms</p>
+      <h2 data-i18n="shop_heading">Shop Lucky Items</h2>
+      <p data-i18n="shop_sub">Traditional amulets and charms</p>
     </div>
     <div class="shop-grid" id="shop-grid"></div>
   </section>
 
   <section class="trends" id="trends">
     <div class="section-head">
-      <h2>Most-read dream symbols</h2>
-      <p>Real counts from actual readings on this site</p>
+      <h2 data-i18n="trends_heading">Most-read dream symbols</h2>
+      <p data-i18n="trends_sub">Real counts from actual readings on this site</p>
     </div>
     <div class="trend-card">
       <div id="trend-list">
-        <p style="text-align:center;font-size:12.5px;color:var(--parchment-dim);">Not enough readings yet — check back once more people have tried it!</p>
+        <p style="text-align:center;font-size:12.5px;color:var(--parchment-dim);" data-i18n="trends_empty">Not enough readings yet — check back once more people have tried it!</p>
       </div>
     </div>
   </section>
 
   <section class="temples" id="temples">
     <div class="section-head">
-      <h2>Where Thais Go for Lucky Numbers</h2>
-      <p>Five real, well-known pilgrimage sites — not a guarantee of anything, just cultural context</p>
+      <h2 data-i18n="temples_heading">Where Thais Go for Lucky Numbers</h2>
+      <p data-i18n="temples_sub">Five real, well-known pilgrimage sites — not a guarantee of anything, just cultural context</p>
     </div>
     <div class="temple-grid" id="temple-grid"></div>
   </section>
 
   <footer>
-    <div class="tagline">Fortuna — your everyday luck companion</div>
+    <div class="tagline" data-i18n="footer_tagline">Fortuna — your everyday luck companion</div>
     <div class="draw-note" id="footer-draw">Next Government Lottery draw: —</div>
   </footer>
-  <p style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:20px;">
+  <p style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:20px;" data-i18n="footer_disclaimer">
     This app references Thailand's official Government Lottery (สลากกินแบ่งรัฐบาล) only.
   </p>
 

@@ -11,7 +11,7 @@
     "redirectUri": "http://localhost:3000/auth/line/callback"
   },
   "manualPayment": {
-    "enabled": true,
+    "enabled": false,
     "qrImagePath": "/promptpay-qr.png",
     "contactQrImagePath": "/line-contact-qr.png",
     "contactInfo": "Scan to add me on LINE, then send your payment screenshot"

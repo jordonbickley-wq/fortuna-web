@@ -1,97 +1,316 @@
 {
   "nameNumberMeanings": {
-    "1": "a natural leader - independent and driven to start new things",
-    "2": "a diplomat - cooperative, sensitive to others, works well in partnership",
-    "3": "expressive and creative - drawn to communication and self-expression",
-    "4": "grounded and hardworking - values stability and building things that last",
-    "5": "adventurous - craves freedom, change, and new experience",
-    "6": "nurturing - a natural caretaker, often the one holding family together",
-    "7": "thoughtful and analytical - drawn to deeper questions and quiet reflection",
-    "8": "ambitious - oriented toward achievement, status, and material success",
-    "9": "idealistic - generous, big-picture thinker, drawn to causes bigger than self"
+    "1": {
+      "en": "a natural leader - independent and driven to start new things",
+      "th": "ผู้นำโดยธรรมชาติ เป็นตัวของตัวเองสูง ชอบเริ่มสิ่งใหม่"
+    },
+    "2": {
+      "en": "a diplomat - cooperative, sensitive to others, works well in partnership",
+      "th": "นักการทูต อ่อนโยน ประนีประนอม ทำงานร่วมกับผู้อื่นได้ดี"
+    },
+    "3": {
+      "en": "expressive and creative - drawn to communication and self-expression",
+      "th": "มีความคิดสร้างสรรค์ ชอบการสื่อสารและแสดงออก"
+    },
+    "4": {
+      "en": "grounded and hardworking - values stability and building things that last",
+      "th": "มั่นคง ขยัน ให้คุณค่ากับความมั่นคงและการสร้างสิ่งที่ยั่งยืน"
+    },
+    "5": {
+      "en": "adventurous - craves freedom, change, and new experience",
+      "th": "รักอิสระ ชอบการเปลี่ยนแปลงและประสบการณ์ใหม่ๆ"
+    },
+    "6": {
+      "en": "nurturing - a natural caretaker, often the one holding family together",
+      "th": "เป็นผู้ดูแล ห่วงใยครอบครัวและคนรอบข้างเสมอ"
+    },
+    "7": {
+      "en": "thoughtful and analytical - drawn to deeper questions and quiet reflection",
+      "th": "ช่างคิด ชอบตั้งคำถามลึกซึ้งและใช้เวลาอยู่กับตัวเอง"
+    },
+    "8": {
+      "en": "ambitious - oriented toward achievement, status, and material success",
+      "th": "มีความทะเยอทะยาน มุ่งสู่ความสำเร็จและฐานะที่มั่นคง"
+    },
+    "9": {
+      "en": "idealistic - generous, big-picture thinker, drawn to causes bigger than self",
+      "th": "มีอุดมคติสูง ใจกว้าง สนใจเรื่องที่ใหญ่กว่าตัวเอง"
+    }
   },
   "zodiacAnimals": [
-    "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake",
-    "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"
+    "Rat",
+    "Ox",
+    "Tiger",
+    "Rabbit",
+    "Dragon",
+    "Snake",
+    "Horse",
+    "Goat",
+    "Monkey",
+    "Rooster",
+    "Dog",
+    "Pig"
   ],
+  "zodiacAnimalLabels": {
+    "Rat": {
+      "en": "Rat",
+      "th": "ชวด (หนู)"
+    },
+    "Ox": {
+      "en": "Ox",
+      "th": "ฉลู (วัว)"
+    },
+    "Tiger": {
+      "en": "Tiger",
+      "th": "ขาล (เสือ)"
+    },
+    "Rabbit": {
+      "en": "Rabbit",
+      "th": "เถาะ (กระต่าย)"
+    },
+    "Dragon": {
+      "en": "Dragon",
+      "th": "มะโรง (งูใหญ่)"
+    },
+    "Snake": {
+      "en": "Snake",
+      "th": "มะเส็ง (งูเล็ก)"
+    },
+    "Horse": {
+      "en": "Horse",
+      "th": "มะเมีย (ม้า)"
+    },
+    "Goat": {
+      "en": "Goat",
+      "th": "มะแม (แพะ)"
+    },
+    "Monkey": {
+      "en": "Monkey",
+      "th": "วอก (ลิง)"
+    },
+    "Rooster": {
+      "en": "Rooster",
+      "th": "ระกา (ไก่)"
+    },
+    "Dog": {
+      "en": "Dog",
+      "th": "จอ (หมา)"
+    },
+    "Pig": {
+      "en": "Pig",
+      "th": "กุน (หมู)"
+    }
+  },
   "zodiacReadings": {
     "Rat": [
-      "Your resourcefulness is highlighted today - a clever shortcut saves you real time.",
-      "A financial opportunity crosses your path. Look closely before committing.",
-      "Social energy is high - a conversation today could open an unexpected door."
+      {
+        "en": "Your resourcefulness is highlighted today - a clever shortcut saves you real time.",
+        "th": "วันนี้ไหวพริบของคุณโดดเด่น ทางลัดที่ฉลาดช่วยประหยัดเวลาได้จริง"
+      },
+      {
+        "en": "A financial opportunity crosses your path. Look closely before committing.",
+        "th": "โอกาสด้านการเงินผ่านเข้ามา ควรพิจารณาให้ดีก่อนตัดสินใจ"
+      },
+      {
+        "en": "Social energy is high - a conversation today could open an unexpected door.",
+        "th": "พลังงานด้านสังคมสูง บทสนทนาวันนี้อาจเปิดโอกาสที่ไม่คาดคิด"
+      }
     ],
     "Ox": [
-      "Steady, patient effort pays off today more than any shortcut would.",
-      "A stubborn streak could cause friction - pick which hills are worth defending.",
-      "Good day to finish something you started rather than begin something new."
+      {
+        "en": "Steady, patient effort pays off today more than any shortcut would.",
+        "th": "ความพยายามอย่างสม่ำเสมอให้ผลดีกว่าทางลัดใดๆ ในวันนี้"
+      },
+      {
+        "en": "A stubborn streak could cause friction - pick which hills are worth defending.",
+        "th": "ความดื้อรั้นอาจทำให้เกิดเรื่องขัดแย้ง เลือกสิ่งที่คุ้มค่าจะยืนหยัดจริงๆ"
+      },
+      {
+        "en": "Good day to finish something you started rather than begin something new.",
+        "th": "เหมาะกับการทำสิ่งที่ค้างอยู่ให้เสร็จ มากกว่าเริ่มสิ่งใหม่"
+      }
     ],
     "Tiger": [
-      "Bold action is favored today - hesitation costs more than a wrong move would.",
-      "Watch for a rival or competing interest showing up unexpectedly.",
-      "Your confidence draws attention today, for better and for worse."
+      {
+        "en": "Bold action is favored today - hesitation costs more than a wrong move would.",
+        "th": "การกระทำที่กล้าหาญเหมาะกับวันนี้ การลังเลอาจเสียโอกาสมากกว่า"
+      },
+      {
+        "en": "Watch for a rival or competing interest showing up unexpectedly.",
+        "th": "ระวังคู่แข่งหรือผลประโยชน์ที่ขัดกันที่อาจโผล่ขึ้นโดยไม่คาดคิด"
+      },
+      {
+        "en": "Your confidence draws attention today, for better and for worse.",
+        "th": "ความมั่นใจของคุณดึงดูดความสนใจวันนี้ ทั้งดีและไม่ดี"
+      }
     ],
     "Rabbit": [
-      "A gentler pace serves you well - don't let others rush your decisions today.",
-      "Home and family matters take priority and reward the attention.",
-      "Diplomacy wins where confrontation would only cost you."
+      {
+        "en": "A gentler pace serves you well - don't let others rush your decisions today.",
+        "th": "จังหวะที่นุ่มนวลเหมาะกับคุณ อย่าให้ใครเร่งการตัดสินใจของคุณวันนี้"
+      },
+      {
+        "en": "Home and family matters take priority and reward the attention.",
+        "th": "เรื่องบ้านและครอบครัวควรได้รับความสนใจเป็นพิเศษวันนี้"
+      },
+      {
+        "en": "Diplomacy wins where confrontation would only cost you.",
+        "th": "การทูตเอาชนะได้ดีกว่าการเผชิญหน้าในสถานการณ์นี้"
+      }
     ],
     "Dragon": [
-      "Big ambitions get a boost today - this is a good day to think bigger, not smaller.",
-      "Your natural charisma opens a door - use it deliberately, not carelessly.",
-      "A leadership moment presents itself; step into it."
+      {
+        "en": "Big ambitions get a boost today - this is a good day to think bigger, not smaller.",
+        "th": "ความทะเยอทะยานใหญ่ได้แรงสนับสนุนวันนี้ เหมาะกับการคิดใหญ่"
+      },
+      {
+        "en": "Your natural charisma opens a door - use it deliberately, not carelessly.",
+        "th": "เสน่ห์ตามธรรมชาติช่วยเปิดโอกาส ใช้อย่างตั้งใจ"
+      },
+      {
+        "en": "A leadership moment presents itself; step into it.",
+        "th": "โอกาสแสดงความเป็นผู้นำกำลังมาถึง ก้าวเข้าไปคว้าไว้"
+      }
     ],
     "Snake": [
-      "Trust your instincts today - a decision that felt obvious in hindsight starts here.",
-      "Quiet observation serves you better than speaking first today.",
-      "A financial matter needs a second, sharper look before you act."
+      {
+        "en": "Trust your instincts today - a decision that felt obvious in hindsight starts here.",
+        "th": "เชื่อสัญชาตญาณของคุณวันนี้ การตัดสินใจที่สำคัญเริ่มจากตรงนี้"
+      },
+      {
+        "en": "Quiet observation serves you better than speaking first today.",
+        "th": "การสังเกตอย่างเงียบๆ ได้ผลดีกว่าการพูดก่อนวันนี้"
+      },
+      {
+        "en": "A financial matter needs a second, sharper look before you act.",
+        "th": "เรื่องการเงินต้องการการทบทวนอีกครั้งก่อนลงมือ"
+      }
     ],
     "Horse": [
-      "Restlessness is strong today - channel it into movement, not scattered effort.",
-      "Travel or a change of scenery brings clarity on something you've been stuck on.",
-      "Independence is favored - a solo effort outperforms a group one today."
+      {
+        "en": "Restlessness is strong today - channel it into movement, not scattered effort.",
+        "th": "ความอยู่ไม่สุขสูงวันนี้ ควรนำไปใช้กับการลงมือทำ ไม่ใช่กระจายความพยายาม"
+      },
+      {
+        "en": "Travel or a change of scenery brings clarity on something you've been stuck on.",
+        "th": "การเดินทางหรือเปลี่ยนบรรยากาศช่วยให้เห็นเรื่องที่ค้างคาชัดขึ้น"
+      },
+      {
+        "en": "Independence is favored - a solo effort outperforms a group one today.",
+        "th": "ความเป็นอิสระเหมาะกับวันนี้ การทำคนเดียวได้ผลดีกว่าการทำงานเป็นกลุ่ม"
+      }
     ],
     "Goat": [
-      "Creative work flows more easily today - a good day to make, not just plan.",
-      "Lean on someone you trust today rather than carrying something alone.",
-      "A gentle, indirect approach gets further than a direct one."
+      {
+        "en": "Creative work flows more easily today - a good day to make, not just plan.",
+        "th": "งานสร้างสรรค์ไหลลื่นดีวันนี้ เหมาะกับการลงมือทำ ไม่ใช่แค่วางแผน"
+      },
+      {
+        "en": "Lean on someone you trust today rather than carrying something alone.",
+        "th": "พึ่งพาคนที่คุณไว้ใจวันนี้ ดีกว่าแบกทุกอย่างคนเดียว"
+      },
+      {
+        "en": "A gentle, indirect approach gets further than a direct one.",
+        "th": "วิธีการที่นุ่มนวลและอ้อมกว่า ได้ผลดีกว่าการตรงๆ"
+      }
     ],
     "Monkey": [
-      "Quick thinking serves you well today - trust the clever solution you find.",
-      "Watch for a tendency to overcommit - say yes to less, follow through more.",
-      "A playful approach to a serious problem surprisingly works today."
+      {
+        "en": "Quick thinking serves you well today - trust the clever solution you find.",
+        "th": "ไหวพริบทางความคิดช่วยได้มากวันนี้ เชื่อทางแก้ปัญหาที่คุณคิดขึ้น"
+      },
+      {
+        "en": "Watch for a tendency to overcommit - say yes to less, follow through more.",
+        "th": "ระวังการรับปากมากเกินไป รับน้อยลงแต่ทำให้สำเร็จจริง"
+      },
+      {
+        "en": "A playful approach to a serious problem surprisingly works today.",
+        "th": "วิธีสนุกๆ กับเรื่องจริงจังอาจได้ผลดีอย่างน่าประหลาดใจวันนี้"
+      }
     ],
     "Rooster": [
-      "Precision and preparation pay off - the details you checked twice matter today.",
-      "Your honesty lands well today, even where it's blunt.",
-      "A public moment favors you - step forward rather than hang back."
+      {
+        "en": "Precision and preparation pay off - the details you checked twice matter today.",
+        "th": "ความละเอียดและการเตรียมตัวให้ผลดี รายละเอียดที่เช็กซ้ำสำคัญวันนี้"
+      },
+      {
+        "en": "Your honesty lands well today, even where it's blunt.",
+        "th": "ความตรงไปตรงมาของคุณได้ผลดีวันนี้ แม้จะตรงไปหน่อยก็ตาม"
+      },
+      {
+        "en": "A public moment favors you - step forward rather than hang back.",
+        "th": "โอกาสในที่สาธารณะเอื้ออำนวยคุณวันนี้ ก้าวออกไปข้างหน้าดีกว่าถอยหลัง"
+      }
     ],
     "Dog": [
-      "Loyalty is tested and rewarded today - a relationship deepens through it.",
-      "Trust your sense of fairness today, even if it's the harder call.",
-      "A protective instinct serves someone close to you well today."
+      {
+        "en": "Loyalty is tested and rewarded today - a relationship deepens through it.",
+        "th": "ความซื่อสัตย์จะถูกทดสอบและได้รับการตอบแทนที่ดีวันนี้"
+      },
+      {
+        "en": "Trust your sense of fairness today, even if it's the harder call.",
+        "th": "เชื่อความยุติธรรมในใจคุณวันนี้ แม้จะเป็นเรื่องยาก"
+      },
+      {
+        "en": "A protective instinct serves someone close to you well today.",
+        "th": "สัญชาตญาณการปกป้องช่วยคนใกล้ชิดของคุณได้ดีวันนี้"
+      }
     ],
     "Pig": [
-      "Generosity comes back around today, sooner than expected.",
-      "A comfortable, unhurried pace serves you better than pushing hard.",
-      "Enjoy something simple today - it recharges more than you'd expect."
+      {
+        "en": "Generosity comes back around today, sooner than expected.",
+        "th": "ความใจกว้างของคุณจะย้อนกลับมาเร็วกว่าที่คิด"
+      },
+      {
+        "en": "A comfortable, unhurried pace serves you better than pushing hard.",
+        "th": "จังหวะที่สบายๆ ไม่เร่งรีบ ได้ผลดีกว่าการฝืนตัวหนัก"
+      },
+      {
+        "en": "Enjoy something simple today - it recharges more than you'd expect.",
+        "th": "สนุกกับเรื่องง่ายๆ วันนี้ มันชาร์จพลังงานได้มากกว่าที่คิด"
+      }
     ]
   },
   "amuletMatches": {
     "wealth": {
-      "summary": "A wealth-drawing amulet (like a Kumarn Thong or Jatukam Ramathep style) is traditionally sought for this.",
-      "tip": "Often paired with the color gold or the wearer's day-color for extra emphasis."
+      "summary": {
+        "en": "A wealth-drawing amulet (like a Kumarn Thong or Jatukam Ramathep style) is traditionally sought for this.",
+        "th": "วัตถุมงคลด้านโชคลาภและเงินทอง เช่น กุมารทองหรือจตุคามรามเทพ มักเป็นที่นิยมสำหรับเรื่องนี้"
+      },
+      "tip": {
+        "en": "Often paired with the color gold or the wearer's day-color for extra emphasis.",
+        "th": "มักใช้คู่กับสีทองหรือสีประจำวันเกิดเพื่อเสริมพลัง"
+      }
     },
     "love": {
-      "summary": "A love-and-relationship charm, often worn close to the heart, is traditionally sought for this.",
-      "tip": "Some traditions favor a paired set (worn by two people) over a single charm."
+      "summary": {
+        "en": "A love-and-relationship charm, often worn close to the heart, is traditionally sought for this.",
+        "th": "เครื่องรางด้านความรัก ที่มักพกติดตัวใกล้หัวใจ เป็นที่นิยมสำหรับเรื่องนี้"
+      },
+      "tip": {
+        "en": "Some traditions favor a paired set (worn by two people) over a single charm.",
+        "th": "บางความเชื่อนิยมเครื่องรางคู่ (สวมคู่กัน 2 คน) มากกว่าชิ้นเดียว"
+      }
     },
     "protection": {
-      "summary": "A protective amulet blessed by a respected monk is traditionally carried for this.",
-      "tip": "Often carried rather than worn visibly, and treated with particular care and respect."
+      "summary": {
+        "en": "A protective amulet blessed by a respected monk is traditionally carried for this.",
+        "th": "พระเครื่องหรือวัตถุมงคลที่ผ่านการปลุกเสกโดยพระอาจารย์ มักพกติดตัวเพื่อความปลอดภัย"
+      },
+      "tip": {
+        "en": "Often carried rather than worn visibly, and treated with particular care and respect.",
+        "th": "มักพกติดตัวมากกว่าสวมให้เห็นชัด และดูแลด้วยความเคารพและระมัดระวังเป็นพิเศษ"
+      }
     },
     "career": {
-      "summary": "A success-and-promotion amulet is traditionally worn for this, often paired with a lucky color at work.",
-      "tip": "Commonly renewed or re-blessed at the start of a new job or a big project."
+      "summary": {
+        "en": "A success-and-promotion amulet is traditionally worn for this, often paired with a lucky color at work.",
+        "th": "วัตถุมงคลด้านความก้าวหน้าในหน้าที่การงาน มักใช้คู่กับสีมงคลประจำวันทำงาน"
+      },
+      "tip": {
+        "en": "Commonly renewed or re-blessed at the start of a new job or a big project.",
+        "th": "มักปลุกเสกซ้ำเมื่อเริ่มงานใหม่หรือโปรเจกต์ใหญ่"
+      }
     }
   }
 }
