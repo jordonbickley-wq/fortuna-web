@@ -14,6 +14,7 @@ const omiseClient = require('./lib/omiseClient');
 const store = require('./lib/store');
 const numerology = require('./lib/numerology');
 const numerologyContent = require('./config/numerology-content.json');
+const products = require('./config/products.json');
 const { createRateLimiter } = require('./lib/rateLimiter');
 const { getMoonPhase } = require('./lib/moonPhase');
 
@@ -105,10 +106,6 @@ app.get('/api/me', (req, res) => {
 
 app.get('/auth/line/login', (req, res) => {
   if (!isLineLoginConfigured()) {
-    // No real LINE Login channel set up yet - send the visitor back with a
-    // flag the frontend uses to show a friendly notice, rather than
-    // forwarding them to LINE with a placeholder client_id that would just
-    // fail confusingly on LINE's side.
     return res.redirect('/?lineComingSoon=1');
   }
   const state = lineAuth.randomState();
@@ -129,10 +126,6 @@ app.get('/auth/line/callback', async (req, res) => {
       displayName: profile.displayName,
       pictureUrl: profile.pictureUrl,
     });
-    // NOTE: if this visitor had a guest identity with an unlocked Draw Pass
-    // or personal-number history, that doesn't carry over to the new LINE
-    // identity - they're treated as a fresh user going forward. Worth
-    // adding a migration step here before this matters at real scale.
     req.session.lineUserId = profile.userId;
     res.redirect('/');
   } catch (err) {
@@ -167,7 +160,6 @@ app.post('/api/dream', readingLimiter, (req, res) => {
   const readings = matches.map((m) => ({
     id: m.id,
     interpretation: m.interpretation,
-    // Premium numbers only included if this draw cycle is unlocked.
     luckyNumbers: hasUnlock ? m.luckyNumbers : null,
     locked: !hasUnlock,
   }));
@@ -213,8 +205,6 @@ app.post('/api/unlock', readingLimiter, async (req, res) => {
         amountSatang: site.pricing.drawPassAmountSatang,
       });
 
-      // Field path per Omise's PromptPay source docs - verify against a live
-      // test charge, since this hasn't been exercised against real API keys.
       const qrImageUrl = charge.source && charge.source.scannable_code
         ? charge.source.scannable_code.image.download_uri
         : null;
@@ -227,24 +217,18 @@ app.post('/api/unlock', readingLimiter, async (req, res) => {
   }
 
   if (site.manualPayment && site.manualPayment.enabled) {
-    // Your own bank/PromptPay QR - no automatic payment verification, so
-    // this just shows the QR + contact info. The actual unlock happens
-    // when you manually confirm the payment at /admin.
     return res.json({
       manual: true,
       qrImageUrl: site.manualPayment.qrImagePath,
+      contactQrImageUrl: site.manualPayment.contactQrImagePath,
       contactInfo: site.manualPayment.contactInfo,
       amountSatang: site.pricing.drawPassAmountSatang,
     });
   }
 
-  // Neither real payments nor manual payment are configured yet.
   return res.json({ comingSoon: true, message: 'Online payments are launching soon - check back shortly!' });
 });
 
-// Visitor confirms (self-reports) that they've paid via the manual QR -
-// creates a pending claim for the site owner to review and confirm at
-// /admin. Does NOT unlock anything automatically.
 app.post('/api/unlock/claim', readingLimiter, (req, res) => {
   const userId = currentUserId(req);
   const drawDate = currentDrawDate();
@@ -258,6 +242,43 @@ app.post('/api/unlock/claim', readingLimiter, (req, res) => {
 
   const payerNote = (req.body.payerNote || '').trim().slice(0, 200);
   store.createPendingManualEntitlement({ userId, drawDate, payerNote });
+  res.json({ submitted: true });
+});
+
+// ---------- shop: product purchase (manual QR, personal fulfillment) ----------
+
+app.post('/api/shop/checkout', readingLimiter, (req, res) => {
+  const product = products.find((p) => p.id === req.body.productId);
+  if (!product) return res.status(400).json({ error: 'Unknown product' });
+
+  if (!(site.manualPayment && site.manualPayment.enabled)) {
+    return res.json({ comingSoon: true, message: "Purchasing isn't live yet - check back soon!" });
+  }
+
+  res.json({
+    manual: true,
+    productId: product.id,
+    productName: product.name,
+    priceSatang: product.priceSatang,
+    qrImageUrl: site.manualPayment.qrImagePath,
+    contactQrImageUrl: site.manualPayment.contactQrImagePath,
+    contactInfo: site.manualPayment.contactInfo,
+  });
+});
+
+app.post('/api/shop/order', readingLimiter, (req, res) => {
+  const userId = currentUserId(req);
+  const product = products.find((p) => p.id === req.body.productId);
+  if (!product) return res.status(400).json({ error: 'Unknown product' });
+
+  const payerNote = (req.body.payerNote || '').trim().slice(0, 200);
+  store.createOrder({
+    userId,
+    productId: product.id,
+    productName: product.name,
+    priceSatang: product.priceSatang,
+    payerNote,
+  });
   res.json({ submitted: true });
 });
 
@@ -280,8 +301,6 @@ app.get('/api/unlock/status', async (req, res) => {
   }
 });
 
-// Omise sends events here on payment completion - configure this URL in
-// the Omise dashboard under Webhooks.
 app.post('/webhook/omise', (req, res) => {
   const event = req.body;
   try {
@@ -294,17 +313,11 @@ app.post('/webhook/omise', (req, res) => {
   res.status(200).end();
 });
 
-// ---------- today's fortune (color of the day, real Thai tradition) ----------
-
 app.get('/api/today', (req, res) => {
   const today = new Date();
   const color = DAY_COLORS[today.getDay()];
   res.json({ color, moonPhase: getMoonPhase(today), date: today.toISOString().slice(0, 10) });
 });
-
-// ---------- license plate / phone number scoring ----------
-// Free modules - not gated behind the Draw Pass, since these are
-// algorithmic (digit-based) rather than the curated dream-number content.
 
 app.post('/api/plate', readingLimiter, (req, res) => {
   const value = (req.body.value || '').trim().slice(0, MAX_INPUT_LENGTH);
@@ -318,16 +331,12 @@ app.post('/api/phone', readingLimiter, (req, res) => {
   res.json({ value, scores: numerology.digitsToScores(value) });
 });
 
-// ---------- name numerology ----------
-
 app.post('/api/name', readingLimiter, (req, res) => {
   const name = (req.body.name || '').trim().slice(0, MAX_INPUT_LENGTH);
   if (!name) return res.status(400).json({ error: 'Missing name' });
   const power = numerology.nameToPowerNumber(name);
   res.json({ name, power, meaning: numerologyContent.nameNumberMeanings[String(power)] });
 });
-
-// ---------- zodiac daily reading ----------
 
 app.post('/api/zodiac', readingLimiter, (req, res) => {
   const animal = (req.body.animal || '').trim();
@@ -340,8 +349,6 @@ app.post('/api/zodiac', readingLimiter, (req, res) => {
   res.json({ animal, reading, luckyNumber });
 });
 
-// ---------- amulet match ----------
-
 app.post('/api/amulet', readingLimiter, (req, res) => {
   const goal = (req.body.goal || '').trim();
   const match = numerologyContent.amuletMatches[goal];
@@ -351,8 +358,6 @@ app.post('/api/amulet', readingLimiter, (req, res) => {
   res.json({ goal, summary: match.summary, tip: match.tip });
 });
 
-// Display metadata (emoji + label) for each dream-dictionary entry, used
-// by the real trends endpoint below.
 const SYMBOL_DISPLAY = {
   snake: { emoji: '🐍', label: 'Snake' },
   teeth_falling: { emoji: '🦷', label: 'Teeth falling' },
@@ -368,14 +373,11 @@ const SYMBOL_DISPLAY = {
   falling: { emoji: '📉', label: 'Falling' },
 };
 
-// Real usage stats - no seeded/fake numbers. Will show 0s on a fresh
-// deployment until real visitors start using the site.
 app.get('/api/stats', (req, res) => {
   const { dreamsToday, unlocksToday } = store.getTodayStats();
   res.json({ dreamsToday, unlocksToday });
 });
 
-// Real top dream symbols - based on actual logged submissions.
 app.get('/api/trends', (req, res) => {
   const top = store.getTopSymbols(5).map((t) => ({
     ...t,
@@ -383,13 +385,6 @@ app.get('/api/trends', (req, res) => {
   }));
   res.json({ trends: top });
 });
-
-// ---------- admin: confirm manual payments ----------
-// Simple password-gated page - not a real auth system, just enough
-// friction to keep this away from casual visitors. Set ADMIN_PASSWORD in
-// your environment before this becomes usable. The password travels in
-// the URL/form, which is fine for personal low-stakes use over HTTPS but
-// isn't a pattern to reuse for anything more sensitive.
 
 function checkAdminPassword(password) {
   const real = process.env.ADMIN_PASSWORD;
@@ -435,6 +430,27 @@ app.get('/admin', (req, res) => {
     )
     .join('');
 
+  const orders = store.getOpenOrders();
+  const orderRows = orders
+    .map(
+      (o) => `
+      <tr>
+        <td>${o.userId}</td>
+        <td>${o.productName} (${(o.priceSatang / 100).toFixed(0)} THB)</td>
+        <td>${(o.payerNote || '').replace(/</g, '&lt;')}</td>
+        <td>${new Date(o.createdAt).toLocaleString()}</td>
+        <td>
+          <form method="POST" action="/admin/shop/handle" style="display:inline">
+            <input type="hidden" name="id" value="${o.id}">
+            <input type="hidden" name="password" value="${password}">
+            <button type="submit">Mark Handled</button>
+          </form>
+        </td>
+      </tr>
+    `
+    )
+    .join('');
+
   res.send(`
     <html><body style="font-family:sans-serif;max-width:800px;margin:40px auto;">
       <h2>Pending Manual Payments (${pending.length})</h2>
@@ -443,8 +459,22 @@ app.get('/admin', (req, res) => {
         <tr><th>Visitor</th><th>Draw</th><th>Note from payer</th><th>Submitted</th><th>Action</th></tr>
         ${rows || '<tr><td colspan="5">No pending payments right now.</td></tr>'}
       </table>
+
+      <h2 style="margin-top:40px;">Shop Orders (${orders.length})</h2>
+      <p style="color:#666;">Check your bank app + LINE for the payment and message, follow up to pick the right item and arrange delivery, then mark handled.</p>
+      <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;">
+        <tr><th>Visitor</th><th>Item</th><th>Note from buyer</th><th>Submitted</th><th>Action</th></tr>
+        ${orderRows || '<tr><td colspan="5">No pending orders right now.</td></tr>'}
+      </table>
     </body></html>
   `);
+});
+
+app.post('/admin/shop/handle', (req, res) => {
+  const { id, password } = req.body;
+  if (!checkAdminPassword(password)) return res.status(403).send('Wrong password');
+  store.markOrderHandled(id);
+  res.redirect(`/admin?password=${encodeURIComponent(password)}`);
 });
 
 app.post('/admin/confirm', (req, res) => {

@@ -244,142 +244,11 @@ async function loadToday() {
   if (moonEl) moonEl.textContent = data.moonPhase;
 }
 
-async function loadStats() {
-  try {
-    const res = await fetch('/api/stats');
-    const data = await res.json();
-    const dEl = document.getElementById('stat-dreams');
-    const uEl = document.getElementById('stat-unlocks');
-    if (dEl) dEl.textContent = data.dreamsToday;
-    if (uEl) uEl.textContent = data.unlocksToday;
-  } catch (e) {}
-}
-
-async function loadStatsDrawDays() {
-  try {
-    const res = await fetch('/api/draw');
-    const draw = await res.json();
-    const el = document.getElementById('stat-days');
-    if (el) el.textContent = draw.isToday ? '0' : draw.daysAway;
-  } catch (e) {}
-}
-
 async function loadCountdown() {
   const res = await fetch('/api/draw');
   const draw = await res.json();
   const sub = document.getElementById('countdown-sub');
   if (sub) sub.textContent = draw.isToday ? 'Government Lottery draw is today!' : `${draw.date} · ${draw.daysAway} days away`;
-}
-
-const products = [
-  { id:'kumarn', icon:'🧿', name:'Kumarn Thong', category:'wealth', desc:'Traditional wealth-drawing amulet, believed to bring prosperity to its keeper.', price:590 },
-  { id:'jatukam', icon:'🪙', name:'Jatukam Ramathep', category:'wealth', desc:'Well-known protective and prosperity amulet, popular across Thailand.', price:890 },
-  { id:'saisin', icon:'🧵', name:'Blessed Thread Bracelet', category:'protection', desc:'Sai sin cotton thread bracelet, blessed by monks for protection.', price:190 },
-  { id:'buddha', icon:'☸️', name:'Buddha Pendant', category:'protection', desc:'Small pendant necklace for everyday protection and peace of mind.', price:450 },
-  { id:'moneytree', icon:'🪴', name:'Lucky Money Tree', category:'wealth', desc:'Pachira plant, traditionally kept in homes and offices for prosperity.', price:350 },
-  { id:'lovecharm', icon:'💗', name:'Love & Relationship Charm', category:'love', desc:'A small charm traditionally worn close to the heart.', price:290 },
-  { id:'incense', icon:'🕯️', name:'Blessed Incense Set', category:'protection', desc:'Traditional incense set for home altars and daily merit-making.', price:120 },
-  { id:'careercharm', icon:'📈', name:'Career Success Charm', category:'career', desc:'Worn for promotion luck, often paired with your day-color.', price:320 },
-];
-
-function renderShop() {
-  const grid = document.getElementById('shop-grid');
-  if (!grid) return;
-  grid.innerHTML = products.map((p) => `
-    <div class="product-card" id="product-${p.id}" data-category="${p.category}">
-      <div class="product-image">${p.icon}</div>
-      <span class="product-tag">${p.category}</span>
-      <h3>${escapeHtml(p.name)}</h3>
-      <p>${escapeHtml(p.desc)}</p>
-      <div class="product-footer">
-        <div class="product-price">${p.price} THB</div>
-        <button class="buy-btn" data-product="${p.id}">Buy</button>
-      </div>
-      <div class="checkout-panel" id="checkout-${p.id}"></div>
-    </div>
-  `).join('');
-
-  grid.querySelectorAll('.buy-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const panel = document.getElementById(`checkout-${btn.dataset.product}`);
-      panel.classList.add('open');
-      panel.innerHTML = `<p style="font-size:12px;color:var(--parchment-dim);text-align:center;">Purchasing isn't live yet — check back soon!</p>`;
-    });
-  });
-}
-
-function highlightShopCategory(category) {
-  setTimeout(() => {
-    document.querySelectorAll('.product-card').forEach((card) => {
-      card.style.borderColor = card.dataset.category === category ? 'rgba(201,162,39,0.8)' : '';
-    });
-  }, 200);
-}
-
-async function loadTrends() {
-  try {
-    const res = await fetch('/api/trends');
-    const data = await res.json();
-    const list = document.getElementById('trend-list');
-    if (!list || !data.trends || data.trends.length === 0) return;
-
-    const max = Math.max(...data.trends.map((t) => t.count));
-    list.innerHTML = data.trends.map((t, i) => `
-      <div class="trend-row">
-        <div class="trend-num">${i + 1}</div>
-        <div style="width:130px;font-size:12.5px;">${t.emoji} ${escapeHtml(t.label)}</div>
-        <div class="trend-bar-track"><div class="trend-bar-fill" style="width:${((t.count / max) * 100).toFixed(0)}%"></div></div>
-        <div class="trend-count">${t.count} read${t.count === 1 ? '' : 's'}</div>
-      </div>
-    `).join('');
-  } catch (e) {}
-}
-
-const temples = [
-  {
-    icon:'🐍', name:'Kham Chanod (Wang Nakhin)', province:'Udon Thani', rating:'4.6★ (15k+ reviews)',
-    desc:'A palm-covered site believed to be a gateway to the naga realm. Visitors light incense, circle the sacred trees, and watch candle wax drip into water for number signs.',
-    mapsUrl:'https://maps.google.com/?cid=14783424111115046286'
-  },
-  {
-    icon:'🐓', name:'Wat Chedi (Ai Khai)', province:'Nakhon Si Thammarat', rating:'4.6★ (12k+ reviews)',
-    desc:'One of Thailand\'s most famous Government Lottery pilgrimage sites, devoted to child-spirit guardian Ai Khai.',
-    mapsUrl:'https://maps.google.com/?cid=13667418601365559692'
-  },
-  {
-    icon:'🐢', name:'Phaya Tao Ngoi Shrine', province:'Sakon Nakhon', rating:'4.3★ (5k+ reviews)',
-    desc:'A giant turtle statue tied to local legends of longevity and windfall luck.',
-    mapsUrl:'https://maps.google.com/?cid=13818307400563680921'
-  },
-  {
-    icon:'🌳', name:'Wat Prasat', province:'Nonthaburi (Greater Bangkok)', rating:'4.7★ (2.9k+ reviews)',
-    desc:'A 400-year-old temple, home to the Nang Ta-khian tree-spirit shrine — a favorite among Government Lottery hopefuls close to Bangkok.',
-    mapsUrl:'https://maps.google.com/?cid=6446611963925743651'
-  },
-  {
-    icon:'🏔️', name:'Naga Cave (Tham Naka)', province:'Bueng Kan', rating:'4.8★ (3k+ reviews)',
-    desc:'Serpentine rock formations high in Phu Langka National Park that went viral for resembling a sleeping naga.',
-    mapsUrl:'https://maps.google.com/?cid=12811720373151630818'
-  },
-];
-
-function renderTemples() {
-  const grid = document.getElementById('temple-grid');
-  if (!grid) return;
-  grid.innerHTML = temples.map((t) => `
-    <div class="temple-card">
-      <div class="temple-icon">${t.icon}</div>
-      <div class="temple-body">
-        <div class="temple-header">
-          <h3>${escapeHtml(t.name)}</h3>
-          <span class="temple-province">${escapeHtml(t.province)}</span>
-          <span class="temple-rating">${t.rating}</span>
-        </div>
-        <p>${t.desc}</p>
-        <a href="${t.mapsUrl}" target="_blank" rel="noopener" class="temple-link">Open in Google Maps →</a>
-      </div>
-    </div>
-  `).join('') + `<p class="temple-disclaimer">These are real, documented pilgrimage sites — included here as cultural context, not as a claim that visiting predicts Government Lottery outcomes.</p>`;
 }
 
 document.querySelectorAll('.try-btn[data-panel]').forEach((btn) => {
@@ -476,10 +345,194 @@ document.querySelectorAll('.mini-go').forEach((btn) => {
 });
 
 loadToday();
+loadCountdown();
+populateZodiacOptions();
+
+async function loadStats() {
+  try {
+    const res = await fetch('/api/stats');
+    const data = await res.json();
+    document.getElementById('stat-dreams').textContent = data.dreamsToday;
+    document.getElementById('stat-unlocks').textContent = data.unlocksToday;
+  } catch (e) {}
+}
+
+async function loadStatsDrawDays() {
+  try {
+    const res = await fetch('/api/draw');
+    const draw = await res.json();
+    document.getElementById('stat-days').textContent = draw.isToday ? '0' : draw.daysAway;
+  } catch (e) {}
+}
+
+const products = [
+  { id:'kumarn', icon:'🧿', name:'Kumarn Thong', category:'wealth', desc:'Traditional wealth-drawing amulet, believed to bring prosperity to its keeper.', price:590 },
+  { id:'jatukam', icon:'🪙', name:'Jatukam Ramathep', category:'wealth', desc:'Well-known protective and prosperity amulet, popular across Thailand.', price:890 },
+  { id:'saisin', icon:'🧵', name:'Blessed Thread Bracelet', category:'protection', desc:'Sai sin cotton thread bracelet, blessed by monks for protection.', price:190 },
+  { id:'buddha', icon:'☸️', name:'Buddha Pendant', category:'protection', desc:'Small pendant necklace for everyday protection and peace of mind.', price:450 },
+  { id:'moneytree', icon:'🪴', name:'Lucky Money Tree', category:'wealth', desc:'Pachira plant, traditionally kept in homes and offices for prosperity.', price:350 },
+  { id:'lovecharm', icon:'💗', name:'Love & Relationship Charm', category:'love', desc:'A small charm traditionally worn close to the heart.', price:290 },
+  { id:'incense', icon:'🕯️', name:'Blessed Incense Set', category:'protection', desc:'Traditional incense set for home altars and daily merit-making.', price:120 },
+  { id:'careercharm', icon:'📈', name:'Career Success Charm', category:'career', desc:'Worn for promotion luck, often paired with your day-color.', price:320 },
+];
+
+function renderShop() {
+  const grid = document.getElementById('shop-grid');
+  if (!grid) return;
+  grid.innerHTML = products.map((p) => `
+    <div class="product-card" id="product-${p.id}" data-category="${p.category}">
+      <div class="product-image">${p.icon}</div>
+      <span class="product-tag">${p.category}</span>
+      <h3>${escapeHtml(p.name)}</h3>
+      <p>${escapeHtml(p.desc)}</p>
+      <div class="product-footer">
+        <div class="product-price">${p.price} THB</div>
+        <button class="buy-btn" data-product="${p.id}">Buy</button>
+      </div>
+      <div class="checkout-panel" id="checkout-${p.id}"></div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.buy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => startShopCheckout(btn.dataset.product));
+  });
+}
+
+async function startShopCheckout(productId) {
+  const panel = document.getElementById(`checkout-${productId}`);
+  const btn = document.querySelector(`.buy-btn[data-product="${productId}"]`);
+  panel.classList.add('open');
+  panel.innerHTML = `<p style="font-size:12px;color:var(--parchment-dim);text-align:center;">Loading...</p>`;
+
+  const res = await fetch('/api/shop/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ productId }),
+  });
+  const data = await res.json();
+
+  if (data.comingSoon) {
+    panel.innerHTML = `<p style="font-size:12px;color:var(--parchment-dim);text-align:center;">${escapeHtml(data.message)}</p>`;
+    return;
+  }
+  if (data.error) {
+    panel.innerHTML = `<p style="font-size:12px;color:var(--parchment-dim);text-align:center;">Something went wrong — please try again.</p>`;
+    return;
+  }
+
+  btn.disabled = true;
+  panel.innerHTML = `
+    <p style="font-size:12px;text-align:center;"><strong>Step 1</strong> — Scan to pay ${(data.priceSatang / 100).toFixed(0)} THB via PromptPay</p>
+    <img src="${data.qrImageUrl}" alt="PromptPay QR code" style="width:160px;height:160px;margin:8px auto;display:block;border-radius:12px;">
+    ${data.contactQrImageUrl ? `
+      <p style="font-size:12px;text-align:center;margin-top:10px;"><strong>Step 2</strong> — ${escapeHtml(data.contactInfo)}</p>
+      <img src="${data.contactQrImageUrl}" alt="LINE contact QR code" style="width:160px;height:160px;margin:8px auto;display:block;border-radius:12px;">
+    ` : `<p style="font-size:12px;text-align:center;">${escapeHtml(data.contactInfo)}</p>`}
+    <input type="text" id="order-note-${productId}" placeholder="Your name or preferences (optional)" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(201,162,39,0.3);margin:10px 0;background:rgba(244,233,208,0.06);color:var(--parchment);box-sizing:border-box;">
+    <button class="unlock-btn" id="order-paid-btn-${productId}" style="width:100%;">I've paid</button>
+    <p id="order-status-${productId}" style="font-size:12px;text-align:center;margin-top:8px;"></p>
+  `;
+
+  document.getElementById(`order-paid-btn-${productId}`).addEventListener('click', () => submitShopOrder(productId));
+}
+
+async function submitShopOrder(productId) {
+  const btn = document.getElementById(`order-paid-btn-${productId}`);
+  const noteInput = document.getElementById(`order-note-${productId}`);
+  const statusEl = document.getElementById(`order-status-${productId}`);
+  btn.disabled = true;
+
+  const res = await fetch('/api/shop/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ productId, payerNote: noteInput ? noteInput.value : '' }),
+  });
+  const data = await res.json();
+
+  if (data.submitted) {
+    statusEl.textContent = "✓ Got it! We'll find the right one for you personally and message you on LINE to confirm details.";
+  } else {
+    statusEl.textContent = 'Something went wrong — please try again.';
+    btn.disabled = false;
+  }
+}
+
+function highlightShopCategory(category) {
+  setTimeout(() => {
+    document.querySelectorAll('.product-card').forEach((card) => {
+      card.style.borderColor = card.dataset.category === category ? 'rgba(201,162,39,0.8)' : '';
+    });
+  }, 200);
+}
+
+async function loadTrends() {
+  try {
+    const res = await fetch('/api/trends');
+    const data = await res.json();
+    const list = document.getElementById('trend-list');
+    if (!data.trends || data.trends.length === 0) return;
+
+    const max = Math.max(...data.trends.map((t) => t.count));
+    list.innerHTML = data.trends.map((t, i) => `
+      <div class="trend-row">
+        <div class="trend-num">${i + 1}</div>
+        <div style="width:130px;font-size:12.5px;">${t.emoji} ${escapeHtml(t.label)}</div>
+        <div class="trend-bar-track"><div class="trend-bar-fill" style="width:${((t.count / max) * 100).toFixed(0)}%"></div></div>
+        <div class="trend-count">${t.count} read${t.count === 1 ? '' : 's'}</div>
+      </div>
+    `).join('');
+  } catch (e) {}
+}
+
+const temples = [
+  {
+    icon:'🐍', name:'Kham Chanod (Wang Nakhin)', province:'Udon Thani', rating:'4.6★ (15k+ reviews)',
+    desc:'A palm-covered site believed to be a gateway to the naga realm. Visitors light incense, circle the sacred trees, and watch candle wax drip into water for number signs.',
+    mapsUrl:'https://maps.google.com/?cid=14783424111115046286'
+  },
+  {
+    icon:'🐓', name:'Wat Chedi (Ai Khai)', province:'Nakhon Si Thammarat', rating:'4.6★ (12k+ reviews)',
+    desc:'One of Thailand\'s most famous Government Lottery pilgrimage sites, devoted to child-spirit guardian Ai Khai.',
+    mapsUrl:'https://maps.google.com/?cid=13667418601365559692'
+  },
+  {
+    icon:'🐢', name:'Phaya Tao Ngoi Shrine', province:'Sakon Nakhon', rating:'4.3★ (5k+ reviews)',
+    desc:'A giant turtle statue tied to local legends of longevity and windfall luck.',
+    mapsUrl:'https://maps.google.com/?cid=13818307400563680921'
+  },
+  {
+    icon:'🌳', name:'Wat Prasat', province:'Nonthaburi (Greater Bangkok)', rating:'4.7★ (2.9k+ reviews)',
+    desc:'A 400-year-old temple, home to the Nang Ta-khian tree-spirit shrine — a favorite among Government Lottery hopefuls close to Bangkok.',
+    mapsUrl:'https://maps.google.com/?cid=6446611963925743651'
+  },
+  {
+    icon:'🏔️', name:'Naga Cave (Tham Naka)', province:'Bueng Kan', rating:'4.8★ (3k+ reviews)',
+    desc:'Serpentine rock formations high in Phu Langka National Park that went viral for resembling a sleeping naga.',
+    mapsUrl:'https://maps.google.com/?cid=12811720373151630818'
+  },
+];
+
+function renderTemples() {
+  const grid = document.getElementById('temple-grid');
+  if (!grid) return;
+  grid.innerHTML = temples.map((t) => `
+    <div class="temple-card">
+      <div class="temple-icon">${t.icon}</div>
+      <div class="temple-body">
+        <div class="temple-header">
+          <h3>${escapeHtml(t.name)}</h3>
+          <span class="temple-province">${escapeHtml(t.province)}</span>
+          <span class="temple-rating">${t.rating}</span>
+        </div>
+        <p>${t.desc}</p>
+        <a href="${t.mapsUrl}" target="_blank" rel="noopener" class="temple-link">Open in Google Maps →</a>
+      </div>
+    </div>
+  `).join('') + `<p class="temple-disclaimer">These are real, documented pilgrimage sites — included here as cultural context, not as a claim that visiting predicts Government Lottery outcomes.</p>`;
+}
+
 loadStats();
 loadStatsDrawDays();
 renderShop();
 loadTrends();
 renderTemples();
-loadCountdown();
-populateZodiacOptions();

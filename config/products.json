@@ -1,0 +1,10 @@
+[
+  { "id": "kumarn", "name": "Kumarn Thong", "priceSatang": 59000 },
+  { "id": "jatukam", "name": "Jatukam Ramathep", "priceSatang": 89000 },
+  { "id": "saisin", "name": "Blessed Thread Bracelet", "priceSatang": 19000 },
+  { "id": "buddha", "name": "Buddha Pendant", "priceSatang": 45000 },
+  { "id": "moneytree", "name": "Lucky Money Tree", "priceSatang": 35000 },
+  { "id": "lovecharm", "name": "Love & Relationship Charm", "priceSatang": 29000 },
+  { "id": "incense", "name": "Blessed Incense Set", "priceSatang": 12000 },
+  { "id": "careercharm", "name": "Career Success Charm", "priceSatang": 32000 }
+]

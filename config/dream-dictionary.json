@@ -1,86 +1,176 @@
 [
   {
     "id": "snake",
-    "keywords": ["\u0e07\u0e39", "\u0e07\u0e39\u0e40\u0e2b\u0e48\u0e32", "\u0e07\u0e39\u0e43\u0e2b\u0e0d\u0e48", "snake"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e2b\u0e47\u0e19\u0e07\u0e39 \u0e15\u0e33\u0e19\u0e32\u0e19\u0e01\u0e25\u0e48\u0e32\u0e27\u0e27\u0e48\u0e32\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e42\u0e0a\u0e04\u0e25\u0e32\u0e20\u0e17\u0e35\u0e48\u0e01\u0e33\u0e25\u0e31\u0e07\u0e08\u0e30\u0e21\u0e32\u0e16\u0e36\u0e07 \u0e2b\u0e23\u0e37\u0e2d\u0e2d\u0e32\u0e08\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e04\u0e39\u0e48\u0e41\u0e02\u0e48\u0e07\u0e17\u0e35\u0e48\u0e01\u0e33\u0e25\u0e31\u0e07\u0e08\u0e30\u0e40\u0e02\u0e49\u0e32\u0e21\u0e32\u0e43\u0e19\u0e0a\u0e35\u0e27\u0e34\u0e15",
-    "luckyNumbers": ["EXAMPLE-56", "EXAMPLE-65", "EXAMPLE-5"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["งู", "งูเห่า", "งูใหญ่", "snake"],
+    "interpretation": "ฝันเห็นงู ตำนานกล่าวว่าหมายถึงโชคลาภที่กำลังจะมาถึง หรืออาจหมายถึงคู่แข่งที่กำลังจะเข้ามาในชีวิต",
+    "luckyNumbers": ["56", "65", "5"]
   },
   {
     "id": "teeth_falling",
-    "keywords": ["\u0e1f\u0e31\u0e19\u0e2b\u0e31\u0e01", "\u0e1f\u0e31\u0e19\u0e2b\u0e25\u0e38\u0e14", "teeth"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e1f\u0e31\u0e19\u0e2b\u0e31\u0e01\u0e2b\u0e23\u0e37\u0e2d\u0e2b\u0e25\u0e38\u0e14 \u0e15\u0e33\u0e19\u0e32\u0e19\u0e2a\u0e21\u0e31\u0e22\u0e01\u0e48\u0e2d\u0e19\u0e21\u0e31\u0e01\u0e15\u0e35\u0e04\u0e27\u0e32\u0e21\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e04\u0e19\u0e43\u0e01\u0e25\u0e49\u0e0a\u0e34\u0e14\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e23\u0e30\u0e27\u0e31\u0e07\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e2a\u0e38\u0e02\u0e20\u0e32\u0e1e",
-    "luckyNumbers": ["EXAMPLE-09", "EXAMPLE-90", "EXAMPLE-9"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["ฟันหัก", "ฟันหลุด", "teeth"],
+    "interpretation": "ฝันฟันหักหรือหลุด ตำนานสมัยก่อนมักตีความว่าหมายถึงคนใกล้ชิดหรือเรื่องที่ต้องระวังเรื่องสุขภาพของครอบครัว",
+    "luckyNumbers": ["09", "90", "9"]
   },
   {
     "id": "water",
-    "keywords": ["\u0e19\u0e49\u0e33", "\u0e19\u0e49\u0e33\u0e17\u0e48\u0e27\u0e21", "\u0e41\u0e21\u0e48\u0e19\u0e49\u0e33", "water"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e2b\u0e47\u0e19\u0e19\u0e49\u0e33 \u0e21\u0e31\u0e01\u0e2a\u0e37\u0e2d\u0e01\u0e31\u0e19\u0e27\u0e48\u0e32\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e42\u0e0a\u0e04\u0e25\u0e32\u0e20\u0e41\u0e25\u0e30\u0e04\u0e27\u0e32\u0e21\u0e23\u0e32\u0e1a\u0e23\u0e37\u0e48\u0e19 \u0e19\u0e49\u0e33\u0e43\u0e2a\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e42\u0e0a\u0e04\u0e14\u0e35 \u0e19\u0e49\u0e33\u0e02\u0e38\u0e48\u0e19\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e2d\u0e38\u0e1b\u0e2a\u0e23\u0e23\u0e04\u0e40\u0e25\u0e47\u0e01\u0e19\u0e49\u0e2d\u0e22",
-    "luckyNumbers": ["EXAMPLE-23", "EXAMPLE-32", "EXAMPLE-2"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["น้ำ", "น้ำท่วม", "แม่น้ำ", "water"],
+    "interpretation": "ฝันเห็นน้ำ มักสื่อกันว่าหมายถึงโชคลาภและความราบรื่น น้ำใสหมายถึงโชคดี น้ำขุ่นหมายถึงอุปสรรคเล็กน้อย",
+    "luckyNumbers": ["23", "32", "2"]
   },
   {
     "id": "flying",
-    "keywords": ["\u0e1a\u0e34\u0e19", "\u0e40\u0e2b\u0e34\u0e19", "flying"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e27\u0e48\u0e32\u0e15\u0e31\u0e27\u0e40\u0e2d\u0e07\u0e1a\u0e34\u0e19\u0e44\u0e14\u0e49 \u0e21\u0e31\u0e01\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e04\u0e27\u0e32\u0e21\u0e2d\u0e34\u0e2a\u0e23\u0e30\u0e17\u0e35\u0e48\u0e01\u0e33\u0e25\u0e31\u0e07\u0e08\u0e30\u0e21\u0e32\u0e16\u0e36\u0e07 \u0e2b\u0e23\u0e37\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\u0e17\u0e35\u0e48\u0e01\u0e33\u0e25\u0e31\u0e07\u0e08\u0e30\u0e44\u0e14\u0e49\u0e21\u0e32",
-    "luckyNumbers": ["EXAMPLE-19", "EXAMPLE-91", "EXAMPLE-1"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["บิน", "เหิน", "flying"],
+    "interpretation": "ฝันว่าตัวเองบินได้ มักหมายถึงความอิสระที่กำลังจะมาถึง หรือความสำเร็จที่กำลังจะได้มา",
+    "luckyNumbers": ["19", "91", "1"]
   },
   {
     "id": "finding_money",
-    "keywords": ["\u0e40\u0e01\u0e47\u0e1a\u0e40\u0e07\u0e34\u0e19", "\u0e40\u0e08\u0e2d\u0e40\u0e07\u0e34\u0e19", "\u0e40\u0e07\u0e34\u0e19", "money"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e01\u0e47\u0e1a\u0e40\u0e07\u0e34\u0e19\u0e44\u0e14\u0e49 \u0e15\u0e33\u0e19\u0e32\u0e19\u0e01\u0e25\u0e48\u0e32\u0e27\u0e27\u0e48\u0e32\u0e2d\u0e32\u0e08\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e01\u0e32\u0e23\u0e2a\u0e39\u0e0d\u0e40\u0e2a\u0e35\u0e22\u0e42\u0e0a\u0e04\u0e25\u0e32\u0e20\u0e40\u0e25\u0e47\u0e01\u0e19\u0e49\u0e2d\u0e22 \u0e2b\u0e23\u0e37\u0e2d\u0e01\u0e32\u0e23\u0e40\u0e15\u0e37\u0e2d\u0e19\u0e43\u0e08\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e40\u0e07\u0e34\u0e19",
-    "luckyNumbers": ["EXAMPLE-78", "EXAMPLE-87", "EXAMPLE-7"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["เก็บเงิน", "เจอเงิน", "เงิน", "money"],
+    "interpretation": "ฝันเก็บเงินได้ ตำนานกล่าวว่าอาจหมายถึงการสูญเสียโชคลาภเล็กน้อย หรือเป็นการเตือนใจเรื่องการเงิน",
+    "luckyNumbers": ["78", "87", "7"]
   },
   {
     "id": "dead_relative",
-    "keywords": ["\u0e04\u0e19\u0e15\u0e32\u0e22", "\u0e1c\u0e35", "\u0e0d\u0e32\u0e15\u0e34\u0e17\u0e35\u0e48\u0e40\u0e2a\u0e35\u0e22\u0e0a\u0e35\u0e27\u0e34\u0e15", "dead"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e2b\u0e47\u0e19\u0e0d\u0e32\u0e15\u0e34\u0e17\u0e35\u0e48\u0e40\u0e2a\u0e35\u0e22\u0e0a\u0e35\u0e27\u0e34\u0e15\u0e41\u0e25\u0e49\u0e27 \u0e15\u0e33\u0e19\u0e32\u0e19\u0e01\u0e25\u0e48\u0e32\u0e27\u0e27\u0e48\u0e32\u0e2d\u0e32\u0e08\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e17\u0e48\u0e32\u0e19\u0e21\u0e32\u0e40\u0e15\u0e37\u0e2d\u0e19\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e42\u0e0a\u0e04\u0e25\u0e32\u0e20 \u0e2b\u0e23\u0e37\u0e2d\u0e2a\u0e48\u0e07\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e13\u0e1a\u0e32\u0e07\u0e2d\u0e22\u0e48\u0e32\u0e07",
-    "luckyNumbers": ["EXAMPLE-45", "EXAMPLE-54", "EXAMPLE-4"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["คนตาย", "ผี", "ญาติที่เสียชีวิต", "dead"],
+    "interpretation": "ฝันเห็นญาติที่เสียชีวิตแล้ว ตำนานกล่าวว่าอาจหมายถึงท่านมาเตือนเรื่องโชคลาภ หรือส่งสัญญาณบางอย่าง",
+    "luckyNumbers": ["45", "54", "4"]
   },
   {
     "id": "wedding",
-    "keywords": ["\u0e41\u0e15\u0e48\u0e07\u0e07\u0e32\u0e19", "\u0e07\u0e32\u0e19\u0e41\u0e15\u0e48\u0e07", "wedding"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e41\u0e15\u0e48\u0e07\u0e07\u0e32\u0e19 \u0e21\u0e31\u0e01\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e01\u0e32\u0e23\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e04\u0e23\u0e31\u0e49\u0e07\u0e43\u0e2b\u0e0d\u0e48\u0e43\u0e19\u0e0a\u0e35\u0e27\u0e34\u0e15 \u0e44\u0e21\u0e48\u0e08\u0e33\u0e40\u0e1b\u0e47\u0e19\u0e15\u0e49\u0e2d\u0e07\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e23\u0e31\u0e01",
-    "luckyNumbers": ["EXAMPLE-12", "EXAMPLE-21", "EXAMPLE-1"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["แต่งงาน", "งานแต่ง", "wedding"],
+    "interpretation": "ฝันเรื่องแต่งงาน มักหมายถึงการเปลี่ยนแปลงครั้งใหญ่ในชีวิต ไม่จำเป็นต้องเกี่ยวกับความรัก",
+    "luckyNumbers": ["12", "21", "1"]
   },
   {
     "id": "chased",
-    "keywords": ["\u0e16\u0e39\u0e01\u0e44\u0e25\u0e48", "\u0e42\u0e14\u0e19\u0e44\u0e25\u0e48", "chased"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e16\u0e39\u0e01\u0e44\u0e25\u0e48 \u0e21\u0e31\u0e01\u0e2a\u0e30\u0e17\u0e49\u0e2d\u0e19\u0e04\u0e27\u0e32\u0e21\u0e40\u0e04\u0e23\u0e35\u0e22\u0e14\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e17\u0e35\u0e48\u0e04\u0e49\u0e32\u0e07\u0e04\u0e32\u0e43\u0e08\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e0a\u0e35\u0e27\u0e34\u0e15\u0e08\u0e23\u0e34\u0e07",
-    "luckyNumbers": ["EXAMPLE-36", "EXAMPLE-63", "EXAMPLE-3"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["ถูกไล่", "โดนไล่", "chased"],
+    "interpretation": "ฝันถูกไล่ มักสะท้อนความเครียดหรือเรื่องที่กำลังหลีกเลี่ยงในชีวิตจริง",
+    "luckyNumbers": ["36", "63", "3"]
   },
   {
     "id": "elephant",
-    "keywords": ["\u0e0a\u0e49\u0e32\u0e07", "elephant"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e2b\u0e47\u0e19\u0e0a\u0e49\u0e32\u0e07 \u0e15\u0e33\u0e19\u0e32\u0e19\u0e01\u0e25\u0e48\u0e32\u0e27\u0e27\u0e48\u0e32\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e1a\u0e32\u0e23\u0e21\u0e35\u0e41\u0e25\u0e30\u0e40\u0e01\u0e35\u0e22\u0e23\u0e15\u0e34\u0e22\u0e28 \u0e2d\u0e32\u0e08\u0e21\u0e35\u0e02\u0e48\u0e32\u0e27\u0e14\u0e35\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e2b\u0e19\u0e49\u0e32\u0e17\u0e35\u0e48\u0e01\u0e32\u0e23\u0e07\u0e32\u0e19",
-    "luckyNumbers": ["EXAMPLE-89", "EXAMPLE-98", "EXAMPLE-8"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["ช้าง", "elephant"],
+    "interpretation": "ฝันเห็นช้าง ตำนานกล่าวว่าหมายถึงความมั่งคั่งและเกียรติยศ อาจมีข่าวดีเรื่องงาน",
+    "luckyNumbers": ["89", "98", "8"]
   },
   {
     "id": "fire",
-    "keywords": ["\u0e44\u0e1f\u0e44\u0e2b\u0e21\u0e49", "\u0e44\u0e1f", "fire"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e44\u0e1f\u0e44\u0e2b\u0e21\u0e49 \u0e2a\u0e2d\u0e07\u0e17\u0e32\u0e07\u0e15\u0e35\u0e04\u0e27\u0e32\u0e21\u0e2b\u0e21\u0e32\u0e22\u0e44\u0e14\u0e49 \u0e2d\u0e32\u0e08\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e42\u0e17\u0e0a\u0e30\u0e17\u0e35\u0e48\u0e01\u0e33\u0e25\u0e31\u0e07\u0e01\u0e48\u0e2d\u0e15\u0e31\u0e27 \u0e2b\u0e23\u0e37\u0e2d\u0e42\u0e0a\u0e04\u0e25\u0e32\u0e20\u0e17\u0e35\u0e48\u0e08\u0e30\u0e25\u0e38\u0e01\u0e42\u0e0a\u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e04\u0e27\u0e32\u0e21\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e1a\u0e32\u0e07\u0e2a\u0e33\u0e19\u0e31\u0e01",
-    "luckyNumbers": ["EXAMPLE-67", "EXAMPLE-76", "EXAMPLE-6"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["ไฟไหม้", "ไฟ", "fire"],
+    "interpretation": "ฝันเห็นไฟ มีสองทาง คือความโกรธที่ควบคุมไม่ได้ หรือโชคลาภที่มาเร็วเหมือนไฟลุก",
+    "luckyNumbers": ["67", "76", "6"]
   },
   {
     "id": "fish",
-    "keywords": ["\u0e1b\u0e25\u0e32", "fish"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e40\u0e2b\u0e47\u0e19\u0e1b\u0e25\u0e32 \u0e21\u0e31\u0e01\u0e2b\u0e21\u0e32\u0e22\u0e16\u0e36\u0e07\u0e04\u0e27\u0e32\u0e21\u0e2d\u0e38\u0e14\u0e21\u0e2a\u0e21\u0e1a\u0e39\u0e23\u0e13\u0e4c\u0e41\u0e25\u0e30\u0e42\u0e0a\u0e04\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e40\u0e07\u0e34\u0e19",
-    "luckyNumbers": ["EXAMPLE-34", "EXAMPLE-43", "EXAMPLE-3"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["ปลา", "fish"],
+    "interpretation": "ฝันเห็นปลา ตำนานกล่าวว่าหมายถึงความอุดมสมบูรณ์และโชคลาภด้านการเงิน",
+    "luckyNumbers": ["34", "43", "3"]
   },
   {
     "id": "falling",
-    "keywords": ["\u0e15\u0e01", "\u0e15\u0e01\u0e08\u0e32\u0e01\u0e17\u0e35\u0e48\u0e2a\u0e39\u0e07", "falling"],
-    "interpretation": "\u0e1d\u0e31\u0e19\u0e15\u0e01\u0e08\u0e32\u0e01\u0e17\u0e35\u0e48\u0e2a\u0e39\u0e07 \u0e21\u0e31\u0e01\u0e2a\u0e30\u0e17\u0e49\u0e2d\u0e19\u0e04\u0e27\u0e32\u0e21\u0e01\u0e31\u0e07\u0e27\u0e25\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e01\u0e32\u0e23\u0e07\u0e32\u0e19\u0e2b\u0e23\u0e37\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e21\u0e31\u0e48\u0e19\u0e04\u0e07\u0e43\u0e19\u0e0a\u0e35\u0e27\u0e34\u0e15",
-    "luckyNumbers": ["EXAMPLE-50", "EXAMPLE-05", "EXAMPLE-0"],
-    "_note": "PLACEHOLDER numbers - replace with curated content from a trusted source"
+    "keywords": ["ตก", "ตกจากที่สูง", "falling"],
+    "interpretation": "ฝันตกจากที่สูง มักสะท้อนความกังวลเรื่องสถานะหรือความมั่นคงในชีวิต",
+    "luckyNumbers": ["50", "05", "0"]
+  },
+  {
+    "id": "house",
+    "keywords": ["บ้าน", "house", "home"],
+    "interpretation": "ฝันเห็นบ้าน มักหมายถึงความมั่นคงในชีวิต หรือการเปลี่ยนแปลงเรื่องที่อยู่อาศัยที่กำลังจะมาถึง",
+    "luckyNumbers": ["14", "41", "4"]
+  },
+  {
+    "id": "car",
+    "keywords": ["รถ", "รถยนต์", "car"],
+    "interpretation": "ฝันเห็นรถหรือขับรถ มักหมายถึงความก้าวหน้าในชีวิตหรือการเดินทางที่กำลังจะมาถึง",
+    "luckyNumbers": ["28", "82", "2"]
+  },
+  {
+    "id": "baby",
+    "keywords": ["เด็กทารก", "ทารก", "เด็กแรกเกิด", "baby"],
+    "interpretation": "ฝันเห็นเด็กทารก มักหมายถึงจุดเริ่มต้นใหม่ โอกาสใหม่ หรือความบริสุทธิ์ที่กำลังเข้ามาในชีวิต",
+    "luckyNumbers": ["01", "10", "1"]
+  },
+  {
+    "id": "monk",
+    "keywords": ["พระ", "พระสงฆ์", "monk"],
+    "interpretation": "ฝันเห็นพระสงฆ์ ตำนานกล่าวว่าหมายถึงพรและโชคดีที่กำลังจะมาถึง เป็นสัญญาณที่ดี",
+    "luckyNumbers": ["39", "93", "3"]
+  },
+  {
+    "id": "hair_falling",
+    "keywords": ["ผมร่วง", "ผมหลุด", "hair falling"],
+    "interpretation": "ฝันผมร่วงหรือหลุด มักสะท้อนความกังวลเรื่องภาพลักษณ์หรือการสูญเสียบางอย่างที่ให้ความสำคัญ",
+    "luckyNumbers": ["60", "06", "6"]
+  },
+  {
+    "id": "funeral",
+    "keywords": ["งานศพ", "funeral"],
+    "interpretation": "ฝันเห็นงานศพ ตำนานกล่าวว่ากลับกันกับความหมายตรงตัว มักหมายถึงการเริ่มต้นใหม่หรืออายุยืนของคนที่ฝันถึง",
+    "luckyNumbers": ["27", "72", "7"]
+  },
+  {
+    "id": "police",
+    "keywords": ["ตำรวจ", "police"],
+    "interpretation": "ฝันเห็นตำรวจ มักหมายถึงเรื่องที่เกี่ยวกับกฎระเบียบหรือความยุติธรรมที่กำลังเข้ามาในชีวิต",
+    "luckyNumbers": ["48", "84", "8"]
+  },
+  {
+    "id": "egg",
+    "keywords": ["ไข่", "egg"],
+    "interpretation": "ฝันเห็นไข่ ตำนานกล่าวว่าหมายถึงโอกาสใหม่หรือความอุดมสมบูรณ์ที่กำลังจะเริ่มต้น",
+    "luckyNumbers": ["02", "20", "2"]
+  },
+  {
+    "id": "bird",
+    "keywords": ["นก", "bird"],
+    "interpretation": "ฝันเห็นนก มักหมายถึงข่าวดีที่กำลังจะมาถึง หรือความเป็นอิสระที่ปรารถนา",
+    "luckyNumbers": ["17", "71", "1"]
+  },
+  {
+    "id": "dog",
+    "keywords": ["หมา", "สุนัข", "dog"],
+    "interpretation": "ฝันเห็นหมา ตำนานกล่าวว่าหมายถึงมิตรภาพและความซื่อสัตย์ที่มีคนคอยดูแล",
+    "luckyNumbers": ["58", "85", "5"]
+  },
+  {
+    "id": "cat",
+    "keywords": ["แมว", "cat"],
+    "interpretation": "ฝันเห็นแมว มักหมายถึงความเป็นตัวของตัวเองหรือเรื่องลับบางอย่างที่กำลังจะถูกเปิดเผย",
+    "luckyNumbers": ["46", "64", "4"]
+  },
+  {
+    "id": "rain",
+    "keywords": ["ฝนตก", "rain"],
+    "interpretation": "ฝันเห็นฝนตก มักหมายถึงการชำระล้างสิ่งไม่ดีออกไป หรือความโล่งใจทางอารมณ์ที่กำลังจะมาถึง",
+    "luckyNumbers": ["23", "32", "3"]
+  },
+  {
+    "id": "gold_jewelry",
+    "keywords": ["ทอง", "เครื่องประดับ", "gold", "jewelry"],
+    "interpretation": "ฝันเห็นทองหรือเครื่องประดับ ตำนานกล่าวว่าหมายถึงความมั่งคั่งและเกียรติยศที่กำลังจะมาถึง",
+    "luckyNumbers": ["79", "97", "9"]
+  },
+  {
+    "id": "thief",
+    "keywords": ["โจร", "ขโมย", "thief"],
+    "interpretation": "ฝันเห็นโจรหรือถูกขโมยของ มักเป็นคำเตือนให้ระมัดระวังเรื่องการเงินหรือความไว้ใจคน",
+    "luckyNumbers": ["35", "53", "5"]
+  },
+  {
+    "id": "pregnant",
+    "keywords": ["ท้อง", "ตั้งครรภ์", "pregnant"],
+    "interpretation": "ฝันว่าตั้งครรภ์หรือเห็นคนท้อง มักหมายถึงการเติบโตของโครงการหรือความคิดใหม่ที่กำลังก่อตัว",
+    "luckyNumbers": ["08", "80", "8"]
+  },
+  {
+    "id": "airplane",
+    "keywords": ["เครื่องบิน", "airplane", "plane"],
+    "interpretation": "ฝันเห็นเครื่องบินหรือนั่งเครื่องบิน มักหมายถึงความทะเยอทะยานหรือการเดินทางไกลที่กำลังจะเกิดขึ้น",
+    "luckyNumbers": ["16", "61", "6"]
+  },
+  {
+    "id": "spider",
+    "keywords": ["แมงมุม", "spider"],
+    "interpretation": "ฝันเห็นแมงมุม มักหมายถึงความคิดสร้างสรรค์ หรือสถานการณ์ที่ซับซ้อนพัวพันในชีวิต",
+    "luckyNumbers": ["29", "92", "2"]
   }
 ]
