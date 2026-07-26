@@ -1,0 +1,13 @@
+{
+  "siteName": "Fortuna",
+  "timezone": "Asia/Bangkok",
+  "drawDaysOfMonth": [1, 16],
+  "pricing": {
+    "drawPassAmountSatang": 2900,
+    "drawPassLabel": "Government Lottery Draw Pass - unlock this cycle's premium numbers"
+  },
+  "lineLogin": {
+    "channelId": "REPLACE_WITH_LINE_LOGIN_CHANNEL_ID",
+    "redirectUri": "http://localhost:3000/auth/line/callback"
+  }
+}

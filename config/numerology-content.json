@@ -1,0 +1,97 @@
+{
+  "nameNumberMeanings": {
+    "1": "a natural leader - independent and driven to start new things",
+    "2": "a diplomat - cooperative, sensitive to others, works well in partnership",
+    "3": "expressive and creative - drawn to communication and self-expression",
+    "4": "grounded and hardworking - values stability and building things that last",
+    "5": "adventurous - craves freedom, change, and new experience",
+    "6": "nurturing - a natural caretaker, often the one holding family together",
+    "7": "thoughtful and analytical - drawn to deeper questions and quiet reflection",
+    "8": "ambitious - oriented toward achievement, status, and material success",
+    "9": "idealistic - generous, big-picture thinker, drawn to causes bigger than self"
+  },
+  "zodiacAnimals": [
+    "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake",
+    "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"
+  ],
+  "zodiacReadings": {
+    "Rat": [
+      "Your resourcefulness is highlighted today - a clever shortcut saves you real time.",
+      "A financial opportunity crosses your path. Look closely before committing.",
+      "Social energy is high - a conversation today could open an unexpected door."
+    ],
+    "Ox": [
+      "Steady, patient effort pays off today more than any shortcut would.",
+      "A stubborn streak could cause friction - pick which hills are worth defending.",
+      "Good day to finish something you started rather than begin something new."
+    ],
+    "Tiger": [
+      "Bold action is favored today - hesitation costs more than a wrong move would.",
+      "Watch for a rival or competing interest showing up unexpectedly.",
+      "Your confidence draws attention today, for better and for worse."
+    ],
+    "Rabbit": [
+      "A gentler pace serves you well - don't let others rush your decisions today.",
+      "Home and family matters take priority and reward the attention.",
+      "Diplomacy wins where confrontation would only cost you."
+    ],
+    "Dragon": [
+      "Big ambitions get a boost today - this is a good day to think bigger, not smaller.",
+      "Your natural charisma opens a door - use it deliberately, not carelessly.",
+      "A leadership moment presents itself; step into it."
+    ],
+    "Snake": [
+      "Trust your instincts today - a decision that felt obvious in hindsight starts here.",
+      "Quiet observation serves you better than speaking first today.",
+      "A financial matter needs a second, sharper look before you act."
+    ],
+    "Horse": [
+      "Restlessness is strong today - channel it into movement, not scattered effort.",
+      "Travel or a change of scenery brings clarity on something you've been stuck on.",
+      "Independence is favored - a solo effort outperforms a group one today."
+    ],
+    "Goat": [
+      "Creative work flows more easily today - a good day to make, not just plan.",
+      "Lean on someone you trust today rather than carrying something alone.",
+      "A gentle, indirect approach gets further than a direct one."
+    ],
+    "Monkey": [
+      "Quick thinking serves you well today - trust the clever solution you find.",
+      "Watch for a tendency to overcommit - say yes to less, follow through more.",
+      "A playful approach to a serious problem surprisingly works today."
+    ],
+    "Rooster": [
+      "Precision and preparation pay off - the details you checked twice matter today.",
+      "Your honesty lands well today, even where it's blunt.",
+      "A public moment favors you - step forward rather than hang back."
+    ],
+    "Dog": [
+      "Loyalty is tested and rewarded today - a relationship deepens through it.",
+      "Trust your sense of fairness today, even if it's the harder call.",
+      "A protective instinct serves someone close to you well today."
+    ],
+    "Pig": [
+      "Generosity comes back around today, sooner than expected.",
+      "A comfortable, unhurried pace serves you better than pushing hard.",
+      "Enjoy something simple today - it recharges more than you'd expect."
+    ]
+  },
+  "amuletMatches": {
+    "wealth": {
+      "summary": "A wealth-drawing amulet (like a Kumarn Thong or Jatukam Ramathep style) is traditionally sought for this.",
+      "tip": "Often paired with the color gold or the wearer's day-color for extra emphasis."
+    },
+    "love": {
+      "summary": "A love-and-relationship charm, often worn close to the heart, is traditionally sought for this.",
+      "tip": "Some traditions favor a paired set (worn by two people) over a single charm."
+    },
+    "protection": {
+      "summary": "A protective amulet blessed by a respected monk is traditionally carried for this.",
+      "tip": "Often carried rather than worn visibly, and treated with particular care and respect."
+    },
+    "career": {
+      "summary": "A success-and-promotion amulet is traditionally worn for this, often paired with a lucky color at work.",
+      "tip": "Commonly renewed or re-blessed at the start of a new job or a big project."
+    }
+  }
+}

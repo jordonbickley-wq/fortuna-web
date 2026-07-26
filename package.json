@@ -1,0 +1,19 @@
+{
+  "name": "dream-lucky-web",
+  "version": "1.0.0",
+  "description": "Website version: LINE Login accounts + Omise PromptPay one-off 'Draw Pass' purchases, built on the same dream-matching engine as the LINE bot",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cookie-session": "^2.1.0",
+    "lowdb": "^1.0.0",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
+    "omise": "^1.6.3"
+  }
+}

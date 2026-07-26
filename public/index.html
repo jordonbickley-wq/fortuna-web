@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortuna — Dream Reading & Lucky Numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">F</div>
+      <div class="logo-word">Fortu<span>na</span></div>
+    </div>
+    <div id="auth-area">
+      <button class="nav-cta" id="login-btn">Sign in with LINE</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Dream reading · Lucky numbers · Fortune</div>
+    <h1>What did you dream<br>about <em>last night?</em></h1>
+    <p>Type your dream and get an instant reading, plus your personal lucky numbers before the next Government Lottery draw.</p>
+
+    <div class="fortune-card">
+      <div class="fortune-card-inner">
+        <input type="text" id="dream-input" placeholder="e.g. I dreamed about a big snake...">
+        <button class="predict-btn" id="reveal-btn">Reveal ✦</button>
+      </div>
+    </div>
+
+    <p class="hint hidden" id="login-hint"></p>
+
+    <div class="result hidden" id="result-card"></div>
+  </section>
+
+  <section class="today-strip">
+    <div class="section-head">
+      <h2>Today's Fortune</h2>
+      <p>A quick daily read before you go about your day</p>
+    </div>
+    <div class="today-grid">
+      <div class="today-card">
+        <div class="today-swatch" id="color-swatch"></div>
+        <div>
+          <h4 id="color-name">Color of the Day</h4>
+          <p>Traditional Thai day-color — worn for good fortune</p>
+        </div>
+      </div>
+      <div class="today-card">
+        <div class="today-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg>
+        </div>
+        <div>
+          <h4 id="moon-phase">Moon Phase</h4>
+          <p>Approximate — for the fun of it 🌙</p>
+        </div>
+      </div>
+      <div class="today-card">
+        <div class="today-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+        </div>
+        <div>
+          <h4>Government Lottery Countdown</h4>
+          <p id="countdown-sub">—</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="modules" id="modules">
+    <div class="section-head">
+      <h2>Everything luck, in one place</h2>
+      <p>Tap "Try it" on any card</p>
+    </div>
+    <div class="module-grid">
+
+      <div class="module-card">
+        <div class="module-icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="12" x2="17" y2="12"/></svg></div>
+        <h3>Lucky License Plate</h3>
+        <p>Check what your car's plate number means for love, money, and work.</p>
+        <button class="try-btn" data-panel="plate-panel">Try it</button>
+        <div class="mini-panel" id="plate-panel">
+          <input type="text" id="plate-input" placeholder="e.g. 1กข 2345">
+          <button class="mini-go" data-action="plate">Check plate</button>
+          <div class="mini-result" id="plate-result"></div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="10" y1="18" x2="14" y2="18"/></svg></div>
+        <h3>Lucky Phone Number</h3>
+        <p>Analyze your phone number's digit pattern for fortune.</p>
+        <button class="try-btn" data-panel="phone-panel">Try it</button>
+        <div class="mini-panel" id="phone-panel">
+          <input type="text" id="phone-input" placeholder="e.g. 081-234-5678">
+          <button class="mini-go" data-action="phone">Check number</button>
+          <div class="mini-result" id="phone-result"></div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9L22 10l-5.5 4.8L18 22l-6-3.6L6 22l1.5-7.2L2 10l7.1-1.1L12 2Z"/></svg></div>
+        <h3>Daily Zodiac Reading</h3>
+        <p>Pick your Chinese zodiac year for a quick daily read.</p>
+        <button class="try-btn" data-panel="zodiac-panel">Try it</button>
+        <div class="mini-panel" id="zodiac-panel">
+          <select id="zodiac-select"></select>
+          <button class="mini-go" data-action="zodiac">Get today's reading</button>
+          <div class="mini-result" id="zodiac-result"></div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M4 19c6-1 9-9 15-15M4 19l4-1 -3-3z"/></svg></div>
+        <h3>Name Numerology</h3>
+        <p>Your name reduces to a power number with its own meaning.</p>
+        <button class="try-btn" data-panel="name-panel">Try it</button>
+        <div class="mini-panel" id="name-panel">
+          <input type="text" id="name-input" placeholder="e.g. Somchai">
+          <button class="mini-go" data-action="name">Reveal number</button>
+          <div class="mini-result" id="name-result"></div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.5-8.8C.6 8.6 2.6 4.8 6.2 4.2c2-.3 3.7.8 5.8 3 2.1-2.2 3.8-3.3 5.8-3 3.6.6 5.6 4.4 3.7 8-2.5 4.4-9.5 8.8-9.5 8.8Z"/></svg></div>
+        <h3>Amulet Match</h3>
+        <p>Get a suggested amulet type based on what you're seeking luck for.</p>
+        <button class="try-btn" data-panel="amulet-panel">Try it</button>
+        <div class="mini-panel" id="amulet-panel">
+          <select id="amulet-select">
+            <option value="">What are you seeking?</option>
+            <option value="wealth">Wealth & money</option>
+            <option value="love">Love & relationships</option>
+            <option value="protection">Protection & safety</option>
+            <option value="career">Career success</option>
+          </select>
+          <button class="mini-go" data-action="amulet">Find my match</button>
+          <div class="mini-result" id="amulet-result"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="tagline">Fortuna — your everyday luck companion</div>
+    <div class="draw-note" id="footer-draw">Next Government Lottery draw: —</div>
+  </footer>
+  <p style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:20px;">
+    This app references Thailand's official Government Lottery (สลากกินแบ่งรัฐบาล) only.
+  </p>
+
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
