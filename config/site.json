@@ -9,5 +9,11 @@
   "lineLogin": {
     "channelId": "REPLACE_WITH_LINE_LOGIN_CHANNEL_ID",
     "redirectUri": "http://localhost:3000/auth/line/callback"
+  },
+  "manualPayment": {
+    "enabled": true,
+    "qrImagePath": "/promptpay-qr.png",
+    "contactQrImagePath": "/line-contact-qr.png",
+    "contactInfo": "Scan to add me on LINE, then send your payment screenshot"
   }
 }

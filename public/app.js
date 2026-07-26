@@ -18,12 +18,14 @@ function escapeHtml(str) {
 }
 
 let currentUser = null;
+let isGuestUser = true;
 let lineLoginAvailable = true;
 
 async function loadMe() {
   const res = await fetch('/api/me');
   const data = await res.json();
   currentUser = data.user;
+  isGuestUser = data.isGuest;
   lineLoginAvailable = data.lineLoginAvailable;
   renderAuthArea();
   maybeShowLineComingSoonNotice();
@@ -40,7 +42,7 @@ function maybeShowLineComingSoonNotice() {
 }
 
 function renderAuthArea() {
-  if (currentUser && !currentUser.isGuest) {
+  if (currentUser && !isGuestUser) {
     loginHint.classList.add('hidden');
     authArea.innerHTML = `
       <div class="nav-user">
@@ -68,7 +70,7 @@ function medallion(value, extraClass = '') {
 }
 
 function renderResult(data) {
-  const { matched, readings, personalNumber, hasUnlock, paymentsAvailable, draw, pricing } = data;
+  const { matched, readings, personalNumber, hasUnlock, pendingManual, paymentsAvailable, draw, pricing } = data;
 
   if (!matched) {
     resultCard.innerHTML = `
@@ -102,6 +104,8 @@ function renderResult(data) {
 
   const paywallHtml = !needsUnlock
     ? ''
+    : pendingManual
+    ? `<div class="paywall"><p>✓ Payment submitted — we'll confirm it shortly and your numbers will unlock automatically.</p></div>`
     : paymentsAvailable
     ? `<div class="paywall" id="paywall">
          <p>${pricing.drawPassLabel}</p>
@@ -142,6 +146,24 @@ async function startUnlock() {
     return;
   }
 
+  if (data.manual) {
+    const qrPanel = document.getElementById('qr-panel');
+    const paywall = document.getElementById('paywall');
+    if (paywall) paywall.classList.add('hidden');
+    qrPanel.classList.remove('hidden');
+    qrPanel.innerHTML = `
+      <p>Scan with your banking app to pay ${(data.amountSatang / 100).toFixed(0)} THB via PromptPay</p>
+      <img src="${data.qrImageUrl}" alt="PromptPay QR code">
+      <p style="margin-top:8px;">${escapeHtml(data.contactInfo)}</p>
+      <input type="text" id="payer-note" placeholder="Your name (optional, helps us find your payment)" style="width:100%;max-width:300px;padding:8px;border-radius:8px;border:1px solid rgba(201,162,39,0.3);margin:10px 0;background:rgba(244,233,208,0.06);color:var(--parchment);">
+      <br>
+      <button class="unlock-btn" id="ive-paid-btn">I've paid</button>
+      <p id="claim-status" style="margin-top:8px;"></p>
+    `;
+    document.getElementById('ive-paid-btn').addEventListener('click', submitManualClaim);
+    return;
+  }
+
   const qrPanel = document.getElementById('qr-panel');
   const paywall = document.getElementById('paywall');
   if (paywall) paywall.classList.add('hidden');
@@ -153,6 +175,29 @@ async function startUnlock() {
   `;
 
   pollUnlockStatus(data.chargeId);
+}
+
+async function submitManualClaim() {
+  const btn = document.getElementById('ive-paid-btn');
+  const noteInput = document.getElementById('payer-note');
+  const statusEl = document.getElementById('claim-status');
+  btn.disabled = true;
+
+  const res = await fetch('/api/unlock/claim', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ payerNote: noteInput ? noteInput.value : '' }),
+  });
+  const data = await res.json();
+
+  if (data.submitted || data.alreadySubmitted) {
+    statusEl.textContent = "✓ Submitted! We'll confirm it shortly and unlock your numbers automatically.";
+  } else if (data.alreadyUnlocked) {
+    statusEl.textContent = 'Already unlocked ✨';
+  } else {
+    statusEl.textContent = 'Something went wrong — please try again.';
+    btn.disabled = false;
+  }
 }
 
 function pollUnlockStatus(chargeId) {
@@ -299,7 +344,10 @@ document.querySelectorAll('.mini-go').forEach((btn) => {
       const res = await fetch('/api/amulet', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ goal }) });
       const data = await res.json();
       const el = document.getElementById('amulet-result');
-      el.innerHTML = `<div class="mini-result-text">${data.summary}<br><br><em>${data.tip}</em></div>`;
+      el.innerHTML = `
+        <div class="mini-result-text">${data.summary}<br><br><em>${data.tip}</em></div>
+        <a href="#shop" class="try-btn" style="display:block;text-decoration:none;text-align:center;box-sizing:border-box;" onclick="highlightShopCategory('${data.goal}')">Shop this type →</a>
+      `;
       el.classList.add('show');
     }
   });
@@ -308,3 +356,152 @@ document.querySelectorAll('.mini-go').forEach((btn) => {
 loadToday();
 loadCountdown();
 populateZodiacOptions();
+
+/* ================= real stats ================= */
+async function loadStats() {
+  try {
+    const res = await fetch('/api/stats');
+    const data = await res.json();
+    document.getElementById('stat-dreams').textContent = data.dreamsToday;
+    document.getElementById('stat-unlocks').textContent = data.unlocksToday;
+  } catch (e) {
+    // non-fatal - stat pills just stay at "—"
+  }
+}
+
+async function loadStatsDrawDays() {
+  try {
+    const res = await fetch('/api/draw');
+    const draw = await res.json();
+    document.getElementById('stat-days').textContent = draw.isToday ? '0' : draw.daysAway;
+  } catch (e) {
+    // non-fatal
+  }
+}
+
+/* ================= shop (illustrative catalog - purchases not live yet) =================
+   IMPORTANT: unlike the design demo, this is a real production site with
+   real visitors, so the "Buy" button does NOT simulate a fake QR code or a
+   fake "order confirmed" message - that would misleadingly suggest an order
+   was actually placed. Real checkout only ships once there's an actual
+   product/fulfillment/payment flow behind it. */
+const products = [
+  { id:'kumarn', icon:'🧿', name:'Kumarn Thong', category:'wealth', desc:'Traditional wealth-drawing amulet, believed to bring prosperity to its keeper.', price:590 },
+  { id:'jatukam', icon:'🪙', name:'Jatukam Ramathep', category:'wealth', desc:'Well-known protective and prosperity amulet, popular across Thailand.', price:890 },
+  { id:'saisin', icon:'🧵', name:'Blessed Thread Bracelet', category:'protection', desc:'Sai sin cotton thread bracelet, blessed by monks for protection.', price:190 },
+  { id:'buddha', icon:'☸️', name:'Buddha Pendant', category:'protection', desc:'Small pendant necklace for everyday protection and peace of mind.', price:450 },
+  { id:'moneytree', icon:'🪴', name:'Lucky Money Tree', category:'wealth', desc:'Pachira plant, traditionally kept in homes and offices for prosperity.', price:350 },
+  { id:'lovecharm', icon:'💗', name:'Love & Relationship Charm', category:'love', desc:'A small charm traditionally worn close to the heart.', price:290 },
+  { id:'incense', icon:'🕯️', name:'Blessed Incense Set', category:'protection', desc:'Traditional incense set for home altars and daily merit-making.', price:120 },
+  { id:'careercharm', icon:'📈', name:'Career Success Charm', category:'career', desc:'Worn for promotion luck, often paired with your day-color.', price:320 },
+];
+
+function renderShop() {
+  const grid = document.getElementById('shop-grid');
+  if (!grid) return;
+  grid.innerHTML = products.map((p) => `
+    <div class="product-card" id="product-${p.id}" data-category="${p.category}">
+      <div class="product-image">${p.icon}</div>
+      <span class="product-tag">${p.category}</span>
+      <h3>${escapeHtml(p.name)}</h3>
+      <p>${escapeHtml(p.desc)}</p>
+      <div class="product-footer">
+        <div class="product-price">${p.price} THB</div>
+        <button class="buy-btn" data-product="${p.id}">Buy</button>
+      </div>
+      <div class="checkout-panel" id="checkout-${p.id}"></div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.buy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(`checkout-${btn.dataset.product}`);
+      panel.classList.add('open');
+      panel.innerHTML = `<p style="font-size:12px;color:var(--parchment-dim);text-align:center;">Purchasing isn't live yet — check back soon!</p>`;
+    });
+  });
+}
+
+function highlightShopCategory(category) {
+  setTimeout(() => {
+    document.querySelectorAll('.product-card').forEach((card) => {
+      card.style.borderColor = card.dataset.category === category ? 'rgba(201,162,39,0.8)' : '';
+    });
+  }, 200);
+}
+
+/* ================= real trends ================= */
+async function loadTrends() {
+  try {
+    const res = await fetch('/api/trends');
+    const data = await res.json();
+    const list = document.getElementById('trend-list');
+    if (!data.trends || data.trends.length === 0) return; // keep the "not enough data yet" placeholder
+
+    const max = Math.max(...data.trends.map((t) => t.count));
+    list.innerHTML = data.trends.map((t, i) => `
+      <div class="trend-row">
+        <div class="trend-num">${i + 1}</div>
+        <div style="width:130px;font-size:12.5px;">${t.emoji} ${escapeHtml(t.label)}</div>
+        <div class="trend-bar-track"><div class="trend-bar-fill" style="width:${((t.count / max) * 100).toFixed(0)}%"></div></div>
+        <div class="trend-count">${t.count} read${t.count === 1 ? '' : 's'}</div>
+      </div>
+    `).join('');
+  } catch (e) {
+    // non-fatal - keeps the "not enough data yet" placeholder
+  }
+}
+
+/* ================= temples (real, verified locations) ================= */
+const temples = [
+  {
+    icon:'🐍', name:'Kham Chanod (Wang Nakhin)', province:'Udon Thani', rating:'4.6★ (15k+ reviews)',
+    desc:'A palm-covered site believed to be a gateway to the naga realm. Visitors light incense, circle the sacred trees, and watch candle wax drip into water for number signs.',
+    mapsUrl:'https://maps.google.com/?cid=14783424111115046286'
+  },
+  {
+    icon:'🐓', name:'Wat Chedi (Ai Khai)', province:'Nakhon Si Thammarat', rating:'4.6★ (12k+ reviews)',
+    desc:'One of Thailand\'s most famous Government Lottery pilgrimage sites, devoted to child-spirit guardian Ai Khai.',
+    mapsUrl:'https://maps.google.com/?cid=13667418601365559692'
+  },
+  {
+    icon:'🐢', name:'Phaya Tao Ngoi Shrine', province:'Sakon Nakhon', rating:'4.3★ (5k+ reviews)',
+    desc:'A giant turtle statue tied to local legends of longevity and windfall luck.',
+    mapsUrl:'https://maps.google.com/?cid=13818307400563680921'
+  },
+  {
+    icon:'🌳', name:'Wat Prasat', province:'Nonthaburi (Greater Bangkok)', rating:'4.7★ (2.9k+ reviews)',
+    desc:'A 400-year-old temple, home to the Nang Ta-khian tree-spirit shrine — a favorite among Government Lottery hopefuls close to Bangkok.',
+    mapsUrl:'https://maps.google.com/?cid=6446611963925743651'
+  },
+  {
+    icon:'🏔️', name:'Naga Cave (Tham Naka)', province:'Bueng Kan', rating:'4.8★ (3k+ reviews)',
+    desc:'Serpentine rock formations high in Phu Langka National Park that went viral for resembling a sleeping naga.',
+    mapsUrl:'https://maps.google.com/?cid=12811720373151630818'
+  },
+];
+
+function renderTemples() {
+  const grid = document.getElementById('temple-grid');
+  if (!grid) return;
+  grid.innerHTML = temples.map((t) => `
+    <div class="temple-card">
+      <div class="temple-icon">${t.icon}</div>
+      <div class="temple-body">
+        <div class="temple-header">
+          <h3>${escapeHtml(t.name)}</h3>
+          <span class="temple-province">${escapeHtml(t.province)}</span>
+          <span class="temple-rating">${t.rating}</span>
+        </div>
+        <p>${t.desc}</p>
+        <a href="${t.mapsUrl}" target="_blank" rel="noopener" class="temple-link">Open in Google Maps →</a>
+      </div>
+    </div>
+  `).join('') + `<p class="temple-disclaimer">These are real, documented pilgrimage sites — included here as cultural context, not as a claim that visiting predicts Government Lottery outcomes.</p>`;
+}
+
+loadStats();
+loadStatsDrawDays();
+renderShop();
+loadTrends();
+renderTemples();

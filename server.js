@@ -57,6 +57,7 @@ function isOmiseConfigured() {
 }
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // needed for the /admin HTML forms
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   cookieSession({
@@ -160,6 +161,8 @@ app.post('/api/dream', readingLimiter, (req, res) => {
   const today = dayjs().format('YYYY-MM-DD');
   const personalNumber = getPersonalNumber(userId, today);
   const hasUnlock = store.hasUnlockedDraw(userId, drawDate);
+  const pendingManual = !hasUnlock && store.hasPendingManualClaim(userId, drawDate);
+  const manualPaymentEnabled = Boolean(site.manualPayment && site.manualPayment.enabled);
 
   const readings = matches.map((m) => ({
     id: m.id,
@@ -174,7 +177,8 @@ app.post('/api/dream', readingLimiter, (req, res) => {
     readings,
     personalNumber,
     hasUnlock,
-    paymentsAvailable: isOmiseConfigured(),
+    pendingManual,
+    paymentsAvailable: isOmiseConfigured() || manualPaymentEnabled,
     draw: getNextDraw(site.drawDaysOfMonth),
     pricing: site.pricing,
   });
@@ -194,37 +198,67 @@ app.post('/api/unlock', readingLimiter, async (req, res) => {
     return res.json({ alreadyUnlocked: true });
   }
 
-  if (!isOmiseConfigured()) {
-    // Real payments aren't wired up yet - tell the frontend so it can show
-    // a "launching soon" state instead of a broken/erroring checkout.
-    return res.json({ comingSoon: true, message: 'Online payments are launching soon - check back shortly!' });
+  if (isOmiseConfigured()) {
+    try {
+      const charge = await omiseClient.createPromptPayCharge({
+        amountSatang: site.pricing.drawPassAmountSatang,
+        userId,
+        drawDate,
+      });
+
+      store.createPendingEntitlement({
+        userId,
+        drawDate,
+        chargeId: charge.id,
+        amountSatang: site.pricing.drawPassAmountSatang,
+      });
+
+      // Field path per Omise's PromptPay source docs - verify against a live
+      // test charge, since this hasn't been exercised against real API keys.
+      const qrImageUrl = charge.source && charge.source.scannable_code
+        ? charge.source.scannable_code.image.download_uri
+        : null;
+
+      return res.json({ chargeId: charge.id, qrImageUrl, amountSatang: site.pricing.drawPassAmountSatang });
+    } catch (err) {
+      console.error('Charge creation failed:', err);
+      return res.status(500).json({ error: 'Could not start payment. Please try again.' });
+    }
   }
 
-  try {
-    const charge = await omiseClient.createPromptPayCharge({
-      amountSatang: site.pricing.drawPassAmountSatang,
-      userId,
-      drawDate,
-    });
-
-    store.createPendingEntitlement({
-      userId,
-      drawDate,
-      chargeId: charge.id,
+  if (site.manualPayment && site.manualPayment.enabled) {
+    // Your own bank/PromptPay QR - no automatic payment verification, so
+    // this just shows the QR + contact info. The actual unlock happens
+    // when you manually confirm the payment at /admin.
+    return res.json({
+      manual: true,
+      qrImageUrl: site.manualPayment.qrImagePath,
+      contactInfo: site.manualPayment.contactInfo,
       amountSatang: site.pricing.drawPassAmountSatang,
     });
-
-    // Field path per Omise's PromptPay source docs - verify against a live
-    // test charge, since this hasn't been exercised against real API keys.
-    const qrImageUrl = charge.source && charge.source.scannable_code
-      ? charge.source.scannable_code.image.download_uri
-      : null;
-
-    res.json({ chargeId: charge.id, qrImageUrl, amountSatang: site.pricing.drawPassAmountSatang });
-  } catch (err) {
-    console.error('Charge creation failed:', err);
-    res.status(500).json({ error: 'Could not start payment. Please try again.' });
   }
+
+  // Neither real payments nor manual payment are configured yet.
+  return res.json({ comingSoon: true, message: 'Online payments are launching soon - check back shortly!' });
+});
+
+// Visitor confirms (self-reports) that they've paid via the manual QR -
+// creates a pending claim for the site owner to review and confirm at
+// /admin. Does NOT unlock anything automatically.
+app.post('/api/unlock/claim', readingLimiter, (req, res) => {
+  const userId = currentUserId(req);
+  const drawDate = currentDrawDate();
+
+  if (store.hasUnlockedDraw(userId, drawDate)) {
+    return res.json({ alreadyUnlocked: true });
+  }
+  if (store.hasPendingManualClaim(userId, drawDate)) {
+    return res.json({ alreadySubmitted: true });
+  }
+
+  const payerNote = (req.body.payerNote || '').trim().slice(0, 200);
+  store.createPendingManualEntitlement({ userId, drawDate, payerNote });
+  res.json({ submitted: true });
 });
 
 app.get('/api/unlock/status', async (req, res) => {
@@ -315,6 +349,109 @@ app.post('/api/amulet', readingLimiter, (req, res) => {
     return res.status(400).json({ error: 'Unknown goal', options: Object.keys(numerologyContent.amuletMatches) });
   }
   res.json({ goal, summary: match.summary, tip: match.tip });
+});
+
+// Display metadata (emoji + label) for each dream-dictionary entry, used
+// by the real trends endpoint below.
+const SYMBOL_DISPLAY = {
+  snake: { emoji: '🐍', label: 'Snake' },
+  teeth_falling: { emoji: '🦷', label: 'Teeth falling' },
+  water: { emoji: '💧', label: 'Water' },
+  flying: { emoji: '🕊️', label: 'Flying' },
+  finding_money: { emoji: '💰', label: 'Finding money' },
+  dead_relative: { emoji: '👻', label: 'Deceased relative' },
+  wedding: { emoji: '💍', label: 'Wedding' },
+  chased: { emoji: '🏃', label: 'Being chased' },
+  elephant: { emoji: '🐘', label: 'Elephant' },
+  fire: { emoji: '🔥', label: 'Fire' },
+  fish: { emoji: '🐟', label: 'Fish' },
+  falling: { emoji: '📉', label: 'Falling' },
+};
+
+// Real usage stats - no seeded/fake numbers. Will show 0s on a fresh
+// deployment until real visitors start using the site.
+app.get('/api/stats', (req, res) => {
+  const { dreamsToday, unlocksToday } = store.getTodayStats();
+  res.json({ dreamsToday, unlocksToday });
+});
+
+// Real top dream symbols - based on actual logged submissions.
+app.get('/api/trends', (req, res) => {
+  const top = store.getTopSymbols(5).map((t) => ({
+    ...t,
+    ...(SYMBOL_DISPLAY[t.id] || { emoji: '✨', label: t.id }),
+  }));
+  res.json({ trends: top });
+});
+
+// ---------- admin: confirm manual payments ----------
+// Simple password-gated page - not a real auth system, just enough
+// friction to keep this away from casual visitors. Set ADMIN_PASSWORD in
+// your environment before this becomes usable. The password travels in
+// the URL/form, which is fine for personal low-stakes use over HTTPS but
+// isn't a pattern to reuse for anything more sensitive.
+
+function checkAdminPassword(password) {
+  const real = process.env.ADMIN_PASSWORD;
+  return Boolean(real) && password === real;
+}
+
+app.get('/admin', (req, res) => {
+  if (!process.env.ADMIN_PASSWORD) {
+    return res.send('Set ADMIN_PASSWORD in your environment variables first, then reload this page.');
+  }
+
+  const password = req.query.password || '';
+  if (!checkAdminPassword(password)) {
+    return res.send(`
+      <html><body style="font-family:sans-serif;max-width:400px;margin:60px auto;">
+        <h2>Admin login</h2>
+        <form method="GET" action="/admin">
+          <input name="password" type="password" placeholder="Admin password" style="padding:8px;width:100%;box-sizing:border-box;margin-bottom:10px;">
+          <button type="submit" style="padding:8px 16px;">View pending payments</button>
+        </form>
+      </body></html>
+    `);
+  }
+
+  const pending = store.getPendingManualEntitlements();
+  const rows = pending
+    .map(
+      (p) => `
+      <tr>
+        <td>${p.userId}</td>
+        <td>${p.drawDate}</td>
+        <td>${(p.payerNote || '').replace(/</g, '&lt;')}</td>
+        <td>${new Date(p.createdAt).toLocaleString()}</td>
+        <td>
+          <form method="POST" action="/admin/confirm" style="display:inline">
+            <input type="hidden" name="id" value="${p.id}">
+            <input type="hidden" name="password" value="${password}">
+            <button type="submit">Confirm Paid</button>
+          </form>
+        </td>
+      </tr>
+    `
+    )
+    .join('');
+
+  res.send(`
+    <html><body style="font-family:sans-serif;max-width:800px;margin:40px auto;">
+      <h2>Pending Manual Payments (${pending.length})</h2>
+      <p style="color:#666;">Check your bank app for the payment, then click Confirm to unlock that visitor's numbers.</p>
+      <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;">
+        <tr><th>Visitor</th><th>Draw</th><th>Note from payer</th><th>Submitted</th><th>Action</th></tr>
+        ${rows || '<tr><td colspan="5">No pending payments right now.</td></tr>'}
+      </table>
+    </body></html>
+  `);
+});
+
+app.post('/admin/confirm', (req, res) => {
+  const { id, password } = req.body;
+  if (!checkAdminPassword(password)) return res.status(403).send('Wrong password');
+  store.confirmManualEntitlement(id);
+  res.redirect(`/admin?password=${encodeURIComponent(password)}`);
 });
 
 app.listen(PORT, () => {
