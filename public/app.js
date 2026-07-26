@@ -531,8 +531,32 @@ function renderTemples() {
   `).join('') + `<p class="temple-disclaimer">These are real, documented pilgrimage sites — included here as cultural context, not as a claim that visiting predicts Government Lottery outcomes.</p>`;
 }
 
+async function loadSymbolGrid() {
+  const grid = document.getElementById('symbol-grid');
+  if (!grid) return;
+  try {
+    const res = await fetch('/api/dream/symbols');
+    const data = await res.json();
+    grid.innerHTML = data.symbols
+      .map(
+        (s) =>
+          `<button class="symbol-chip" data-keyword="${escapeHtml(s.keyword)}"><span class="emoji">${s.emoji}</span>${escapeHtml(s.label)}</button>`
+      )
+      .join('');
+
+    grid.querySelectorAll('.symbol-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        dreamInput.value = chip.dataset.keyword;
+        revealDream(chip.dataset.keyword);
+        resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+  } catch (e) {}
+}
+
 loadStats();
 loadStatsDrawDays();
 renderShop();
 loadTrends();
 renderTemples();
+loadSymbolGrid();

@@ -18,13 +18,10 @@ const products = require('./config/products.json');
 const { createRateLimiter } = require('./lib/rateLimiter');
 const { getMoonPhase } = require('./lib/moonPhase');
 
-// 20 requests per minute per IP on the free-text endpoints - generous for
-// a real user clicking around, tight enough to blunt casual spam/scraping.
 const readingLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 20 });
 
-const MAX_INPUT_LENGTH = 200; // dream text, plate, phone, name - all capped here
+const MAX_INPUT_LENGTH = 200;
 
-// real Thai day-of-week color tradition, indexed by JS Date#getDay() (0=Sunday)
 const DAY_COLORS = [
   { name: 'Red', hex: '#C4342B' },
   { name: 'Yellow', hex: '#E4C158' },
@@ -38,17 +35,8 @@ const DAY_COLORS = [
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Needed so req.ip reflects the real client IP rather than the proxy's,
-// since Railway/Render (and most hosts) sit behind a reverse proxy - the
-// rate limiter above depends on this being accurate per-user.
 app.set('trust proxy', 1);
 
-// Detects whether real LINE Login / Omise credentials have been set, so
-// the site can run in a fully working "soft launch" mode before either is
-// configured - dream reading, personal numbers, and all free modules work
-// immediately; LINE sign-in and real payments switch on automatically the
-// moment real credentials are added to .env and config/site.json, with no
-// code changes needed.
 function isLineLoginConfigured() {
   return Boolean(site.lineLogin.channelId) && !site.lineLogin.channelId.startsWith('REPLACE_');
 }
@@ -58,21 +46,16 @@ function isOmiseConfigured() {
 }
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // needed for the /admin HTML forms
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   cookieSession({
     name: 'session',
     secret: process.env.SESSION_SECRET || 'dev-only-fallback-secret-change-me',
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    maxAge: 30 * 24 * 60 * 60 * 1000,
   })
 );
 
-// Every visitor gets a stable anonymous ID (persisted via the same signed
-// cookie as everything else) so personal numbers and Draw Pass purchases
-// work immediately, without waiting on LINE Login. Once a visitor signs in
-// with real LINE Login later, req.session.lineUserId takes over as the
-// identity going forward - this is purely a bridge for the pre-LINE phase.
 app.use((req, res, next) => {
   if (!req.session.lineUserId && !req.session.guestId) {
     req.session.guestId = 'guest_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
@@ -88,15 +71,11 @@ function currentDrawDate() {
   return getNextDraw(site.drawDaysOfMonth).date;
 }
 
-// ---------- auth ----------
-
 app.get('/api/me', (req, res) => {
   if (req.session.lineUserId) {
     const user = store.getUser(req.session.lineUserId);
     return res.json({ user: user || null, isGuest: false, lineLoginAvailable: isLineLoginConfigured() });
   }
-  // Guest identity - real for personal-number/entitlement purposes, just
-  // not tied to a LINE account yet.
   res.json({
     user: { displayName: 'Guest', pictureUrl: null },
     isGuest: true,
@@ -139,8 +118,6 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
-// ---------- dream reading ----------
-
 app.post('/api/dream', readingLimiter, (req, res) => {
   const text = (req.body.text || '').trim().slice(0, MAX_INPUT_LENGTH);
   if (!text) return res.status(400).json({ error: 'Missing dream text' });
@@ -179,8 +156,6 @@ app.post('/api/dream', readingLimiter, (req, res) => {
 app.get('/api/draw', (req, res) => {
   res.json(getNextDraw(site.drawDaysOfMonth));
 });
-
-// ---------- purchase: Draw Pass (one-off, PromptPay) ----------
 
 app.post('/api/unlock', readingLimiter, async (req, res) => {
   const userId = currentUserId(req);
@@ -244,8 +219,6 @@ app.post('/api/unlock/claim', readingLimiter, (req, res) => {
   store.createPendingManualEntitlement({ userId, drawDate, payerNote });
   res.json({ submitted: true });
 });
-
-// ---------- shop: product purchase (manual QR, personal fulfillment) ----------
 
 app.post('/api/shop/checkout', readingLimiter, (req, res) => {
   const product = products.find((p) => p.id === req.body.productId);
@@ -359,19 +332,46 @@ app.post('/api/amulet', readingLimiter, (req, res) => {
 });
 
 const SYMBOL_DISPLAY = {
-  snake: { emoji: '🐍', label: 'Snake' },
-  teeth_falling: { emoji: '🦷', label: 'Teeth falling' },
-  water: { emoji: '💧', label: 'Water' },
-  flying: { emoji: '🕊️', label: 'Flying' },
-  finding_money: { emoji: '💰', label: 'Finding money' },
-  dead_relative: { emoji: '👻', label: 'Deceased relative' },
-  wedding: { emoji: '💍', label: 'Wedding' },
-  chased: { emoji: '🏃', label: 'Being chased' },
-  elephant: { emoji: '🐘', label: 'Elephant' },
-  fire: { emoji: '🔥', label: 'Fire' },
-  fish: { emoji: '🐟', label: 'Fish' },
-  falling: { emoji: '📉', label: 'Falling' },
+  snake: { emoji: '🐍', label: 'งู' },
+  teeth_falling: { emoji: '🦷', label: 'ฟันหลุด' },
+  water: { emoji: '💧', label: 'น้ำ' },
+  flying: { emoji: '🕊️', label: 'บิน' },
+  finding_money: { emoji: '💰', label: 'เก็บเงิน' },
+  dead_relative: { emoji: '👻', label: 'คนตาย' },
+  wedding: { emoji: '💍', label: 'แต่งงาน' },
+  chased: { emoji: '🏃', label: 'ถูกไล่' },
+  elephant: { emoji: '🐘', label: 'ช้าง' },
+  fire: { emoji: '🔥', label: 'ไฟไหม้' },
+  fish: { emoji: '🐟', label: 'ปลา' },
+  falling: { emoji: '📉', label: 'ตกจากที่สูง' },
+  house: { emoji: '🏠', label: 'บ้าน' },
+  car: { emoji: '🚗', label: 'รถ' },
+  baby: { emoji: '👶', label: 'เด็กทารก' },
+  monk: { emoji: '🙏', label: 'พระ' },
+  hair_falling: { emoji: '💇', label: 'ผมร่วง' },
+  funeral: { emoji: '⚰️', label: 'งานศพ' },
+  police: { emoji: '👮', label: 'ตำรวจ' },
+  egg: { emoji: '🥚', label: 'ไข่' },
+  bird: { emoji: '🐦', label: 'นก' },
+  dog: { emoji: '🐶', label: 'หมา' },
+  cat: { emoji: '🐱', label: 'แมว' },
+  rain: { emoji: '🌧️', label: 'ฝนตก' },
+  gold_jewelry: { emoji: '✨', label: 'ทอง' },
+  thief: { emoji: '🥷', label: 'โจร' },
+  pregnant: { emoji: '🤰', label: 'ท้อง' },
+  airplane: { emoji: '✈️', label: 'เครื่องบิน' },
+  spider: { emoji: '🕷️', label: 'แมงมุม' },
 };
+
+app.get('/api/dream/symbols', (req, res) => {
+  const symbols = dictionary.map((entry) => ({
+    id: entry.id,
+    keyword: entry.keywords[0],
+    emoji: (SYMBOL_DISPLAY[entry.id] || {}).emoji || '✨',
+    label: (SYMBOL_DISPLAY[entry.id] || {}).label || entry.id,
+  }));
+  res.json({ symbols });
+});
 
 app.get('/api/stats', (req, res) => {
   const { dreamsToday, unlocksToday } = store.getTodayStats();
