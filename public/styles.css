@@ -752,3 +752,88 @@ html[lang="th"] .tarot-name .en{ font-style:normal; }
   background:none; border:none; color:var(--parchment-dim); font-size:15px;
   cursor:pointer; padding:6px; flex-shrink:0;
 }
+
+/* ---------- ห้องมงคล / BLESSING ROOM (premium) ----------
+   Deliberately the most ornamented block on the page - it should read as
+   somewhere special before you've even read the words. */
+.blessing{ margin-top:40px; }
+.vip-card{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(201,162,39,0.16), transparent 70%),
+    linear-gradient(165deg, #2A1D14, #160F0A 65%);
+  border:2px solid var(--gold); border-radius:24px; padding:34px 26px;
+  max-width:760px; margin:0 auto;
+  box-shadow:0 26px 60px -22px rgba(0,0,0,0.85), inset 0 0 60px rgba(201,162,39,0.06);
+}
+.vip-card::before{
+  content:''; position:absolute; inset:9px; border:1px solid rgba(201,162,39,0.28);
+  border-radius:17px; pointer-events:none;
+}
+.vip-shimmer{
+  position:absolute; top:0; left:-60%; width:45%; height:100%;
+  background:linear-gradient(105deg, transparent, rgba(244,233,208,0.10), transparent);
+  animation:vipShimmer 6.5s ease-in-out infinite; pointer-events:none;
+}
+@keyframes vipShimmer{ 0%{ left:-60%; } 55%,100%{ left:120%; } }
+@media (prefers-reduced-motion: reduce){ .vip-shimmer{ display:none; } }
+
+.vip-head{ text-align:center; position:relative; z-index:1; margin-bottom:22px; }
+.vip-crest{
+  width:60px; height:60px; margin:0 auto 14px; border-radius:50%;
+  background:conic-gradient(from 210deg, var(--gold), var(--marigold), var(--gold-bright), var(--gold));
+  display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--ink);
+  box-shadow:0 0 0 5px rgba(201,162,39,0.16), 0 8px 22px -6px rgba(201,162,39,0.5);
+}
+.vip-title{ font-family:var(--font-display); font-size:26px; margin-bottom:6px; }
+.vip-sub{ font-size:13.5px; color:var(--parchment-dim); line-height:1.65; max-width:440px; margin:0 auto; }
+
+.vip-perks{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:22px 0; position:relative; z-index:1; }
+.vip-perk{
+  display:flex; align-items:flex-start; gap:11px;
+  background:rgba(244,233,208,0.05); border:1px solid rgba(201,162,39,0.2);
+  border-radius:14px; padding:14px;
+}
+.vip-perk .pi{ font-size:20px; flex-shrink:0; line-height:1.2; }
+.vip-perk .pt{ font-family:var(--font-display); font-size:13.5px; margin-bottom:3px; }
+.vip-perk .pd{ font-size:11.5px; color:var(--parchment-dim); line-height:1.5; }
+
+.vip-price{ text-align:center; position:relative; z-index:1; margin:22px 0 8px; }
+.vip-price .amt{ font-family:var(--font-display); font-size:44px; font-weight:700; color:var(--gold-bright); line-height:1; }
+.vip-price .per{ font-size:12.5px; color:var(--parchment-dim); margin-top:6px; }
+.vip-cta{
+  display:block; width:100%; max-width:340px; margin:16px auto 0;
+  font-family:var(--font-body); font-weight:700; font-size:17px; color:var(--ink);
+  background:linear-gradient(135deg,var(--gold-bright),var(--marigold));
+  border:none; padding:17px; border-radius:999px; cursor:pointer; position:relative; z-index:1;
+  box-shadow:0 10px 26px -8px rgba(201,162,39,0.6);
+}
+.vip-cta:active{ transform:translateY(1px); }
+.vip-note{ text-align:center; font-size:11px; color:var(--parchment-dim); margin-top:12px; position:relative; z-index:1; opacity:0.8; }
+
+.vip-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(62,107,92,0.35); color:#a9d6c4; border-radius:999px;
+  padding:6px 14px; font-size:11.5px; font-weight:700; margin-bottom:14px;
+}
+.nav-vip{ color:var(--gold-bright) !important; font-weight:700 !important; }
+
+/* prayers inside the unlocked room */
+.prayer{ background:rgba(244,233,208,0.04); border:1px solid rgba(201,162,39,0.18); border-radius:16px; padding:18px; margin-bottom:12px; position:relative; z-index:1; }
+.prayer-name{ font-family:var(--font-display); font-size:15px; color:var(--gold-bright); margin-bottom:10px; }
+.prayer-text{
+  font-family:var(--font-display); font-size:16px; line-height:2.1; color:var(--parchment);
+  white-space:pre-line; padding:14px 16px; background:rgba(0,0,0,0.22);
+  border-left:3px solid var(--gold); border-radius:10px; margin-bottom:10px;
+}
+.prayer-note{ font-size:12px; color:var(--parchment-dim); line-height:1.6; }
+.day-chant{
+  background:linear-gradient(135deg, rgba(201,162,39,0.16), rgba(232,135,58,0.10));
+  border:1px solid rgba(201,162,39,0.4); border-radius:16px; padding:20px; margin-bottom:14px;
+  text-align:center; position:relative; z-index:1;
+}
+.day-chant .dc-label{ font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--marigold); font-weight:700; margin-bottom:8px; }
+.day-chant .dc-name{ font-family:var(--font-display); font-size:17px; margin-bottom:10px; line-height:1.4; }
+.day-chant .dc-count{ font-family:var(--font-display); font-size:34px; font-weight:700; color:var(--gold-bright); }
+.day-chant .dc-count-label{ font-size:12px; color:var(--parchment-dim); margin-top:2px; }
+.prayer-source{ font-size:11px; color:var(--parchment-dim); line-height:1.6; text-align:center; margin-top:14px; opacity:0.85; position:relative; z-index:1; }

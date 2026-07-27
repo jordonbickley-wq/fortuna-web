@@ -1,0 +1,86 @@
+{
+  "core": [
+    {
+      "id": "namo",
+      "name_th": "บทบูชาพระรัตนตรัย (นะโม ๓ จบ)",
+      "name_en": "Homage to the Buddha (Namo, 3 times)",
+      "text_th": "นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ",
+      "note_th": "สวด 3 จบ เป็นบทเริ่มต้นก่อนสวดมนต์บทอื่นเสมอ",
+      "note_en": "Chanted three times — the standard opening before any other prayer."
+    },
+    {
+      "id": "refuges",
+      "name_th": "ไตรสรณคมน์ (ถึงพระรัตนตรัยเป็นที่พึ่ง)",
+      "name_en": "The Three Refuges",
+      "text_th": "พุทธัง สะระณัง คัจฉามิ\nธัมมัง สะระณัง คัจฉามิ\nสังฆัง สะระณัง คัจฉามิ",
+      "note_th": "ระลึกถึงพระพุทธ พระธรรม พระสงฆ์ เป็นที่พึ่งที่ระลึก",
+      "note_en": "Taking refuge in the Buddha, the Dhamma, and the Sangha."
+    },
+    {
+      "id": "metta",
+      "name_th": "บทแผ่เมตตาให้ตนเอง",
+      "name_en": "Loving-kindness for oneself",
+      "text_th": "อะหัง สุขิโต โหมิ\nอะหัง นิททุกโข โหมิ\nอะหัง อะเวโร โหมิ\nอะหัง อัพยาปัชโฌ โหมิ\nอะหัง อะนีโฆ โหมิ\nสุขี อัตตานัง ปะริหะรามิ",
+      "note_th": "ขอให้ข้าพเจ้ามีความสุข ปราศจากทุกข์ ปราศจากเวร ปราศจากความเบียดเบียน",
+      "note_en": "May I be happy, free from suffering, free from enmity and affliction."
+    }
+  ],
+  "byDay": [
+    {
+      "index": 0,
+      "day_th": "วันอาทิตย์",
+      "day_en": "Sunday",
+      "chant_th": "บทสวดพระอาทิตย์ (อุเทตะยัญจักขุมา)",
+      "chant_en": "The Sunday chant",
+      "count": 6
+    },
+    {
+      "index": 1,
+      "day_th": "วันจันทร์",
+      "day_en": "Monday",
+      "chant_th": "บทสวดพระจันทร์ (ยันทุนนิมิตตัง)",
+      "chant_en": "The Monday chant",
+      "count": 15
+    },
+    {
+      "index": 2,
+      "day_th": "วันอังคาร",
+      "day_en": "Tuesday",
+      "chant_th": "บทสวดพระอังคาร (ยัสสานุสสะระเณนาปิ)",
+      "chant_en": "The Tuesday chant",
+      "count": 8
+    },
+    {
+      "index": 3,
+      "day_th": "วันพุธ",
+      "day_en": "Wednesday",
+      "chant_th": "บทสวดพระพุธ (สัพพาสีวิสะชาตีนัง)",
+      "chant_en": "The Wednesday chant",
+      "count": 17
+    },
+    {
+      "index": 4,
+      "day_th": "วันพฤหัสบดี",
+      "day_en": "Thursday",
+      "chant_th": "บทสวดพระพฤหัสบดี (ปูเรนตัมโพธิสัมภาเร)",
+      "chant_en": "The Thursday chant",
+      "count": 19
+    },
+    {
+      "index": 5,
+      "day_th": "วันศุกร์",
+      "day_en": "Friday",
+      "chant_th": "บทสวดพระศุกร์ (อัปปะสันเนหิ นาถัสสะ)",
+      "chant_en": "The Friday chant",
+      "count": 21
+    },
+    {
+      "index": 6,
+      "day_th": "วันเสาร์",
+      "day_en": "Saturday",
+      "chant_th": "บทสวดพระเสาร์ (ยะโตหัง ภะคินิ)",
+      "chant_en": "The Saturday chant",
+      "count": 10
+    }
+  ]
+}

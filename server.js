@@ -21,6 +21,7 @@ const drawResults = require('./lib/drawResults');
 const tarot = require('./lib/tarot');
 const birthdays = require('./config/birthday.json');
 const auspicious = require('./lib/auspicious');
+const prayers = require('./config/prayers.json');
 const paymentRef = require('./lib/paymentRef');
 
 // 20 requests per minute per IP on the free-text endpoints - generous for
@@ -901,6 +902,43 @@ app.post('/api/tarot/spread', readingLimiter, (req, res) => {
   const result = tarot.drawSpread(key);
   if (!result) return res.status(400).json({ error: 'Unknown spread' });
   res.json({ locked: false, ...result });
+});
+
+
+// ---------- ห้องมงคล / Blessing Room (the premium area) ----------
+// One clearly-signposted place where everything paid lives, rather than
+// locks scattered across the page. Free visitors see exactly what's
+// inside and one obvious way to unlock it.
+
+app.get('/api/blessing-room', (req, res) => {
+  const userId = currentUserId(req);
+  const hasPremium = store.hasUnlockedDraw(userId, currentDrawDate());
+  const profile = store.getProfile(userId);
+
+  const birthIndex =
+    profile && profile.birthDayIndex !== null && profile.birthDayIndex !== undefined
+      ? profile.birthDayIndex
+      : null;
+
+  // The day-of-birth chant is personalised when we know their birth day;
+  // otherwise fall back to today's weekday so there's still something useful.
+  const dayIndex = birthIndex !== null ? birthIndex : new Date().getDay();
+  const dayChant = prayers.byDay[dayIndex];
+
+  if (!hasPremium) {
+    return res.json({
+      unlocked: false,
+      pricing: site.pricing,
+      paymentsAvailable: isOmiseConfigured() || Boolean(site.manualPayment && site.manualPayment.enabled),
+    });
+  }
+
+  res.json({
+    unlocked: true,
+    usedBirthDay: birthIndex !== null,
+    prayers: prayers.core,
+    dayChant,
+  });
 });
 
 app.listen(PORT, () => {

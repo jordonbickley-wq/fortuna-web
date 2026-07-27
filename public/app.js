@@ -163,6 +163,23 @@ const STRINGS = {
     install_btn: 'Add now',
     install_later: 'Not now',
     install_ios_hint: 'Tap the Share button below, then choose "Add to Home Screen".',
+    nav_blessing: '✦ Blessing Room',
+    vip_title: 'The Blessing Room',
+    vip_sub: 'One place for everything extra lucky — your full fortune calendar, complete tarot spreads, and the daily prayers for your birth day.',
+    vip_perk1_t: 'Full lucky-date calendar', vip_perk1_d: '12 auspicious dates across 60 days, each with the traditional reasoning',
+    vip_perk2_t: 'Complete tarot spreads', vip_perk2_d: 'Love, work and life-direction readings, drawn fresh for your question',
+    vip_perk3_t: 'Daily prayers', vip_perk3_d: 'Your birth-day chant with its traditional repetition count',
+    vip_perk4_t: 'All premium numbers', vip_perk4_d: 'Every dream reading unlocked for this Government Lottery draw',
+    vip_per: 'for this draw cycle',
+    vip_cta: '✦ Unlock the Blessing Room',
+    vip_note: 'One payment. Unlocks everything above until the next Government Lottery draw.',
+    vip_unlocked: '✓ Unlocked',
+    vip_welcome: 'Welcome to the Blessing Room',
+    prayer_heading: 'Prayers for today',
+    day_chant_label: 'Your birth-day chant',
+    day_chant_today_label: "Today's chant",
+    chant_times: 'times',
+    prayer_source_note: 'The short prayers above are reproduced as commonly chanted. For the full text of your birth-day chant, ask at your local temple or use a printed prayer book — we give the name and count rather than a partial version.',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -327,6 +344,23 @@ const STRINGS = {
     install_btn: 'เพิ่มเลย',
     install_later: 'ไว้ทีหลัง',
     install_ios_hint: 'กดปุ่มแชร์ด้านล่าง แล้วเลือก "เพิ่มไปยังหน้าจอโฮม"',
+    nav_blessing: '✦ ห้องมงคล',
+    vip_title: 'ห้องมงคล',
+    vip_sub: 'รวมทุกสิ่งที่เสริมดวงไว้ที่เดียว ปฏิทินฤกษ์ฉบับเต็ม เปิดไพ่แบบครบชุด และบทสวดประจำวันเกิดของคุณ',
+    vip_perk1_t: 'ปฏิทินฤกษ์ฉบับเต็ม', vip_perk1_d: 'วันมงคล 12 วันใน 60 วัน พร้อมเหตุผลตามตำราทุกวัน',
+    vip_perk2_t: 'เปิดไพ่แบบครบชุด', vip_perk2_d: 'ไพ่ความรัก การงาน และทิศทางชีวิต สับใหม่ทุกครั้ง',
+    vip_perk3_t: 'บทสวดประจำวัน', vip_perk3_d: 'บทสวดประจำวันเกิดของคุณ พร้อมจำนวนจบตามกำลังวัน',
+    vip_perk4_t: 'เลขเด็ดครบทุกใบ', vip_perk4_d: 'ปลดล็อกทุกคำทำนายฝันสำหรับหวยรัฐบาลงวดนี้',
+    vip_per: 'สำหรับงวดนี้',
+    vip_cta: '✦ ปลดล็อกห้องมงคล',
+    vip_note: 'จ่ายครั้งเดียว ใช้ได้ทุกอย่างด้านบนจนถึงหวยรัฐบาลงวดหน้า',
+    vip_unlocked: '✓ ปลดล็อกแล้ว',
+    vip_welcome: 'ยินดีต้อนรับสู่ห้องมงคล',
+    prayer_heading: 'บทสวดประจำวันนี้',
+    day_chant_label: 'บทสวดประจำวันเกิดของคุณ',
+    day_chant_today_label: 'บทสวดประจำวันนี้',
+    chant_times: 'จบ',
+    prayer_source_note: 'บทสวดสั้นด้านบนคัดมาตามที่สวดกันทั่วไป สำหรับบทสวดประจำวันเกิดฉบับเต็ม กรุณาสอบถามที่วัดใกล้บ้านหรือใช้หนังสือสวดมนต์ เราแสดงชื่อบทและจำนวนจบแทนการลงข้อความไม่ครบ',
   },
 };
 
@@ -381,6 +415,7 @@ function setLang(lang) {
   renderDayPicker();
   loadAuspiciousActivities();
   loadSpreadOptions();
+  loadBlessingRoom();
   if (selectedActivity) runAuspicious();
   // Note: a currently-displayed dream/module result stays in whatever
   // language it was fetched in until the next action - re-translating
@@ -1584,7 +1619,7 @@ async function runAuspicious() {
          <div class="lk">🔒</div>
          <h4>${t('premium_title')}</h4>
          <p>${t('premium_body')}</p>
-         ${data.paymentsAvailable ? `<button class="premium-btn" onclick="document.getElementById('dream').scrollIntoView({behavior:'smooth'})">${t('premium_btn')}</button>` : ''}
+         ${data.paymentsAvailable ? `<button class="premium-btn" onclick="openBlessingPayment()">${t('premium_btn')}</button>` : ''}
        </div>`;
 
   out.innerHTML = `
@@ -1646,7 +1681,7 @@ async function drawSpread() {
         <div class="lk">🔮</div>
         <h4>${t('premium_spread_title')}</h4>
         <p>${t('premium_spread_body')}</p>
-        ${data.paymentsAvailable ? `<button class="premium-btn" onclick="document.getElementById('dream').scrollIntoView({behavior:'smooth'})">${t('premium_btn')}</button>` : ''}
+        ${data.paymentsAvailable ? `<button class="premium-btn" onclick="openBlessingPayment()">${t('premium_btn')}</button>` : ''}
       </div>`;
     return;
   }
@@ -1872,3 +1907,174 @@ function maybeShowInstallBar() {
   localStorage.setItem('fortunaVisitCount', String(n));
   if (isIos()) setTimeout(maybeShowInstallBar, 4000);
 })();
+
+/* ================= ห้องมงคล / Blessing Room =================
+   A single, highly visible premium destination. Previously the paid
+   features were behind small locks scattered down the page, and the
+   unlock buttons only scrolled elsewhere instead of opening payment -
+   which is exactly the dead end this replaces. */
+
+async function loadBlessingRoom() {
+  const box = document.getElementById('blessing-container');
+  if (!box) return;
+
+  try {
+    const res = await fetch('/api/blessing-room');
+    const data = await res.json();
+
+    if (!data.unlocked) {
+      box.innerHTML = renderBlessingLocked(data);
+      const cta = document.getElementById('vip-cta');
+      if (cta) cta.addEventListener('click', openBlessingPayment);
+      return;
+    }
+
+    box.innerHTML = renderBlessingUnlocked(data);
+  } catch (e) {}
+}
+
+function renderBlessingLocked(data) {
+  const thb = (data.pricing.drawPassAmountSatang / 100).toFixed(0);
+  const perks = [
+    ['📅', t('vip_perk1_t'), t('vip_perk1_d')],
+    ['🔮', t('vip_perk2_t'), t('vip_perk2_d')],
+    ['🙏', t('vip_perk3_t'), t('vip_perk3_d')],
+    ['🔢', t('vip_perk4_t'), t('vip_perk4_d')],
+  ];
+
+  return `
+    <div class="vip-card">
+      <div class="vip-shimmer"></div>
+      <div class="vip-head">
+        <div class="vip-crest">✦</div>
+        <div class="vip-title">${t('vip_title')}</div>
+        <div class="vip-sub">${t('vip_sub')}</div>
+      </div>
+
+      <div class="vip-perks">
+        ${perks
+          .map(
+            ([icon, title, desc]) => `
+          <div class="vip-perk">
+            <span class="pi">${icon}</span>
+            <div>
+              <div class="pt">${escapeHtml(title)}</div>
+              <div class="pd">${escapeHtml(desc)}</div>
+            </div>
+          </div>`
+          )
+          .join('')}
+      </div>
+
+      <div class="vip-price">
+        <div class="amt">${thb} ฿</div>
+        <div class="per">${t('vip_per')}</div>
+      </div>
+
+      ${data.paymentsAvailable ? `<button class="vip-cta" id="vip-cta">${t('vip_cta')}</button>` : ''}
+      <div class="vip-note">${t('vip_note')}</div>
+      <div id="vip-payment"></div>
+    </div>
+  `;
+}
+
+function renderBlessingUnlocked(data) {
+  const dc = data.dayChant;
+  const label = data.usedBirthDay ? t('day_chant_label') : t('day_chant_today_label');
+  const chantName = currentLang === 'th' ? dc.chant_th : dc.chant_en;
+  const dayName = currentLang === 'th' ? dc.day_th : dc.day_en;
+
+  return `
+    <div class="vip-card">
+      <div class="vip-shimmer"></div>
+      <div class="vip-head">
+        <div class="vip-badge">${t('vip_unlocked')}</div>
+        <div class="vip-crest">✦</div>
+        <div class="vip-title">${t('vip_welcome')}</div>
+      </div>
+
+      <div class="day-chant">
+        <div class="dc-label">${escapeHtml(label)} · ${escapeHtml(dayName)}</div>
+        <div class="dc-name">${escapeHtml(chantName)}</div>
+        <div class="dc-count">${dc.count}</div>
+        <div class="dc-count-label">${t('chant_times')}</div>
+      </div>
+
+      <div class="prayer-name" style="text-align:center;margin:20px 0 12px;">${t('prayer_heading')}</div>
+      ${data.prayers
+        .map(
+          (p) => `
+        <div class="prayer">
+          <div class="prayer-name">${escapeHtml(currentLang === 'th' ? p.name_th : p.name_en)}</div>
+          <div class="prayer-text">${escapeHtml(p.text_th)}</div>
+          <div class="prayer-note">${escapeHtml(currentLang === 'th' ? p.note_th : p.note_en)}</div>
+        </div>`
+        )
+        .join('')}
+
+      <p class="prayer-source">${t('prayer_source_note')}</p>
+    </div>
+  `;
+}
+
+// Opens the payment steps inside the Blessing Room and scrolls to them.
+// This is what every "Unlock" button across the site now calls, so a tap
+// always leads somewhere useful.
+async function openBlessingPayment() {
+  const room = document.getElementById('blessing');
+  if (room) room.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const target = document.getElementById('vip-payment');
+  if (!target) return;
+
+  target.innerHTML = `<p style="text-align:center;color:var(--parchment-dim);font-size:13px;padding:16px;">${t('loading')}</p>`;
+
+  const res = await fetch('/api/unlock', { method: 'POST' });
+  const data = await res.json();
+
+  if (data.alreadyUnlocked) {
+    loadBlessingRoom();
+    return;
+  }
+  if (data.comingSoon) {
+    target.innerHTML = `<p style="text-align:center;color:var(--parchment-dim);font-size:13px;padding:16px;">${escapeHtml(data.message)}</p>`;
+    return;
+  }
+
+  // Reuse the same simplified payment steps used everywhere else, on a
+  // light panel so the dark VIP card doesn't wash out the form.
+  target.innerHTML = `<div class="result" style="margin-top:20px;">${renderPaymentSteps(
+    data,
+    (data.amountSatang / 100).toFixed(0)
+  )}</div>`;
+  wirePaymentSteps(submitBlessingClaim);
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+async function submitBlessingClaim() {
+  const btn = document.getElementById('ive-paid-btn');
+  const noteInput = document.getElementById('payer-note');
+  const statusEl = document.getElementById('claim-status');
+  if (btn) btn.disabled = true;
+
+  const res = await fetch('/api/unlock/claim', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      payerNote: noteInput ? noteInput.value : '',
+      amountSatang: btn ? btn.dataset.amount : null,
+    }),
+  });
+  const data = await res.json();
+
+  if (data.submitted || data.alreadySubmitted) {
+    showPaymentConfirmed('vip-payment');
+  } else if (data.alreadyUnlocked) {
+    loadBlessingRoom();
+  } else if (statusEl) {
+    statusEl.textContent = t('claim_error');
+    if (btn) btn.disabled = false;
+  }
+}
+
+loadBlessingRoom();
