@@ -113,6 +113,28 @@
 
 
 
+  <section class="rub" id="rub">
+    <div class="section-head">
+      <h2 data-i18n="rub_heading">ขูดหาเลข</h2>
+      <p data-i18n="rub_sub">ใช้นิ้วถูเบาๆ บนผิวไม้ แล้วดูว่าเลขอะไรจะปรากฏ</p>
+    </div>
+
+    <div class="rub-frame">
+      <div class="rub-panel" id="rub-panel">
+        <canvas id="rub-base"></canvas>
+        <canvas id="rub-cover"></canvas>
+        <div class="rub-hint" id="rub-hint">
+          <span class="rh-finger">👆</span>
+          <span data-i18n="rub_hint">ถูตรงนี้</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rub-result hidden" id="rub-result"></div>
+    <button class="rub-again" id="rub-again" data-i18n="rub_again">ถูใหม่อีกครั้ง</button>
+    <p class="rub-note" data-i18n="rub_note">เลขจะสุ่มใหม่ทุกครั้ง เป็นการละเล่นเพื่อความสนุกและสิริมงคล</p>
+  </section>
+
   <section class="tarot" id="tarot">
     <div class="section-head">
       <h2 data-i18n="tarot_heading">ไพ่ประจำวันของคุณ</h2>
@@ -329,6 +351,9 @@
   <a href="#dream" class="tb-item" data-target="dream">
     <span class="tb-ico">🌙</span><span class="tb-lbl" data-i18n="tb_dream">ฝัน</span>
   </a>
+  <a href="#rub" class="tb-item" data-target="rub">
+    <span class="tb-ico">✨</span><span class="tb-lbl" data-i18n="tb_rub">ขูดเลข</span>
+  </a>
   <a href="#tarot" class="tb-item" data-target="tarot">
     <span class="tb-ico">🔮</span><span class="tb-lbl" data-i18n="tb_tarot">ไพ่</span>
   </a>
@@ -337,9 +362,6 @@
   </a>
   <a href="#blessing" class="tb-item tb-vip" data-target="blessing">
     <span class="tb-ico">✦</span><span class="tb-lbl" data-i18n="tb_vip">ห้องมงคล</span>
-  </a>
-  <a href="#journal" class="tb-item" data-target="journal">
-    <span class="tb-ico">📓</span><span class="tb-lbl" data-i18n="tb_journal">สมุด</span>
   </a>
 </nav>
 
@@ -354,6 +376,7 @@
   }
 </script>
 <script src="/background.js"></script>
+<script src="/rub.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>

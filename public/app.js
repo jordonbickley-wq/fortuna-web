@@ -182,6 +182,13 @@ const STRINGS = {
     prayer_source_note: 'The short prayers above are reproduced as commonly chanted. For the full text of your birth-day chant, ask at your local temple or use a printed prayer book — we give the name and count rather than a partial version.',
     cat_back: 'All categories',
     tb_dream: 'Dream', tb_tarot: 'Tarot', tb_check: 'Check', tb_vip: 'Blessing', tb_journal: 'Journal',
+    tb_rub: 'Rub',
+    rub_heading: 'Rub to Reveal',
+    rub_sub: 'Run your finger gently across the bark and see which numbers appear.',
+    rub_hint: 'Rub here',
+    rub_again: 'Rub again',
+    rub_note: 'The numbers are drawn at random and are different every time — a moment of ritual and a bit of fun, in the spirit of rubbing the sacred trees.',
+    rub_revealed: 'The bark gave up these numbers',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -365,6 +372,13 @@ const STRINGS = {
     prayer_source_note: 'บทสวดสั้นด้านบนคัดมาตามที่สวดกันทั่วไป สำหรับบทสวดประจำวันเกิดฉบับเต็ม กรุณาสอบถามที่วัดใกล้บ้านหรือใช้หนังสือสวดมนต์ เราแสดงชื่อบทและจำนวนจบแทนการลงข้อความไม่ครบ',
     cat_back: 'ทุกหมวด',
     tb_dream: 'ฝัน', tb_tarot: 'ไพ่', tb_check: 'ตรวจหวย', tb_vip: 'ห้องมงคล', tb_journal: 'สมุด',
+    tb_rub: 'ขูดเลข',
+    rub_heading: 'ขูดหาเลข',
+    rub_sub: 'ใช้นิ้วถูเบาๆ บนผิวไม้ แล้วดูว่าเลขอะไรจะปรากฏ',
+    rub_hint: 'ถูตรงนี้',
+    rub_again: 'ถูใหม่อีกครั้ง',
+    rub_note: 'เลขสุ่มใหม่ทุกครั้งและไม่ซ้ำกัน เป็นการละเล่นเพื่อความสนุกและสิริมงคล ตามอย่างการขูดต้นไม้ศักดิ์สิทธิ์',
+    rub_revealed: 'ผิวไม้เผยเลขเหล่านี้',
   },
 };
 
@@ -2162,4 +2176,35 @@ loadBlessingRoom();
       setActive(el.dataset.target);
     });
   });
+})();
+
+/* ================= ขูดหาเลข wiring ================= */
+(function initRubPanel() {
+  const panel = document.getElementById('rub-panel');
+  const result = document.getElementById('rub-result');
+  const againBtn = document.getElementById('rub-again');
+  if (!panel || !result) return;
+
+  panel.addEventListener('rub:revealed', (e) => {
+    const nums = (e.detail && e.detail.numbers) || [];
+    result.innerHTML = `
+      <div class="rub-revealed-label">${t('rub_revealed')}</div>
+      <div class="rub-nums">
+        ${nums.map((n) => `<div class="rub-num">${escapeHtml(n)}</div>`).join('')}
+      </div>
+    `;
+    result.classList.remove('hidden');
+  });
+
+  panel.addEventListener('rub:reset', () => {
+    result.classList.add('hidden');
+    result.innerHTML = '';
+  });
+
+  if (againBtn) {
+    againBtn.addEventListener('click', () => {
+      if (typeof panel.rubReset === 'function') panel.rubReset();
+      panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
 })();

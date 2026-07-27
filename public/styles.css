@@ -893,3 +893,68 @@ html[lang="th"] .tarot-name .en{ font-style:normal; }
   padding:2px 9px; border-radius:999px; font-weight:700;
 }
 .cat-tab.back{ background:rgba(244,233,208,0.02); border-style:dashed; }
+
+/* ---------- ขูดหาเลข / RUB TO REVEAL ---------- */
+.rub{ margin-top:44px; }
+.rub-frame{
+  max-width:520px; margin:0 auto; padding:14px;
+  background:linear-gradient(165deg, rgba(201,162,39,0.18), rgba(110,20,35,0.14));
+  border:2px solid var(--gold); border-radius:26px;
+  box-shadow:0 24px 55px -22px rgba(0,0,0,0.85), inset 0 0 40px rgba(201,162,39,0.06);
+  position:relative;
+}
+.rub-frame::before{
+  content:''; position:absolute; inset:7px; border:1px solid rgba(201,162,39,0.3);
+  border-radius:20px; pointer-events:none; z-index:3;
+}
+.rub-panel{
+  position:relative; width:100%; aspect-ratio:16/10; border-radius:18px;
+  overflow:hidden; touch-action:none; cursor:grab;
+}
+.rub-panel:active{ cursor:grabbing; }
+.rub-panel canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+#rub-base{ z-index:1; }
+#rub-cover{ z-index:2; }
+
+.rub-hint{
+  position:absolute; inset:0; z-index:3; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:8px; pointer-events:none;
+  color:rgba(244,233,208,0.75); font-size:13.5px; font-weight:600;
+  transition:opacity .4s ease; text-shadow:0 2px 10px rgba(0,0,0,0.8);
+}
+.rh-finger{ font-size:32px; animation:rubHint 2.1s ease-in-out infinite; }
+@keyframes rubHint{
+  0%,100%{ transform:translateX(-22px) rotate(-8deg); opacity:0.6; }
+  50%{ transform:translateX(22px) rotate(8deg); opacity:1; }
+}
+@media (prefers-reduced-motion: reduce){ .rh-finger{ animation:none; } }
+
+.rub-panel.is-revealed{ box-shadow:0 0 40px rgba(201,162,39,0.35) inset; }
+
+.rub-result{ max-width:520px; margin:18px auto 0; text-align:center; }
+.rub-result.hidden{ display:none; }
+.rub-nums{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:10px; }
+.rub-num{
+  width:64px; height:64px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 60%, #9c7c1e 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--ink);
+  border:3px solid var(--parchment); box-shadow:0 6px 18px -4px rgba(201,162,39,0.6);
+  animation:rubPop .5s cubic-bezier(.2,.8,.2,1) both;
+}
+.rub-num:nth-child(2){ animation-delay:.09s; }
+.rub-num:nth-child(3){ animation-delay:.18s; }
+@keyframes rubPop{ from{ opacity:0; transform:scale(.5) translateY(10px);} to{ opacity:1; transform:none;} }
+@media (prefers-reduced-motion: reduce){ .rub-num{ animation:none; } }
+.rub-revealed-label{ font-family:var(--font-display); font-size:15px; color:var(--gold-bright); margin-bottom:12px; }
+
+.rub-again{
+  display:block; margin:16px auto 0; font-family:var(--font-body); font-weight:700;
+  font-size:14.5px; color:var(--gold-bright); background:none;
+  border:1px solid rgba(201,162,39,0.45); padding:13px 30px; border-radius:999px; cursor:pointer;
+}
+.rub-again:hover{ background:rgba(201,162,39,0.12); }
+.rub-note{
+  text-align:center; font-size:11.5px; color:var(--parchment-dim);
+  margin:14px auto 0; max-width:440px; line-height:1.65; opacity:0.85;
+}
