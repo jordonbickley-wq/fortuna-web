@@ -107,6 +107,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Returns a config value only if it's been filled in - placeholder values
 // starting with REPLACE_ are treated as "not set" so the UI hides that
 // element rather than showing raw placeholder text to a paying customer.
+// In donation mode every feature is free for everyone - the "support the
+// developer" panel is a genuine ask, not a paywall in disguise. Flip
+// donationMode off in config/site.json to restore the paid gate.
+function isDonationMode() {
+  return Boolean(site.donationMode);
+}
+
+function hasPremiumAccess(req) {
+  if (isDonationMode()) return true;
+  return store.hasUnlockedDraw(currentUserId(req), currentDrawDate());
+}
+
 function cleanConfig(value) {
   const v = String(value || '').trim();
   if (!v || v.startsWith('REPLACE_')) return null;
@@ -190,7 +202,7 @@ app.post('/api/dream', readingLimiter, (req, res) => {
 
   const today = dayjs().format('YYYY-MM-DD');
   const personalNumber = getPersonalNumber(userId, today);
-  const hasUnlock = store.hasUnlockedDraw(userId, drawDate);
+  const hasUnlock = hasPremiumAccess(req);
   const pendingManual = !hasUnlock && store.hasPendingManualClaim(userId, drawDate);
   const manualPaymentEnabled = Boolean(site.manualPayment && site.manualPayment.enabled);
 
@@ -862,7 +874,7 @@ app.get('/api/auspicious/activities', (req, res) => {
 app.post('/api/auspicious', readingLimiter, (req, res) => {
   const key = (req.body.activity || '').trim();
   const userId = currentUserId(req);
-  const hasPremium = store.hasUnlockedDraw(userId, currentDrawDate());
+  const hasPremium = hasPremiumAccess(req);
 
   const result = auspicious.bestDates(key, 60, hasPremium ? 12 : 3);
   if (!result) return res.status(400).json({ error: 'Unknown activity' });
@@ -888,8 +900,7 @@ app.get('/api/tarot/spreads', (req, res) => {
 });
 
 app.post('/api/tarot/spread', readingLimiter, (req, res) => {
-  const userId = currentUserId(req);
-  const hasPremium = store.hasUnlockedDraw(userId, currentDrawDate());
+  const hasPremium = hasPremiumAccess(req);
 
   if (!hasPremium) {
     return res.json({
@@ -912,7 +923,7 @@ app.post('/api/tarot/spread', readingLimiter, (req, res) => {
 
 app.get('/api/blessing-room', (req, res) => {
   const userId = currentUserId(req);
-  const hasPremium = store.hasUnlockedDraw(userId, currentDrawDate());
+  const hasPremium = hasPremiumAccess(req);
   const profile = store.getProfile(userId);
 
   const birthIndex =
@@ -935,9 +946,18 @@ app.get('/api/blessing-room', (req, res) => {
 
   res.json({
     unlocked: true,
+    donationMode: isDonationMode(),
     usedBirthDay: birthIndex !== null,
     prayers: prayers.core,
     dayChant,
+    donation: isDonationMode()
+      ? {
+          suggestedAmounts: (site.donation && site.donation.suggestedAmounts) || [],
+          promptPayNumber: cleanConfig(site.donation && site.donation.promptPayNumber),
+          promptPayName: cleanConfig(site.donation && site.donation.promptPayName),
+          qrImagePath: (site.donation && site.donation.qrImagePath) || null,
+        }
+      : null,
   });
 });
 

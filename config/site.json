@@ -21,5 +21,17 @@
     "promptPayNumber": "REPLACE_WITH_YOUR_PROMPTPAY_PHONE_OR_ID",
     "promptPayName": "REPLACE_WITH_ACCOUNT_NAME_SHOWN_TO_PAYERS",
     "lineUrl": "REPLACE_WITH_https://line.me/R/ti/p/@yourlineid"
+  },
+  "donationMode": true,
+  "donation": {
+    "suggestedAmounts": [
+      29,
+      59,
+      99,
+      199
+    ],
+    "promptPayNumber": "REPLACE_WITH_YOUR_PROMPTPAY_PHONE_OR_ID",
+    "promptPayName": "REPLACE_WITH_ACCOUNT_NAME_SHOWN_TO_PAYERS",
+    "qrImagePath": "/promptpay-qr.png"
   }
 }

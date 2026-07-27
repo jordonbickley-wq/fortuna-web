@@ -189,6 +189,14 @@ const STRINGS = {
     rub_again: 'Rub again',
     rub_note: 'The numbers are drawn at random and are different every time — a moment of ritual and a bit of fun, in the spirit of rubbing the sacred trees.',
     rub_revealed: 'The bark gave up these numbers',
+    donate_title: 'Enjoying this?',
+    donate_body: 'Everything here is free, and always will be. If it brought you a smile or a lucky number, a small gift helps me keep adding new readings, prayers and features.',
+    donate_thanks: 'Thank you for whatever you can give — even a little means a lot. 🙏',
+    donate_scan: 'Scan to give via PromptPay',
+    donate_number_label: 'Or send to this PromptPay number',
+    donate_any_amount: 'Any amount is welcome',
+    donate_no_unlock: 'Nothing is locked. You do not need to give anything to use the app.',
+    donate_copy: 'Copy number', donate_copied: '✓ Copied',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -379,6 +387,14 @@ const STRINGS = {
     rub_again: 'ถูใหม่อีกครั้ง',
     rub_note: 'เลขสุ่มใหม่ทุกครั้งและไม่ซ้ำกัน เป็นการละเล่นเพื่อความสนุกและสิริมงคล ตามอย่างการขูดต้นไม้ศักดิ์สิทธิ์',
     rub_revealed: 'ผิวไม้เผยเลขเหล่านี้',
+    donate_title: 'ชอบแอปนี้ไหมคะ?',
+    donate_body: 'ทุกอย่างในนี้ใช้ฟรี และจะฟรีตลอดไป ถ้าแอปนี้ทำให้คุณยิ้มได้หรือได้เลขถูกใจ การสนับสนุนเล็กๆ น้อยๆ ช่วยให้ผมทำเนื้อหาใหม่ๆ บทสวด และฟีเจอร์เพิ่มเติมต่อไปได้',
+    donate_thanks: 'ขอบคุณสำหรับน้ำใจทุกบาททุกสตางค์ แม้เพียงเล็กน้อยก็มีความหมายมากครับ 🙏',
+    donate_scan: 'สแกนเพื่อร่วมสนับสนุนผ่านพร้อมเพย์',
+    donate_number_label: 'หรือโอนมาที่เบอร์พร้อมเพย์นี้',
+    donate_any_amount: 'ให้เท่าไหร่ก็ได้ตามศรัทธา',
+    donate_no_unlock: 'ไม่มีอะไรถูกล็อก คุณไม่จำเป็นต้องบริจาคเพื่อใช้งานแอปนี้',
+    donate_copy: 'คัดลอกเบอร์', donate_copied: '✓ คัดลอกแล้ว',
   },
 };
 
@@ -1978,6 +1994,9 @@ async function loadBlessingRoom() {
     }
 
     box.innerHTML = renderBlessingUnlocked(data);
+    if (data.donationMode && data.donation) {
+      renderDonationPanel(data.donation);
+    }
   } catch (e) {}
 }
 
@@ -2062,6 +2081,7 @@ function renderBlessingUnlocked(data) {
 
       <p class="prayer-source">${t('prayer_source_note')}</p>
     </div>
+    <div id="donation-slot"></div>
   `;
 }
 
@@ -2208,3 +2228,67 @@ loadBlessingRoom();
     });
   }
 })();
+
+/* ================= donation panel =================
+   Deliberately NOT a paywall. Everything on the site is free; this is a
+   plain, warm ask that says so explicitly. No unlock state, no approval
+   step, no reference amounts - which also means no admin work. */
+function renderDonationPanel(donation) {
+  const host = document.getElementById('donation-slot');
+  if (!host) return;
+
+  const hasNumber = Boolean(donation.promptPayNumber);
+  const amounts = donation.suggestedAmounts || [];
+
+  host.innerHTML = `
+    <div class="donate-card">
+      <div class="donate-heart">🙏</div>
+      <div class="donate-title">${t('donate_title')}</div>
+      <p class="donate-body">${t('donate_body')}</p>
+
+      ${amounts.length ? `<div class="donate-amounts">${amounts
+        .map((a) => `<span class="donate-amt">${a} ฿</span>`)
+        .join('')}<span class="donate-amt any">${t('donate_any_amount')}</span></div>` : ''}
+
+      ${donation.qrImagePath ? `
+        <div class="donate-qr">
+          <div class="donate-qr-label">${t('donate_scan')}</div>
+          <img src="${escapeHtml(donation.qrImagePath)}" alt="PromptPay QR">
+        </div>` : ''}
+
+      ${hasNumber ? `
+        <div class="donate-number-box">
+          <div class="donate-number-label">${t('donate_number_label')}</div>
+          <div class="donate-number" id="donate-number">${escapeHtml(donation.promptPayNumber)}</div>
+          ${donation.promptPayName ? `<div class="donate-account">${escapeHtml(donation.promptPayName)}</div>` : ''}
+          <button class="donate-copy" id="donate-copy">${t('donate_copy')}</button>
+        </div>` : ''}
+
+      <p class="donate-thanks">${t('donate_thanks')}</p>
+      <p class="donate-nolock">${t('donate_no_unlock')}</p>
+    </div>
+  `;
+
+  const copyBtn = document.getElementById('donate-copy');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const el = document.getElementById('donate-number');
+      if (!el) return;
+      try {
+        await navigator.clipboard.writeText(el.textContent.trim());
+      } catch (e) {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      copyBtn.textContent = t('donate_copied');
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = t('donate_copy');
+        copyBtn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+}
