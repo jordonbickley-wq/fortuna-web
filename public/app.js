@@ -428,6 +428,11 @@ const STRINGS = {
   },
 };
 
+// Declared up here deliberately: several render functions read it during
+// the initial pass, and a `let` declared further down would put it in a
+// temporal dead zone and throw before the rest of the file could run.
+let siteConfig = null;
+
 let currentLang = localStorage.getItem('fortunaLang') || 'th';
 function t(key, ...args) {
   const val = STRINGS[currentLang][key];
@@ -514,13 +519,16 @@ let isGuestUser = true;
 let lineLoginAvailable = true;
 
 async function loadMe() {
-  const res = await fetch('/api/me');
-  const data = await res.json();
-  currentUser = data.user;
-  isGuestUser = data.isGuest;
-  lineLoginAvailable = data.lineLoginAvailable;
-  renderAuthArea();
-  maybeShowLineComingSoonNotice();
+  try {
+    const res = await fetch('/api/me');
+    const data = await res.json();
+    if (!data) return;
+    currentUser = data.user;
+    isGuestUser = data.isGuest;
+    lineLoginAvailable = data.lineLoginAvailable;
+    renderAuthArea();
+    maybeShowLineComingSoonNotice();
+  } catch (e) {}
 }
 
 function maybeShowLineComingSoonNotice() {
@@ -551,9 +559,14 @@ function renderAuthArea() {
 }
 
 async function loadDraw() {
-  const res = await fetch('/api/draw');
-  const draw = await res.json();
-  footerDraw.textContent = draw.isToday ? t('footer_draw_today') : t('footer_draw_next', draw.date, draw.daysAway);
+  try {
+    const res = await fetch('/api/draw');
+    const draw = await res.json();
+    if (!footerDraw || !draw) return;
+    footerDraw.textContent = draw.isToday
+      ? t('footer_draw_today')
+      : t('footer_draw_next', draw.date, draw.daysAway);
+  } catch (e) {}
 }
 
 function medallion(value, extraClass = '') {
@@ -750,20 +763,38 @@ dreamInput.addEventListener('keydown', (e) => {
 
 /* ================= today's fortune ================= */
 async function loadToday() {
-  const res = await fetch('/api/today');
-  const data = await res.json();
-  document.getElementById('color-swatch').style.background = data.color.hex;
-  const colorName = currentLang === 'th' ? data.color.name_th : data.color.name;
-  document.getElementById('color-name').textContent = t('color_of_day', colorName);
-  const moonEl = document.getElementById('moon-phase');
-  if (moonEl) moonEl.textContent = data.moonPhase;
+  try {
+    const res = await fetch('/api/today');
+    const data = await res.json();
+    if (!data || !data.color) return;
+
+    const swatch = document.getElementById('color-swatch');
+    if (swatch) swatch.style.background = data.color.hex;
+
+    const nameEl = document.getElementById('color-name');
+    if (nameEl) {
+      const colorName = currentLang === 'th' ? data.color.name_th : data.color.name;
+      nameEl.textContent = t('color_of_day', colorName);
+    }
+
+    const moonEl = document.getElementById('moon-phase');
+    if (moonEl && data.moonPhase) moonEl.textContent = data.moonPhase;
+  } catch (e) {
+    // Non-fatal: the rest of the page must still work.
+  }
 }
 
 async function loadCountdown() {
-  const res = await fetch('/api/draw');
-  const draw = await res.json();
-  const sub = document.getElementById('countdown-sub');
-  if (sub) sub.textContent = draw.isToday ? t('countdown_sub_today') : t('countdown_sub_days', draw.date, draw.daysAway);
+  try {
+    const res = await fetch('/api/draw');
+    const draw = await res.json();
+    const sub = document.getElementById('countdown-sub');
+    if (sub && draw) {
+      sub.textContent = draw.isToday
+        ? t('countdown_sub_today')
+        : t('countdown_sub_days', draw.date, draw.daysAway);
+    }
+  } catch (e) {}
 }
 
 async function loadStatsDrawDays() {
@@ -1205,8 +1236,6 @@ populateZodiacOptions();
 
 /* ================= lottery result checker ================= */
 let latestDrawCache = null;
-
-let siteConfig = null;
 
 async function loadSiteConfig() {
   if (siteConfig) return siteConfig;
