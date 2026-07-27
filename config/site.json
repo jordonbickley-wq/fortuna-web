@@ -1,10 +1,7 @@
 {
   "siteName": "Fortuna",
   "timezone": "Asia/Bangkok",
-  "drawDaysOfMonth": [
-    1,
-    16
-  ],
+  "drawDaysOfMonth": [1, 16],
   "pricing": {
     "drawPassAmountSatang": 2900,
     "drawPassLabel": "Government Lottery Draw Pass - unlock this cycle's premium numbers"
@@ -18,8 +15,8 @@
     "qrImagePath": "/promptpay-qr.png",
     "contactQrImagePath": "/line-contact-qr.png",
     "contactInfo": "Scan to add me on LINE, then send your payment screenshot",
-    "promptPayNumber": "REPLACE_WITH_YOUR_PROMPTPAY_PHONE_OR_ID",
-    "promptPayName": "REPLACE_WITH_ACCOUNT_NAME_SHOWN_TO_PAYERS",
+    "promptPayNumber": "0812345678",
+    "promptPayName": "Jordon Bickley",
     "lineUrl": "REPLACE_WITH_https://line.me/R/ti/p/@yourlineid"
   }
 }
