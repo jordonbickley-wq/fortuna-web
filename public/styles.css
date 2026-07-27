@@ -1005,3 +1005,36 @@ html[lang="th"] .tarot-name .en{ font-style:normal; }
 
 .donate-thanks{ font-size:13px; color:var(--parchment); line-height:1.7; margin-bottom:8px; }
 .donate-nolock{ font-size:11.5px; color:var(--parchment-dim); opacity:0.8; line-height:1.6; }
+
+/* ---------- OFFICIAL RESULTS SIGNPOST ---------- */
+.official-card{
+  max-width:520px; margin:0 auto; text-align:center; padding:30px 24px; border-radius:20px;
+  background:linear-gradient(165deg, rgba(110,20,35,0.28), rgba(201,162,39,0.10));
+  border:1px solid rgba(201,162,39,0.4);
+}
+.oc-seal{ font-size:40px; margin-bottom:12px; }
+.oc-countdown{ font-family:var(--font-display); font-size:19px; color:var(--gold-bright); margin-bottom:14px; }
+.oc-body{ font-size:13px; color:var(--parchment-dim); line-height:1.75; max-width:400px; margin:0 auto 20px; }
+.oc-btn{
+  display:inline-block; text-decoration:none; font-family:var(--font-body); font-weight:700;
+  font-size:15px; color:var(--ink); background:linear-gradient(135deg,var(--gold-bright),var(--marigold));
+  padding:15px 30px; border-radius:999px;
+}
+.oc-source{ font-size:11.5px; color:var(--parchment-dim); margin-top:14px; opacity:0.8; }
+.journal-selfcheck{ text-align:center; font-size:12.5px; color:var(--parchment-dim); line-height:1.6; margin-bottom:18px; }
+
+/* ---------- CONTACT ---------- */
+.contact{ margin-top:60px; }
+.contact-card{
+  max-width:520px; margin:0 auto; text-align:center; padding:30px 24px; border-radius:20px;
+  background:linear-gradient(165deg, rgba(62,107,92,0.18), rgba(244,233,208,0.03));
+  border:1px solid rgba(201,162,39,0.3);
+}
+.cc-icon{ font-size:36px; margin-bottom:12px; }
+.cc-title{ font-family:var(--font-display); font-size:20px; margin-bottom:10px; }
+.cc-body{ font-size:13.5px; color:var(--parchment-dim); line-height:1.75; max-width:400px; margin:0 auto 20px; }
+.cc-btn{
+  display:inline-block; text-decoration:none; font-family:var(--font-body); font-weight:700;
+  font-size:15px; color:#fff; background:#06C755; padding:15px 30px; border-radius:999px;
+}
+.cc-qr{ display:block; width:150px; height:150px; margin:18px auto 0; border-radius:14px; background:#fff; padding:8px; }

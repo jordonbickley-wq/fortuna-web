@@ -110,6 +110,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // In donation mode every feature is free for everyone - the "support the
 // developer" panel is a genuine ask, not a paywall in disguise. Flip
 // donationMode off in config/site.json to restore the paid gate.
+// Unattended mode: the site is designed to run without anyone tending it.
+// Features that would silently rot without upkeep (manually-entered draw
+// results, order fulfilment) are replaced with honest alternatives -
+// a link to the official source, and a LINE contact for anything personal.
+function isUnattended() {
+  return Boolean(site.unattendedMode);
+}
+
 function isDonationMode() {
   return Boolean(site.donationMode);
 }
@@ -958,6 +966,20 @@ app.get('/api/blessing-room', (req, res) => {
           qrImagePath: (site.donation && site.donation.qrImagePath) || null,
         }
       : null,
+  });
+});
+
+
+app.get('/api/site-config', (req, res) => {
+  res.json({
+    unattended: isUnattended(),
+    donationMode: isDonationMode(),
+    officialLottery: site.officialLottery || null,
+    contact: {
+      lineUrl: cleanConfig(site.contact && site.contact.lineUrl),
+      lineQrPath: (site.contact && site.contact.lineQrPath) || null,
+    },
+    draw: getNextDraw(site.drawDaysOfMonth),
   });
 });
 

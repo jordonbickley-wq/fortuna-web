@@ -197,6 +197,20 @@ const STRINGS = {
     donate_any_amount: 'Any amount is welcome',
     donate_no_unlock: 'Nothing is locked. You do not need to give anything to use the app.',
     donate_copy: 'Copy number', donate_copied: '✓ Copied',
+    official_heading: 'Check the Official Results',
+    official_sub: 'Results are published by the Government Lottery Office on the 1st and 16th',
+    official_body: 'We do not republish prize numbers here. Always check the official announcement — it is the only source that counts when claiming a prize.',
+    official_btn: 'Open the official GLO site →',
+    official_next: (d, n) => `Next draw: ${d} · ${n} days away`,
+    official_today: 'The draw is today!',
+    journal_sub_solo: 'Your saved dreams and the numbers they gave you',
+    journal_empty_solo: 'No saved dreams yet. Get a reading above, then tap "Save to journal" to keep a record of your dreams and their numbers for each draw.',
+    journal_check_yourself: 'Check these against the official results on the GLO site.',
+    contact_heading: 'Questions or a special request?',
+    contact_body: 'This app runs on its own, but I read every message. For a personal reading, an amulet enquiry, or anything else — reach me on LINE.',
+    contact_btn: '💬 Message me on LINE',
+    shop_enquire: 'Ask on LINE',
+    shop_sub_solo: 'Traditional amulets and charms — message me on LINE to enquire about any item',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -395,6 +409,20 @@ const STRINGS = {
     donate_any_amount: 'ให้เท่าไหร่ก็ได้ตามศรัทธา',
     donate_no_unlock: 'ไม่มีอะไรถูกล็อก คุณไม่จำเป็นต้องบริจาคเพื่อใช้งานแอปนี้',
     donate_copy: 'คัดลอกเบอร์', donate_copied: '✓ คัดลอกแล้ว',
+    official_heading: 'ตรวจผลรางวัลอย่างเป็นทางการ',
+    official_sub: 'ผลรางวัลประกาศโดยสำนักงานสลากกินแบ่งรัฐบาล ทุกวันที่ 1 และ 16',
+    official_body: 'เราไม่ได้เผยแพร่หมายเลขรางวัลซ้ำที่นี่ กรุณาตรวจกับประกาศอย่างเป็นทางการเสมอ เพราะเป็นแหล่งเดียวที่ใช้อ้างอิงในการขึ้นเงินรางวัลได้',
+    official_btn: 'เปิดเว็บสำนักงานสลากฯ →',
+    official_next: (d, n) => `งวดถัดไป: ${d} · อีก ${n} วัน`,
+    official_today: 'วันนี้หวยออก!',
+    journal_sub_solo: 'ความฝันที่คุณบันทึกไว้ พร้อมเลขที่ได้จากแต่ละครั้ง',
+    journal_empty_solo: 'ยังไม่มีความฝันที่บันทึกไว้ ทำนายฝันด้านบนแล้วกด "บันทึกลงสมุด" เพื่อเก็บความฝันและเลขประจำงวดของคุณไว้ดูย้อนหลัง',
+    journal_check_yourself: 'นำเลขเหล่านี้ไปตรวจกับผลรางวัลอย่างเป็นทางการที่เว็บสำนักงานสลากฯ',
+    contact_heading: 'มีคำถามหรือขอดูดวงเป็นพิเศษ?',
+    contact_body: 'แอปนี้ทำงานได้เองอัตโนมัติ แต่ผมอ่านทุกข้อความ หากต้องการดูดวงส่วนตัว สอบถามวัตถุมงคล หรือเรื่องอื่นๆ ทักมาทาง LINE ได้เลย',
+    contact_btn: '💬 ทักหาผมทาง LINE',
+    shop_enquire: 'สอบถามทาง LINE',
+    shop_sub_solo: 'วัตถุมงคลและเครื่องรางแบบดั้งเดิม — ทักทาง LINE เพื่อสอบถามรายการที่สนใจ',
   },
 };
 
@@ -885,6 +913,23 @@ function renderShop() {
     </div>
   `).join('');
 
+  const unattended = siteConfig && siteConfig.unattended;
+  const lineUrl = siteConfig && siteConfig.contact && siteConfig.contact.lineUrl;
+
+  if (unattended) {
+    // No order pipeline to babysit - enquiries go straight to LINE.
+    grid.querySelectorAll('.buy-btn').forEach((btn) => {
+      btn.textContent = t('shop_enquire');
+      btn.addEventListener('click', () => {
+        if (lineUrl) window.open(lineUrl, '_blank', 'noopener');
+        else document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+    const sub = document.querySelector('#shop .section-head p');
+    if (sub) sub.textContent = t('shop_sub_solo');
+    return;
+  }
+
   grid.querySelectorAll('.buy-btn').forEach((btn) => {
     btn.addEventListener('click', () => startShopCheckout(btn.dataset.product));
   });
@@ -1135,6 +1180,12 @@ function renderSymbolChips() {
 
 /* ================= init ================= */
 applyStaticTranslations();
+loadSiteConfig().then(() => {
+  loadLatestResult();
+  loadJournal();
+  renderShop();
+  renderContact();
+});
 loadMe();
 loadDraw();
 loadToday();
@@ -1150,7 +1201,52 @@ populateZodiacOptions();
 /* ================= lottery result checker ================= */
 let latestDrawCache = null;
 
+let siteConfig = null;
+
+async function loadSiteConfig() {
+  if (siteConfig) return siteConfig;
+  try {
+    const res = await fetch('/api/site-config');
+    siteConfig = await res.json();
+  } catch (e) {
+    siteConfig = { unattended: false };
+  }
+  return siteConfig;
+}
+
+// In unattended mode we don't republish prize numbers - we point at the
+// official source instead. Re-publishing results that nobody is keeping
+// current would be worse than not showing them at all.
+async function renderOfficialResults() {
+  const section = document.getElementById('checker');
+  if (!section) return;
+  const cfg = await loadSiteConfig();
+  if (!cfg.unattended) return false;
+
+  const url = (cfg.officialLottery && cfg.officialLottery.resultsUrl) || 'https://www.glo.or.th';
+  const officialName = cfg.officialLottery
+    ? (currentLang === 'th' ? cfg.officialLottery.name_th : cfg.officialLottery.name_en)
+    : 'GLO';
+  const d = cfg.draw || {};
+
+  section.innerHTML = `
+    <div class="section-head">
+      <h2>${t('official_heading')}</h2>
+      <p>${t('official_sub')}</p>
+    </div>
+    <div class="official-card">
+      <div class="oc-seal">🎟️</div>
+      <div class="oc-countdown">${d.isToday ? t('official_today') : escapeHtml(t('official_next', d.date || '—', d.daysAway ?? '—'))}</div>
+      <p class="oc-body">${t('official_body')}</p>
+      <a class="oc-btn" href="${escapeHtml(url)}" target="_blank" rel="noopener">${t('official_btn')}</a>
+      <div class="oc-source">${escapeHtml(officialName)}</div>
+    </div>
+  `;
+  return true;
+}
+
 async function loadLatestResult() {
+  if (await renderOfficialResults()) return;
   const box = document.getElementById('latest-result');
   if (!box) return;
   try {
@@ -1301,11 +1397,13 @@ async function loadJournal() {
 
     if (!data.entries || data.entries.length === 0) {
       summaryBox.innerHTML = '';
-      listBox.innerHTML = `<div class="journal-empty">${t('journal_empty')}</div>`;
+      listBox.innerHTML = `<div class="journal-empty">${siteConfig && siteConfig.unattended ? t('journal_empty_solo') : t('journal_empty')}</div>`;
       return;
     }
 
-    summaryBox.innerHTML = `
+    summaryBox.innerHTML = (siteConfig && siteConfig.unattended)
+      ? `<p class="journal-selfcheck">${t('journal_check_yourself')}</p>`
+      : `
       <div class="journal-summary">
         <div class="journal-stat"><div class="num">${data.summary.total}</div><div class="lbl">${t('journal_stat_total')}</div></div>
         <div class="journal-stat"><div class="num">${data.summary.checked}</div><div class="lbl">${t('journal_stat_checked')}</div></div>
@@ -1313,9 +1411,15 @@ async function loadJournal() {
       </div>
     `;
 
+    const unattended = siteConfig && siteConfig.unattended;
+
     listBox.innerHTML = data.entries.map((e) => {
-      const badgeClass = e.status;
-      const badgeText = e.status === 'pending' ? t('journal_badge_pending')
+      // Without published results there is nothing to check against, so
+      // don't imply we checked - just record the draw it was saved for.
+      const badgeClass = unattended ? 'pending' : e.status;
+      const badgeText = unattended
+        ? t('journal_for_draw', e.drawDate)
+        : e.status === 'pending' ? t('journal_badge_pending')
         : e.status === 'hit' ? t('journal_badge_hit') : t('journal_badge_miss');
 
       const numbersHtml = (e.numbers || []).map((n) => {
@@ -2292,3 +2396,28 @@ function renderDonationPanel(donation) {
     });
   }
 }
+
+/* ================= contact (unattended mode) ================= */
+async function renderContact() {
+  const box = document.getElementById('contact-container');
+  if (!box) return;
+  const cfg = await loadSiteConfig();
+  const lineUrl = cfg.contact && cfg.contact.lineUrl;
+  const qr = cfg.contact && cfg.contact.lineQrPath;
+  if (!lineUrl && !qr) {
+    box.innerHTML = '';
+    return;
+  }
+
+  box.innerHTML = `
+    <div class="contact-card">
+      <div class="cc-icon">💬</div>
+      <div class="cc-title">${t('contact_heading')}</div>
+      <p class="cc-body">${t('contact_body')}</p>
+      ${lineUrl ? `<a class="cc-btn" href="${escapeHtml(lineUrl)}" target="_blank" rel="noopener">${t('contact_btn')}</a>` : ''}
+      ${qr ? `<img class="cc-qr" src="${escapeHtml(qr)}" alt="LINE QR">` : ''}
+    </div>
+  `;
+}
+
+renderContact();
