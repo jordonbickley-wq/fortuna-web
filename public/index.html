@@ -19,11 +19,11 @@
     </div>
     <div class="nav-links">
       <a href="#dream" data-i18n="nav_dream">Dream</a>
+      <a href="#tarot" data-i18n="nav_tarot">Tarot</a>
       <a href="#checker" data-i18n="nav_checker">Check</a>
       <a href="#journal" data-i18n="nav_journal">Journal</a>
       <a href="#modules" data-i18n="nav_modules">Modules</a>
       <a href="#shop" data-i18n="nav_shop">Shop</a>
-      <a href="#temples" data-i18n="nav_temples">Temples</a>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
       <div id="lang-toggle" style="display:flex; border:1px solid rgba(201,162,39,0.35); border-radius:999px; overflow:hidden;">
@@ -172,6 +172,14 @@
     </div>
   </section>
 
+  <section class="tarot" id="tarot">
+    <div class="section-head">
+      <h2 data-i18n="tarot_heading">Your Card for Today</h2>
+      <p data-i18n="tarot_sub">One card, drawn for you — it stays the same all day</p>
+    </div>
+    <div id="tarot-container"></div>
+  </section>
+
   <section class="checker" id="checker">
     <div class="section-head">
       <h2 data-i18n="checker_heading">Check Your Lottery Ticket</h2>
@@ -230,9 +238,10 @@
     <div class="tagline" data-i18n="footer_tagline">Fortuna — your everyday luck companion</div>
     <div class="draw-note" id="footer-draw">Next Government Lottery draw: —</div>
   </footer>
-  <p style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:20px;" data-i18n="footer_disclaimer">
+  <p style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:6px;" data-i18n="footer_disclaimer">
     This app references Thailand's official Government Lottery (สลากกินแบ่งรัฐบาล) only.
   </p>
+  <p id="visit-counter" style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:20px;opacity:0.7;"></p>
 
 </div>
 

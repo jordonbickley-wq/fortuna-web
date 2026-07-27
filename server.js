@@ -18,6 +18,7 @@ const products = require('./config/products.json');
 const { createRateLimiter } = require('./lib/rateLimiter');
 const { getMoonPhase } = require('./lib/moonPhase');
 const drawResults = require('./lib/drawResults');
+const tarot = require('./lib/tarot');
 
 // 20 requests per minute per IP on the free-text endpoints - generous for
 // a real user clicking around, tight enough to blunt casual spam/scraping.
@@ -60,7 +61,6 @@ function isOmiseConfigured() {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // needed for the /admin HTML forms
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   cookieSession({
     name: 'session',
@@ -84,6 +84,21 @@ app.use((req, res, next) => {
 function currentUserId(req) {
   return req.session.lineUserId || req.session.guestId;
 }
+
+// Count a visit only when someone actually loads the page - not on every
+// background API call the page then makes, which would inflate the number
+// several times per visitor. This must sit BEFORE express.static below,
+// otherwise the static handler serves index.html and this never runs.
+app.get('/', (req, res, next) => {
+  try {
+    store.recordVisit(currentUserId(req));
+  } catch (e) {
+    console.error('Visit counting failed:', e);
+  }
+  next();
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 function currentDrawDate() {
   return getNextDraw(site.drawDaysOfMonth).date;
@@ -722,6 +737,25 @@ app.post('/api/journal/delete', readingLimiter, (req, res) => {
   const id = (req.body.id || '').trim();
   const ok = store.deleteJournalEntry(userId, id);
   res.json({ deleted: ok });
+});
+
+// ---------- daily tarot ----------
+// One card per person per day. The card meanings are traditional tarot
+// (Major Arcana), which is documented practice - unlike the dream
+// numbers, this content isn't invented. The lucky-number derivation on
+// top of it IS this app's own method, and the UI says so.
+
+app.get('/api/tarot/daily', (req, res) => {
+  const userId = currentUserId(req);
+  const today = dayjs().format('YYYY-MM-DD');
+  const card = tarot.drawDailyCard(userId, today);
+  res.json({ date: today, card });
+});
+
+// ---------- visit counter ----------
+
+app.get('/api/visits', (req, res) => {
+  res.json(store.getVisitStats());
 });
 
 app.listen(PORT, () => {

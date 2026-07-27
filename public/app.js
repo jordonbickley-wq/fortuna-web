@@ -97,6 +97,13 @@ const STRINGS = {
     hot_numbers_title: 'Most-drawn last-2 numbers',
     hot_numbers_caveat: 'Real observed counts from the draws published here. Past frequency does not make a number more likely next time — every draw is independent.',
     entertainment_disclaimer: 'Dream readings and lucky numbers are for entertainment. No number can predict a lottery result.',
+    nav_tarot: 'Tarot',
+    tarot_heading: 'Your Card for Today',
+    tarot_sub: 'One card, drawn for you — it stays the same all day',
+    tarot_upright: 'Upright', tarot_reversed: 'Reversed',
+    tarot_numbers_label: "Today's numbers from this card",
+    tarot_caveat: 'Card meanings follow traditional tarot. Turning the card number into lottery numbers is this app\'s own method — for fun, not prophecy.',
+    visits_line: (total, unique) => `${total.toLocaleString()} visits · ${unique.toLocaleString()} visitors`,
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -195,6 +202,13 @@ const STRINGS = {
     hot_numbers_title: 'เลขท้าย 2 ตัวที่ออกบ่อยที่สุด',
     hot_numbers_caveat: 'นับจากผลรางวัลจริงที่เผยแพร่บนเว็บนี้ — การที่เลขเคยออกบ่อยไม่ได้ทำให้มีโอกาสออกมากขึ้นในงวดหน้า ทุกงวดเป็นอิสระต่อกัน',
     entertainment_disclaimer: 'คำทำนายฝันและเลขนำโชคมีไว้เพื่อความบันเทิง ไม่มีเลขใดทำนายผลรางวัลได้',
+    nav_tarot: 'ไพ่ทาโรต์',
+    tarot_heading: 'ไพ่ประจำวันของคุณ',
+    tarot_sub: 'ไพ่หนึ่งใบที่เปิดให้คุณ — จะเป็นใบเดิมตลอดทั้งวัน',
+    tarot_upright: 'ไพ่ตั้ง', tarot_reversed: 'ไพ่กลับหัว',
+    tarot_numbers_label: 'เลขประจำวันจากไพ่ใบนี้',
+    tarot_caveat: 'ความหมายไพ่อ้างอิงตามตำราทาโรต์ดั้งเดิม ส่วนการแปลงเลขไพ่เป็นเลขนำโชคเป็นวิธีของแอปนี้เอง มีไว้เพื่อความสนุก ไม่ใช่คำพยากรณ์',
+    visits_line: (total, unique) => `เข้าชม ${total.toLocaleString()} ครั้ง · ผู้เข้าชม ${unique.toLocaleString()} คน`,
   },
 };
 
@@ -243,6 +257,8 @@ function setLang(lang) {
   populateZodiacOptions();
   loadLatestResult();
   loadJournal();
+  loadDailyTarot();
+  loadVisits();
   // Note: a currently-displayed dream/module result stays in whatever
   // language it was fetched in until the next action - re-translating
   // live server content isn't attempted here.
@@ -1062,3 +1078,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
 loadLatestResult();
 loadJournal();
+
+/* ================= daily tarot ================= */
+async function loadDailyTarot() {
+  const box = document.getElementById('tarot-container');
+  if (!box) return;
+  try {
+    const res = await fetch('/api/tarot/daily');
+    const data = await res.json();
+    const c = data.card;
+    const isRev = c.orientation === 'reversed';
+
+    const name = currentLang === 'th' ? c.name_th : c.name_en;
+    const altName = currentLang === 'th' ? c.name_en : c.name_th;
+    const meaning = currentLang === 'th' ? c.reading.meaning_th : c.reading.meaning_en;
+    const message = currentLang === 'th' ? c.reading.message_th : c.reading.message_en;
+
+    box.innerHTML = `
+      <div class="tarot-layout">
+        <div class="tarot-card ${isRev ? 'is-reversed' : ''}">
+          <div class="tarot-numeral">${c.roman}</div>
+          <div class="tarot-symbol">${c.symbol}</div>
+          <div class="tarot-name">
+            <div class="en">${escapeHtml(name)}</div>
+            <div class="th">${escapeHtml(altName)}</div>
+          </div>
+        </div>
+        <div class="tarot-body">
+          <span class="tarot-orientation ${c.orientation}">${isRev ? t('tarot_reversed') : t('tarot_upright')}</span>
+          <div class="tarot-meaning">${escapeHtml(meaning)}</div>
+          <div class="tarot-message">${escapeHtml(message)}</div>
+          <div class="tarot-numbers-label">${t('tarot_numbers_label')}</div>
+          <div class="tarot-numbers">
+            ${c.luckyNumbers.map((n) => `<div class="tarot-num">${escapeHtml(n)}</div>`).join('')}
+          </div>
+          <p class="tarot-caveat">${t('tarot_caveat')}</p>
+        </div>
+      </div>
+    `;
+  } catch (e) {}
+}
+
+/* ================= visit counter ================= */
+async function loadVisits() {
+  const el = document.getElementById('visit-counter');
+  if (!el) return;
+  try {
+    const res = await fetch('/api/visits');
+    const data = await res.json();
+    el.textContent = t('visits_line', data.total, data.unique);
+  } catch (e) {}
+}
+
+loadDailyTarot();
+loadVisits();

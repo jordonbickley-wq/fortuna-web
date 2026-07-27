@@ -1,0 +1,420 @@
+[
+  {
+    "number": 0,
+    "roman": "0",
+    "name_en": "The Fool",
+    "name_th": "คนโง่",
+    "symbol": "🃏",
+    "upright": {
+      "meaning_en": "New beginnings, innocence, a leap of faith",
+      "meaning_th": "การเริ่มต้นใหม่ ความบริสุทธิ์ใจ และการกล้าก้าวออกไป",
+      "message_en": "Today favours the first step over the perfect plan. Say yes to something new.",
+      "message_th": "วันนี้เหมาะกับการเริ่มก้าวแรก มากกว่ารอให้แผนสมบูรณ์แบบ ลองตอบตกลงกับสิ่งใหม่ดู"
+    },
+    "reversed": {
+      "meaning_en": "Recklessness, hesitation, or leaping without looking",
+      "meaning_th": "ความประมาท ความลังเล หรือกระโดดโดยไม่ดูให้ดีก่อน",
+      "message_en": "Slow down before committing today. One extra question could save you a lot.",
+      "message_th": "วันนี้ควรชะลอก่อนตัดสินใจ คำถามเพิ่มอีกข้ออาจช่วยคุณได้มาก"
+    }
+  },
+  {
+    "number": 1,
+    "roman": "I",
+    "name_en": "The Magician",
+    "name_th": "นักมายากล",
+    "symbol": "🪄",
+    "upright": {
+      "meaning_en": "Manifestation, resourcefulness, skill, willpower",
+      "meaning_th": "การสร้างสรรค์ ความสามารถ ทักษะ และพลังใจ",
+      "message_en": "You have what you need already. Today rewards using it rather than waiting.",
+      "message_th": "คุณมีสิ่งที่ต้องการอยู่แล้ว วันนี้ให้ผลดีกับการลงมือใช้มัน มากกว่าการรอ"
+    },
+    "reversed": {
+      "meaning_en": "Untapped talent, manipulation, or scattered focus",
+      "meaning_th": "ความสามารถที่ยังไม่ได้ใช้ การหลอกลวง หรือสมาธิที่กระจัดกระจาย",
+      "message_en": "Focus on one thing today. Spreading thin is the risk to watch.",
+      "message_th": "วันนี้โฟกัสเรื่องเดียว ระวังการทำหลายอย่างพร้อมกันจนไม่สำเร็จสักอย่าง"
+    }
+  },
+  {
+    "number": 2,
+    "roman": "II",
+    "name_en": "The High Priestess",
+    "name_th": "นักบวชหญิง",
+    "symbol": "🌙",
+    "upright": {
+      "meaning_en": "Intuition, mystery, the inner voice",
+      "meaning_th": "สัญชาตญาณ ความลึกลับ และเสียงภายในใจ",
+      "message_en": "Your gut knows something your head hasn't caught up to. Listen before acting.",
+      "message_th": "สัญชาตญาณของคุณรู้บางอย่างก่อนเหตุผล ลองฟังใจก่อนลงมือ"
+    },
+    "reversed": {
+      "meaning_en": "Ignored intuition, secrets surfacing, disconnection from self",
+      "meaning_th": "การเพิกเฉยต่อสัญชาตญาณ ความลับที่ถูกเปิดเผย หรือการห่างจากตัวเอง",
+      "message_en": "Something you've been ignoring wants attention today. Give it five quiet minutes.",
+      "message_th": "มีบางอย่างที่คุณเลี่ยงมานานอยากได้ความสนใจวันนี้ ให้เวลาเงียบๆ สักห้านาที"
+    }
+  },
+  {
+    "number": 3,
+    "roman": "III",
+    "name_en": "The Empress",
+    "name_th": "จักรพรรดินี",
+    "symbol": "🌺",
+    "upright": {
+      "meaning_en": "Abundance, nurturing, beauty, growth",
+      "meaning_th": "ความอุดมสมบูรณ์ การดูแลเอาใจใส่ ความงาม และการเติบโต",
+      "message_en": "Tend to something today and it will grow — a person, a project, or yourself.",
+      "message_th": "วันนี้ดูแลบางสิ่งแล้วมันจะเติบโต ไม่ว่าจะเป็นคน งาน หรือตัวคุณเอง"
+    },
+    "reversed": {
+      "meaning_en": "Neglect, creative block, or over-giving",
+      "meaning_th": "การละเลย ความคิดตัน หรือการให้จนเกินตัว",
+      "message_en": "Check whether you're pouring into others and running dry yourself.",
+      "message_th": "ลองสำรวจดูว่าคุณให้คนอื่นจนตัวเองเหือดแห้งหรือเปล่า"
+    }
+  },
+  {
+    "number": 4,
+    "roman": "IV",
+    "name_en": "The Emperor",
+    "name_th": "จักรพรรดิ",
+    "symbol": "👑",
+    "upright": {
+      "meaning_en": "Authority, structure, stability, leadership",
+      "meaning_th": "อำนาจ ระเบียบ ความมั่นคง และภาวะผู้นำ",
+      "message_en": "Structure serves you today. Set the boundary or make the decision you've delayed.",
+      "message_th": "ความมีระเบียบเข้าข้างคุณวันนี้ ตั้งขอบเขตหรือตัดสินใจเรื่องที่ผัดผ่อนไว้"
+    },
+    "reversed": {
+      "meaning_en": "Rigidity, control issues, or resisting authority",
+      "meaning_th": "ความแข็งกระด้าง ปัญหาการควบคุม หรือการต่อต้านอำนาจ",
+      "message_en": "Loosen your grip a little today. Not everything needs managing.",
+      "message_th": "วันนี้ผ่อนมือลงบ้าง ไม่ใช่ทุกอย่างต้องควบคุม"
+    }
+  },
+  {
+    "number": 5,
+    "roman": "V",
+    "name_en": "The Hierophant",
+    "name_th": "พระสังฆราช",
+    "symbol": "🏛️",
+    "upright": {
+      "meaning_en": "Tradition, wisdom, guidance, learning",
+      "meaning_th": "ประเพณี ปัญญา คำแนะนำ และการเรียนรู้",
+      "message_en": "Someone with more experience has the answer today. Ask rather than guess.",
+      "message_th": "วันนี้คนที่มีประสบการณ์มากกว่ามีคำตอบ ลองถามแทนที่จะเดา"
+    },
+    "reversed": {
+      "meaning_en": "Breaking convention, questioning beliefs, non-conformity",
+      "meaning_th": "การแหกกฎ การตั้งคำถามกับความเชื่อ หรือการไม่ทำตามกรอบ",
+      "message_en": "The usual way may not fit today. Your own path is worth considering.",
+      "message_th": "วิธีเดิมๆ อาจไม่เหมาะกับวันนี้ ทางของคุณเองก็น่าพิจารณา"
+    }
+  },
+  {
+    "number": 6,
+    "roman": "VI",
+    "name_en": "The Lovers",
+    "name_th": "คู่รัก",
+    "symbol": "💞",
+    "upright": {
+      "meaning_en": "Love, harmony, alignment, choice",
+      "meaning_th": "ความรัก ความกลมเกลียว ความสอดคล้อง และการเลือก",
+      "message_en": "A choice today is really about values. Pick the one you could explain proudly.",
+      "message_th": "การเลือกวันนี้จริงๆ แล้วเป็นเรื่องของคุณค่า เลือกทางที่คุณอธิบายได้อย่างภูมิใจ"
+    },
+    "reversed": {
+      "meaning_en": "Misalignment, difficult choices, or relationship friction",
+      "meaning_th": "ความไม่ลงรอย การเลือกที่ยากลำบาก หรือความขัดแย้งในความสัมพันธ์",
+      "message_en": "Something feels off because it is. Name it honestly today.",
+      "message_th": "ที่รู้สึกว่าไม่ใช่ เพราะมันไม่ใช่จริงๆ วันนี้ลองพูดออกมาตามตรง"
+    }
+  },
+  {
+    "number": 7,
+    "roman": "VII",
+    "name_en": "The Chariot",
+    "name_th": "รถศึก",
+    "symbol": "🐎",
+    "upright": {
+      "meaning_en": "Determination, willpower, forward momentum",
+      "meaning_th": "ความมุ่งมั่น พลังใจ และการเดินหน้า",
+      "message_en": "Momentum is on your side today. Push on the thing that's nearly done.",
+      "message_th": "วันนี้แรงส่งเข้าข้างคุณ ผลักดันสิ่งที่ใกล้เสร็จให้จบไปเลย"
+    },
+    "reversed": {
+      "meaning_en": "Losing direction, scattered effort, or forcing things",
+      "meaning_th": "การหลงทิศทาง ความพยายามที่กระจัดกระจาย หรือการฝืน",
+      "message_en": "Check you're still heading where you meant to. Speed isn't the same as progress.",
+      "message_th": "ลองเช็กว่ายังมุ่งไปทางที่ตั้งใจไว้ไหม ความเร็วไม่เท่ากับความก้าวหน้า"
+    }
+  },
+  {
+    "number": 8,
+    "roman": "VIII",
+    "name_en": "Strength",
+    "name_th": "พลัง",
+    "symbol": "🦁",
+    "upright": {
+      "meaning_en": "Courage, patience, gentle power, self-control",
+      "meaning_th": "ความกล้าหาญ ความอดทน พลังที่อ่อนโยน และการควบคุมตนเอง",
+      "message_en": "The strongest move today is the calm one. Patience wins what force can't.",
+      "message_th": "วันนี้การกระทำที่แข็งแกร่งที่สุดคือความสงบ ความอดทนชนะในสิ่งที่กำลังทำไม่ได้"
+    },
+    "reversed": {
+      "meaning_en": "Self-doubt, impatience, or suppressed frustration",
+      "meaning_th": "ความไม่มั่นใจในตัวเอง ความใจร้อน หรือความหงุดหงิดที่เก็บกด",
+      "message_en": "Be kinder to yourself today than you'd planned to be.",
+      "message_th": "วันนี้ใจดีกับตัวเองมากกว่าที่ตั้งใจไว้สักหน่อย"
+    }
+  },
+  {
+    "number": 9,
+    "roman": "IX",
+    "name_en": "The Hermit",
+    "name_th": "ฤๅษี",
+    "symbol": "🏮",
+    "upright": {
+      "meaning_en": "Reflection, solitude, inner guidance",
+      "meaning_th": "การใคร่ครวญ ความสันโดษ และคำแนะนำจากภายใน",
+      "message_en": "Time alone today is productive, not lazy. The answer comes in the quiet.",
+      "message_th": "เวลาอยู่คนเดียววันนี้มีประโยชน์ ไม่ใช่ความขี้เกียจ คำตอบมาในความเงียบ"
+    },
+    "reversed": {
+      "meaning_en": "Isolation, avoidance, or refusing help",
+      "meaning_th": "การแยกตัว การหลีกหนี หรือการปฏิเสธความช่วยเหลือ",
+      "message_en": "You've been alone with this long enough. Reach out to one person today.",
+      "message_th": "คุณอยู่กับเรื่องนี้คนเดียวนานพอแล้ว วันนี้ลองบอกใครสักคน"
+    }
+  },
+  {
+    "number": 10,
+    "roman": "X",
+    "name_en": "Wheel of Fortune",
+    "name_th": "วงล้อแห่งโชคชะตา",
+    "symbol": "🎡",
+    "upright": {
+      "meaning_en": "Luck, cycles, turning points, destiny",
+      "meaning_th": "โชคลาภ วัฏจักร จุดเปลี่ยน และโชคชะตา",
+      "message_en": "The wheel is turning your way. Be ready to say yes when it comes.",
+      "message_th": "วงล้อกำลังหมุนมาทางคุณ เตรียมพร้อมตอบรับเมื่อโอกาสมาถึง"
+    },
+    "reversed": {
+      "meaning_en": "Bad timing, resistance to change, or a cycle repeating",
+      "meaning_th": "จังหวะที่ไม่ดี การต้านการเปลี่ยนแปลง หรือวัฏจักรที่วนซ้ำ",
+      "message_en": "If this feels familiar, it's a pattern — not bad luck. Change one input.",
+      "message_th": "ถ้ารู้สึกคุ้นๆ นั่นคือรูปแบบที่วนซ้ำ ไม่ใช่ดวงไม่ดี ลองเปลี่ยนสักอย่าง"
+    }
+  },
+  {
+    "number": 11,
+    "roman": "XI",
+    "name_en": "Justice",
+    "name_th": "ความยุติธรรม",
+    "symbol": "⚖️",
+    "upright": {
+      "meaning_en": "Fairness, truth, accountability, balance",
+      "meaning_th": "ความยุติธรรม ความจริง ความรับผิดชอบ และความสมดุล",
+      "message_en": "Today rewards doing it properly. The fair path is also the smart one.",
+      "message_th": "วันนี้การทำอย่างถูกต้องให้ผลดี ทางที่ยุติธรรมคือทางที่ฉลาดด้วย"
+    },
+    "reversed": {
+      "meaning_en": "Unfairness, avoiding responsibility, or bias",
+      "meaning_th": "ความไม่ยุติธรรม การเลี่ยงความรับผิดชอบ หรืออคติ",
+      "message_en": "Something needs owning today. Doing it early costs less than doing it late.",
+      "message_th": "มีบางอย่างที่ต้องรับผิดชอบวันนี้ ทำแต่เนิ่นๆ เสียหายน้อยกว่าปล่อยไว้"
+    }
+  },
+  {
+    "number": 12,
+    "roman": "XII",
+    "name_en": "The Hanged Man",
+    "name_th": "คนแขวนคอ",
+    "symbol": "🙃",
+    "upright": {
+      "meaning_en": "Pause, new perspective, letting go",
+      "meaning_th": "การหยุดพัก มุมมองใหม่ และการปล่อยวาง",
+      "message_en": "Stop pushing today and look at it upside down. The answer is in the reframe.",
+      "message_th": "วันนี้หยุดฝืนแล้วลองมองกลับหัว คำตอบอยู่ในการเปลี่ยนมุมมอง"
+    },
+    "reversed": {
+      "meaning_en": "Stalling, resistance, or needless delay",
+      "meaning_th": "การหยุดนิ่ง การต่อต้าน หรือการถ่วงเวลาโดยไม่จำเป็น",
+      "message_en": "Waiting has stopped being useful. Today's the day to move.",
+      "message_th": "การรอไม่ได้ช่วยอะไรอีกแล้ว วันนี้คือวันที่ควรขยับ"
+    }
+  },
+  {
+    "number": 13,
+    "roman": "XIII",
+    "name_en": "Death",
+    "name_th": "ความตาย",
+    "symbol": "🦋",
+    "upright": {
+      "meaning_en": "Endings, transformation, release, renewal",
+      "meaning_th": "การสิ้นสุด การเปลี่ยนแปลง การปล่อยวาง และการเกิดใหม่",
+      "message_en": "Something is genuinely finished — and that's the good news. Space is opening.",
+      "message_th": "บางอย่างจบลงจริงๆ แล้ว และนั่นคือข่าวดี พื้นที่ใหม่กำลังเปิดออก"
+    },
+    "reversed": {
+      "meaning_en": "Clinging on, fear of change, or a delayed ending",
+      "meaning_th": "การยึดติด ความกลัวการเปลี่ยนแปลง หรือการยื้อสิ่งที่ควรจบ",
+      "message_en": "You already know what needs to end. Today just asks you to admit it.",
+      "message_th": "คุณรู้อยู่แล้วว่าอะไรควรจบ วันนี้แค่ขอให้คุณยอมรับมัน"
+    }
+  },
+  {
+    "number": 14,
+    "roman": "XIV",
+    "name_en": "Temperance",
+    "name_th": "ความพอดี",
+    "symbol": "🕊️",
+    "upright": {
+      "meaning_en": "Balance, moderation, patience, blending",
+      "meaning_th": "ความสมดุล ความพอดี ความอดทน และการผสมผสาน",
+      "message_en": "The middle path works today. Neither extreme is serving you.",
+      "message_th": "ทางสายกลางได้ผลวันนี้ ไม่มีทางสุดโต่งไหนที่ช่วยคุณได้"
+    },
+    "reversed": {
+      "meaning_en": "Imbalance, excess, or impatience",
+      "meaning_th": "ความไม่สมดุล ความมากเกินไป หรือความใจร้อน",
+      "message_en": "Something is out of proportion in your day. Trim the excess.",
+      "message_th": "มีบางอย่างในวันของคุณที่มากเกินพอดี ลองตัดส่วนเกินออก"
+    }
+  },
+  {
+    "number": 15,
+    "roman": "XV",
+    "name_en": "The Devil",
+    "name_th": "ปีศาจ",
+    "symbol": "⛓️",
+    "upright": {
+      "meaning_en": "Attachment, temptation, patterns that bind",
+      "meaning_th": "ความยึดติด สิ่งยั่วยุ และรูปแบบที่ผูกมัดเราไว้",
+      "message_en": "Notice what has a hold on you today. Naming it loosens it.",
+      "message_th": "สังเกตว่าอะไรกำลังยึดคุณไว้ การเรียกชื่อมันทำให้มันคลายลง"
+    },
+    "reversed": {
+      "meaning_en": "Breaking free, releasing a habit, regaining control",
+      "meaning_th": "การหลุดพ้น การเลิกนิสัยเดิม และการได้ควบคุมตัวเองคืนมา",
+      "message_en": "A grip is loosening today. Push a little and it gives.",
+      "message_th": "บางอย่างกำลังคลายลงวันนี้ ผลักอีกนิดแล้วมันจะปล่อย"
+    }
+  },
+  {
+    "number": 16,
+    "roman": "XVI",
+    "name_en": "The Tower",
+    "name_th": "หอคอย",
+    "symbol": "⚡",
+    "upright": {
+      "meaning_en": "Sudden change, revelation, necessary upheaval",
+      "meaning_th": "การเปลี่ยนแปลงกะทันหัน การเปิดเผย และการพังทลายที่จำเป็น",
+      "message_en": "If something breaks today, it was already cracked. Better now than later.",
+      "message_th": "ถ้าวันนี้มีอะไรพัง แสดงว่ามันร้าวอยู่แล้ว พังตอนนี้ดีกว่าพังทีหลัง"
+    },
+    "reversed": {
+      "meaning_en": "Avoiding the inevitable, or disaster narrowly missed",
+      "meaning_th": "การเลี่ยงสิ่งที่หลีกไม่พ้น หรือหวุดหวิดรอดมาได้",
+      "message_en": "You dodged something today. Worth checking what made it wobble.",
+      "message_th": "วันนี้คุณรอดมาได้หวุดหวิด ลองดูว่าอะไรทำให้มันเกือบพัง"
+    }
+  },
+  {
+    "number": 17,
+    "roman": "XVII",
+    "name_en": "The Star",
+    "name_th": "ดวงดาว",
+    "symbol": "⭐",
+    "upright": {
+      "meaning_en": "Hope, renewal, inspiration, healing",
+      "meaning_th": "ความหวัง การฟื้นฟู แรงบันดาลใจ และการเยียวยา",
+      "message_en": "The hard part is behind you. Today is for quiet hope and small repairs.",
+      "message_th": "ช่วงยากผ่านไปแล้ว วันนี้เป็นวันของความหวังเงียบๆ และการซ่อมแซมทีละนิด"
+    },
+    "reversed": {
+      "meaning_en": "Lost faith, discouragement, or disconnection from hope",
+      "meaning_th": "ความศรัทธาที่หายไป ความท้อแท้ หรือการหลุดจากความหวัง",
+      "message_en": "Hope feels thin today. Do one small thing that used to make you feel good.",
+      "message_th": "วันนี้ความหวังอาจบางลง ลองทำสิ่งเล็กๆ ที่เคยทำให้คุณรู้สึกดี"
+    }
+  },
+  {
+    "number": 18,
+    "roman": "XVIII",
+    "name_en": "The Moon",
+    "name_th": "ดวงจันทร์",
+    "symbol": "🌕",
+    "upright": {
+      "meaning_en": "Dreams, intuition, uncertainty, the unseen",
+      "meaning_th": "ความฝัน สัญชาตญาณ ความไม่แน่นอน และสิ่งที่มองไม่เห็น",
+      "message_en": "Not everything is clear today, and that's fine. Trust dreams over data.",
+      "message_th": "วันนี้ไม่ใช่ทุกอย่างจะชัดเจน และไม่เป็นไร เชื่อความฝันมากกว่าตัวเลข"
+    },
+    "reversed": {
+      "meaning_en": "Clarity returning, illusion lifting, fears easing",
+      "meaning_th": "ความชัดเจนที่กลับมา ภาพลวงที่จางลง และความกลัวที่คลายลง",
+      "message_en": "The fog is lifting. What worried you looks smaller in daylight.",
+      "message_th": "หมอกกำลังจาง สิ่งที่กังวลดูเล็กลงเมื่อมองในตอนกลางวัน"
+    }
+  },
+  {
+    "number": 19,
+    "roman": "XIX",
+    "name_en": "The Sun",
+    "name_th": "ดวงอาทิตย์",
+    "symbol": "☀️",
+    "upright": {
+      "meaning_en": "Joy, success, vitality, clarity",
+      "meaning_th": "ความสุข ความสำเร็จ พลังชีวิต และความกระจ่าง",
+      "message_en": "A genuinely good day. Take the win without waiting for the catch.",
+      "message_th": "วันนี้เป็นวันที่ดีจริงๆ รับความสำเร็จไว้โดยไม่ต้องรอว่าจะมีอะไรตามมา"
+    },
+    "reversed": {
+      "meaning_en": "Temporary clouds, delayed joy, or dimmed confidence",
+      "meaning_th": "เมฆบังชั่วคราว ความสุขที่มาช้า หรือความมั่นใจที่หรี่ลง",
+      "message_en": "The good is still there, just quieter today. Don't mistake it for gone.",
+      "message_th": "สิ่งดีๆ ยังอยู่ แค่เงียบลงวันนี้ อย่าเข้าใจผิดว่ามันหายไป"
+    }
+  },
+  {
+    "number": 20,
+    "roman": "XX",
+    "name_en": "Judgement",
+    "name_th": "การพิพากษา",
+    "symbol": "📯",
+    "upright": {
+      "meaning_en": "Reckoning, awakening, a clear call",
+      "meaning_th": "การตัดสิน การตื่นรู้ และเสียงเรียกที่ชัดเจน",
+      "message_en": "Something is asking for a real decision today. You already know the answer.",
+      "message_th": "มีบางอย่างที่ขอการตัดสินใจจริงจังวันนี้ คุณรู้คำตอบอยู่แล้ว"
+    },
+    "reversed": {
+      "meaning_en": "Self-doubt, ignoring the call, or harsh self-judgement",
+      "meaning_th": "ความไม่มั่นใจ การเพิกเฉยต่อเสียงเรียก หรือการตัดสินตัวเองรุนแรงเกินไป",
+      "message_en": "Go easier on yourself today. You're judging by a standard you'd never apply to a friend.",
+      "message_th": "วันนี้ใจดีกับตัวเองหน่อย คุณกำลังตัดสินตัวเองด้วยมาตรฐานที่ไม่เคยใช้กับเพื่อน"
+    }
+  },
+  {
+    "number": 21,
+    "roman": "XXI",
+    "name_en": "The World",
+    "name_th": "โลก",
+    "symbol": "🌍",
+    "upright": {
+      "meaning_en": "Completion, achievement, wholeness, arrival",
+      "meaning_th": "ความสมบูรณ์ ความสำเร็จ ความครบถ้วน และการไปถึงเป้าหมาย",
+      "message_en": "A chapter closes well today. Let yourself notice how far you've come.",
+      "message_th": "บทหนึ่งจบลงอย่างสวยงามวันนี้ ให้เวลาตัวเองมองย้อนดูว่ามาไกลแค่ไหน"
+    },
+    "reversed": {
+      "meaning_en": "Almost there, loose ends, or a delayed finish",
+      "meaning_th": "ใกล้ถึงแล้ว งานที่ยังค้าง หรือการจบที่ล่าช้า",
+      "message_en": "One loose end is holding the whole thing open. Tie it today.",
+      "message_th": "มีปมเดียวที่ทำให้ทุกอย่างยังไม่จบ วันนี้จัดการมันซะ"
+    }
+  }
+]
