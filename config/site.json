@@ -15,8 +15,8 @@
     "qrImagePath": "/promptpay-qr.png",
     "contactQrImagePath": "/line-contact-qr.png",
     "contactInfo": "Scan to add me on LINE, then send your payment screenshot",
-    "promptPayNumber": "0812345678",
-    "promptPayName": "Jordon Bickley",
+    "promptPayNumber": "0612122770",
+    "promptPayName": "",
     "lineUrl": "REPLACE_WITH_https://line.me/R/ti/p/@yourlineid"
   }
 }
