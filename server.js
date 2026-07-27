@@ -21,6 +21,7 @@ const drawResults = require('./lib/drawResults');
 const tarot = require('./lib/tarot');
 const birthdays = require('./config/birthday.json');
 const auspicious = require('./lib/auspicious');
+const paymentRef = require('./lib/paymentRef');
 
 // 20 requests per minute per IP on the free-text endpoints - generous for
 // a real user clicking around, tight enough to blunt casual spam/scraping.
@@ -101,6 +102,15 @@ app.get('/', (req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Returns a config value only if it's been filled in - placeholder values
+// starting with REPLACE_ are treated as "not set" so the UI hides that
+// element rather than showing raw placeholder text to a paying customer.
+function cleanConfig(value) {
+  const v = String(value || '').trim();
+  if (!v || v.startsWith('REPLACE_')) return null;
+  return v;
+}
 
 function currentDrawDate() {
   return getNextDraw(site.drawDaysOfMonth).date;
@@ -250,12 +260,24 @@ app.post('/api/unlock', readingLimiter, async (req, res) => {
     // Your own bank/PromptPay QR - no automatic payment verification, so
     // this just shows the QR + contact info. The actual unlock happens
     // when you manually confirm the payment at /admin.
+    // Give this person a unique payment amount (e.g. 29.03 rather than a
+    // flat 29.00) so their transfer is identifiable in the bank statement
+    // on its own - no follow-up message needed from them.
+    const ref = paymentRef.allocateReference(
+      site.pricing.drawPassAmountSatang,
+      store.getPendingManualAmounts()
+    );
+
     return res.json({
       manual: true,
       qrImageUrl: site.manualPayment.qrImagePath,
       contactQrImageUrl: site.manualPayment.contactQrImagePath,
       contactInfo: site.manualPayment.contactInfo,
-      amountSatang: site.pricing.drawPassAmountSatang,
+      promptPayNumber: cleanConfig(site.manualPayment.promptPayNumber),
+      promptPayName: cleanConfig(site.manualPayment.promptPayName),
+      lineUrl: cleanConfig(site.manualPayment.lineUrl),
+      amountSatang: ref.amountSatang,
+      exactAmount: true,
     });
   }
 
@@ -278,7 +300,8 @@ app.post('/api/unlock/claim', readingLimiter, (req, res) => {
   }
 
   const payerNote = (req.body.payerNote || '').trim().slice(0, 200);
-  store.createPendingManualEntitlement({ userId, drawDate, payerNote });
+  const amountSatang = parseInt(req.body.amountSatang, 10) || null;
+  store.createPendingManualEntitlement({ userId, drawDate, payerNote, amountSatang });
   res.json({ submitted: true });
 });
 
@@ -303,6 +326,9 @@ app.post('/api/shop/checkout', readingLimiter, (req, res) => {
     qrImageUrl: site.manualPayment.qrImagePath,
     contactQrImageUrl: site.manualPayment.contactQrImagePath,
     contactInfo: site.manualPayment.contactInfo,
+    promptPayNumber: cleanConfig(site.manualPayment.promptPayNumber),
+    promptPayName: cleanConfig(site.manualPayment.promptPayName),
+    lineUrl: cleanConfig(site.manualPayment.lineUrl),
   });
 });
 
@@ -526,9 +552,9 @@ app.get('/admin', (req, res) => {
     .map(
       (p) => `
       <tr>
-        <td>${p.userId}</td>
-        <td>${p.drawDate}</td>
+        <td><strong style="font-size:16px;color:#a00;">${p.amountSatang ? (p.amountSatang / 100).toFixed(2) + ' ฿' : '—'}</strong></td>
         <td>${(p.payerNote || '').replace(/</g, '&lt;')}</td>
+        <td>${p.drawDate}</td>
         <td>${new Date(p.createdAt).toLocaleString()}</td>
         <td>
           <form method="POST" action="/admin/confirm" style="display:inline">
@@ -584,9 +610,9 @@ app.get('/admin', (req, res) => {
   res.send(`
     <html><body style="font-family:sans-serif;max-width:800px;margin:40px auto;">
       <h2>Pending Manual Payments (${pending.length})</h2>
-      <p style="color:#666;">Check your bank app for the payment, then click Confirm to unlock that visitor's numbers.</p>
+      <p style="color:#666;">Open your bank app and look for these <strong>exact amounts</strong> — the odd satang identifies each person, so you can match without messaging them. Then click Confirm.</p>
       <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;">
-        <tr><th>Visitor</th><th>Draw</th><th>Note from payer</th><th>Submitted</th><th>Action</th></tr>
+        <tr><th>Look for this amount</th><th>Name given</th><th>Draw</th><th>Submitted</th><th>Action</th></tr>
         ${rows || '<tr><td colspan="5">No pending payments right now.</td></tr>'}
       </table>
 

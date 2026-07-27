@@ -140,6 +140,19 @@ const STRINGS = {
     spread_draw: 'Draw the cards',
     spread_again: 'Draw again',
     spread_pick_prompt: 'Choose a spread above.',
+    pay_step1: 'Transfer the money', pay_step2: 'Tell us you paid',
+    pay_number_label: 'PromptPay number', pay_amount_label: 'Amount to send',
+    pay_copy: 'Copy number', pay_copied: '✓ Copied',
+    pay_show_qr: 'Or scan the QR code instead', pay_hide_qr: 'Hide QR code',
+    pay_qr_hint: 'On a phone, save this image then upload it in your banking app — or just copy the number above instead, it\'s quicker.',
+    pay_open_line: '💬 Message us on LINE',
+    pay_name_placeholder: 'Your name (so we can find your payment)',
+    pay_done: 'I have paid',
+    pay_confirm_title: 'Thank you!',
+    pay_confirm_body: 'We\'ll check the payment and unlock your numbers, usually within a few hours. No need to do anything else — just come back and refresh.',
+    pay_amount_exact_label: 'Send exactly this amount',
+    pay_exact_note: 'The odd satang is your reference — it lets us match your payment automatically, so please send this exact figure.',
+    pay_line_optional: 'Having trouble? You can also reach us here:',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -281,6 +294,19 @@ const STRINGS = {
     spread_draw: 'เปิดไพ่',
     spread_again: 'เปิดใหม่',
     spread_pick_prompt: 'เลือกรูปแบบการเปิดไพ่ด้านบน',
+    pay_step1: 'โอนเงิน', pay_step2: 'แจ้งให้เราทราบ',
+    pay_number_label: 'เบอร์พร้อมเพย์', pay_amount_label: 'จำนวนเงินที่ต้องโอน',
+    pay_copy: 'คัดลอกเบอร์', pay_copied: '✓ คัดลอกแล้ว',
+    pay_show_qr: 'หรือสแกน QR โค้ดแทน', pay_hide_qr: 'ซ่อน QR โค้ด',
+    pay_qr_hint: 'ถ้าใช้มือถือ ให้บันทึกรูปนี้แล้วอัปโหลดในแอปธนาคาร หรือคัดลอกเบอร์ด้านบนจะเร็วกว่า',
+    pay_open_line: '💬 ทักหาเราทาง LINE',
+    pay_name_placeholder: 'ชื่อของคุณ (เพื่อให้เราหาการโอนของคุณเจอ)',
+    pay_done: 'โอนเงินแล้ว',
+    pay_confirm_title: 'ขอบคุณค่ะ!',
+    pay_confirm_body: 'เราจะตรวจสอบการโอนและปลดล็อกเลขให้คุณ ปกติภายในไม่กี่ชั่วโมง ไม่ต้องทำอะไรเพิ่ม แค่กลับมารีเฟรชหน้านี้',
+    pay_amount_exact_label: 'โอนยอดนี้เป๊ะๆ',
+    pay_exact_note: 'เศษสตางค์คือรหัสอ้างอิงของคุณ ช่วยให้เราจับคู่การโอนได้ทันที กรุณาโอนยอดนี้ให้ตรงเป๊ะ',
+    pay_line_optional: 'มีปัญหาใช่ไหม? ติดต่อเราได้ที่นี่:',
   },
 };
 
@@ -511,19 +537,8 @@ async function startUnlock() {
     const paywall = document.getElementById('paywall');
     if (paywall) paywall.classList.add('hidden');
     qrPanel.classList.remove('hidden');
-    qrPanel.innerHTML = `
-      <p><strong>${t('step1_pay', (data.amountSatang / 100).toFixed(0))}</strong></p>
-      <img src="${data.qrImageUrl}" alt="PromptPay QR code">
-      ${data.contactQrImageUrl ? `
-        <p style="margin-top:14px;"><strong>${t('step2_contact', escapeHtml(data.contactInfo))}</strong></p>
-        <img src="${data.contactQrImageUrl}" alt="LINE contact QR code">
-      ` : `<p style="margin-top:8px;">${escapeHtml(data.contactInfo)}</p>`}
-      <input type="text" id="payer-note" placeholder="${t('payer_note_placeholder')}" style="width:100%;max-width:300px;padding:8px;border-radius:8px;border:1px solid rgba(201,162,39,0.3);margin:10px 0;background:rgba(244,233,208,0.06);color:var(--parchment);">
-      <br>
-      <button class="unlock-btn" id="ive-paid-btn">${t('ive_paid_btn')}</button>
-      <p id="claim-status" style="margin-top:8px;"></p>
-    `;
-    document.getElementById('ive-paid-btn').addEventListener('click', submitManualClaim);
+    qrPanel.innerHTML = renderPaymentSteps(data, (data.amountSatang / 100).toFixed(0));
+    wirePaymentSteps(submitManualClaim);
     return;
   }
 
@@ -549,12 +564,15 @@ async function submitManualClaim() {
   const res = await fetch('/api/unlock/claim', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ payerNote: noteInput ? noteInput.value : '' }),
+    body: JSON.stringify({
+      payerNote: noteInput ? noteInput.value : '',
+      amountSatang: btn ? btn.dataset.amount : null,
+    }),
   });
   const data = await res.json();
 
   if (data.submitted || data.alreadySubmitted) {
-    statusEl.textContent = t('claim_submitted');
+    showPaymentConfirmed('qr-panel');
   } else if (data.alreadyUnlocked) {
     statusEl.textContent = t('claim_already');
   } else {
@@ -795,19 +813,19 @@ async function startShopCheckout(productId) {
   }
 
   btn.disabled = true;
-  panel.innerHTML = `
-    <p style="font-size:12px;text-align:center;"><strong>${t('step1_pay', (data.priceSatang / 100).toFixed(0))}</strong></p>
-    <img src="${data.qrImageUrl}" alt="PromptPay QR code" style="width:160px;height:160px;margin:8px auto;display:block;border-radius:12px;">
-    ${data.contactQrImageUrl ? `
-      <p style="font-size:12px;text-align:center;margin-top:10px;"><strong>${t('step2_contact', escapeHtml(data.contactInfo))}</strong></p>
-      <img src="${data.contactQrImageUrl}" alt="LINE contact QR code" style="width:160px;height:160px;margin:8px auto;display:block;border-radius:12px;">
-    ` : `<p style="font-size:12px;text-align:center;">${escapeHtml(data.contactInfo)}</p>`}
-    <input type="text" id="order-note-${productId}" placeholder="${t('order_note_placeholder')}" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(201,162,39,0.3);margin:10px 0;background:rgba(244,233,208,0.06);color:var(--parchment);box-sizing:border-box;">
-    <button class="unlock-btn" id="order-paid-btn-${productId}" style="width:100%;">${t('ive_paid_btn')}</button>
-    <p id="order-status-${productId}" style="font-size:12px;text-align:center;margin-top:8px;"></p>
-  `;
+  panel.innerHTML = renderPaymentSteps(data, (data.priceSatang / 100).toFixed(0));
+  // The shared renderer uses generic ids; point them at this product so
+  // several open product panels can't collide with each other.
+  const noteInput = panel.querySelector('#payer-note');
+  if (noteInput) noteInput.id = `order-note-${productId}`;
+  const doneBtn = panel.querySelector('#ive-paid-btn');
+  if (doneBtn) doneBtn.id = `order-paid-btn-${productId}`;
+  const statusEl = panel.querySelector('#claim-status');
+  if (statusEl) statusEl.id = `order-status-${productId}`;
 
-  document.getElementById(`order-paid-btn-${productId}`).addEventListener('click', () => submitShopOrder(productId));
+  wirePaymentSteps(null);
+  const finalBtn = document.getElementById(`order-paid-btn-${productId}`);
+  if (finalBtn) finalBtn.addEventListener('click', () => submitShopOrder(productId));
 }
 
 async function submitShopOrder(productId) {
@@ -824,7 +842,7 @@ async function submitShopOrder(productId) {
   const data = await res.json();
 
   if (data.submitted) {
-    statusEl.textContent = t('order_confirmed');
+    showPaymentConfirmed(`checkout-${productId}`);
   } else {
     statusEl.textContent = t('error_generic');
     btn.disabled = false;
@@ -1575,3 +1593,124 @@ async function drawSpread() {
 
 loadAuspiciousActivities();
 loadSpreadOptions();
+
+/* ================= simplified payment UI =================
+   Built for less confident / older users:
+   - the PromptPay NUMBER is primary, the QR is secondary and collapsed.
+     On a phone you can't scan a QR shown on that same phone, so leading
+     with a copyable number removes the biggest real-world blocker.
+   - two clearly numbered steps rather than one dense panel
+   - large type and full-width tap targets throughout
+   - a direct "message us on LINE" button, since many older Thai users
+     are far more comfortable in LINE than filling in a web form  */
+
+function renderPaymentSteps(data, amountThb) {
+  const hasNumber = Boolean(data.promptPayNumber);
+  const hasLine = Boolean(data.lineUrl);
+  // When the server assigned a unique reference amount, show it to the
+  // satang and stress that it must match exactly - that exactness is what
+  // lets the payment be matched without any follow-up message.
+  const exact = Boolean(data.exactAmount) && data.amountSatang;
+  const displayAmount = exact ? (data.amountSatang / 100).toFixed(2) : amountThb;
+
+  const numberBlock = hasNumber
+    ? `<div class="pay-number-box">
+         <div class="pay-number-label">${t('pay_number_label')}</div>
+         <div class="pay-number" id="pp-number">${escapeHtml(data.promptPayNumber)}</div>
+         ${data.promptPayName ? `<div class="pay-account-name">${escapeHtml(data.promptPayName)}</div>` : ''}
+         <button class="pay-copy-btn" id="pp-copy">${t('pay_copy')}</button>
+       </div>`
+    : '';
+
+  const qrBlock = data.qrImageUrl
+    ? `<button class="pay-qr-toggle" id="pp-qr-toggle">${t('pay_show_qr')}</button>
+       <div class="pay-qr-wrap hidden" id="pp-qr-wrap">
+         <img src="${data.qrImageUrl}" alt="PromptPay QR">
+         <p class="pay-qr-hint">${t('pay_qr_hint')}</p>
+       </div>`
+    : '';
+
+  const lineBlock = hasLine
+    ? `<a class="pay-line-btn" href="${escapeHtml(data.lineUrl)}" target="_blank" rel="noopener">${t('pay_open_line')}</a>`
+    : data.contactQrImageUrl
+    ? `<div class="pay-qr-wrap"><img src="${data.contactQrImageUrl}" alt="LINE QR"><p class="pay-qr-hint">${escapeHtml(data.contactInfo || '')}</p></div>`
+    : '';
+
+  return `
+    <div class="pay-step">
+      <div class="pay-step-head">
+        <div class="pay-step-num">1</div>
+        <div class="pay-step-title">${t('pay_step1')}</div>
+      </div>
+      <div class="pay-number-label" style="text-align:center;">${exact ? t('pay_amount_exact_label') : t('pay_amount_label')}</div>
+      <div class="pay-amount-big">${displayAmount} ฿</div>
+      ${exact ? `<p class="pay-exact-note">${t('pay_exact_note')}</p>` : ''}
+      ${numberBlock}
+      ${numberBlock && qrBlock ? `<div class="pay-or">${t('pay_or') || '—'}</div>` : ''}
+      ${qrBlock}
+    </div>
+
+    <div class="pay-step">
+      <div class="pay-step-head">
+        <div class="pay-step-num">2</div>
+        <div class="pay-step-title">${t('pay_step2')}</div>
+      </div>
+      <input type="text" id="payer-note" class="pay-name-input" placeholder="${t('pay_name_placeholder')}">
+      <button class="pay-done-btn" id="ive-paid-btn" data-amount="${data.amountSatang || ''}">${t('pay_done')}</button>
+      ${lineBlock ? `<p class="pay-optional-help">${t('pay_line_optional')}</p>${lineBlock}` : ''}
+      <p id="claim-status" style="margin-top:10px;text-align:center;font-size:13px;color:#5a4a37;"></p>
+    </div>
+  `;
+}
+
+function wirePaymentSteps(onDone) {
+  const copyBtn = document.getElementById('pp-copy');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const numEl = document.getElementById('pp-number');
+      if (!numEl) return;
+      const text = numEl.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        // Older browsers / non-secure contexts: fall back to selecting the
+        // text so the user can copy it with a long-press.
+        const range = document.createRange();
+        range.selectNodeContents(numEl);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      copyBtn.textContent = t('pay_copied');
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = t('pay_copy');
+        copyBtn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+
+  const qrToggle = document.getElementById('pp-qr-toggle');
+  const qrWrap = document.getElementById('pp-qr-wrap');
+  if (qrToggle && qrWrap) {
+    qrToggle.addEventListener('click', () => {
+      const nowHidden = qrWrap.classList.toggle('hidden');
+      qrToggle.textContent = nowHidden ? t('pay_show_qr') : t('pay_hide_qr');
+    });
+  }
+
+  const doneBtn = document.getElementById('ive-paid-btn');
+  if (doneBtn && onDone) doneBtn.addEventListener('click', onDone);
+}
+
+function showPaymentConfirmed(containerId) {
+  const box = document.getElementById(containerId);
+  if (!box) return;
+  box.innerHTML = `
+    <div class="pay-confirm">
+      <div class="tick">✓</div>
+      <h4>${t('pay_confirm_title')}</h4>
+      <p>${t('pay_confirm_body')}</p>
+    </div>
+  `;
+}

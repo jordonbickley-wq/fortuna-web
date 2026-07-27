@@ -590,3 +590,75 @@ html[lang="th"] .tarot-name .en{ font-style:normal; }
   color:var(--ink); background:linear-gradient(135deg,var(--gold-bright),var(--marigold));
   border:none; padding:13px 30px; border-radius:999px; cursor:pointer;
 }
+
+/* ---------- SIMPLIFIED PAYMENT (older-user friendly) ----------
+   Deliberately larger type and touch targets than the rest of the site.
+   The whole flow is one visible step at a time rather than a wall of
+   options, because that's where less confident users drop off. */
+.pay-step{ margin-bottom:22px; }
+.pay-step-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.pay-step-num{
+  width:34px; height:34px; border-radius:50%; flex-shrink:0;
+  background:var(--lacquer); color:var(--parchment);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; font-size:16px;
+}
+.pay-step-title{ font-family:var(--font-display); font-size:17px; color:#2A1D14; }
+
+/* Big, tappable copy-the-number block - the key fix for phone users, who
+   cannot scan a QR shown on the same phone they're holding. */
+.pay-number-box{
+  background:#fff; border:2px solid var(--lacquer); border-radius:16px;
+  padding:18px; text-align:center; margin-bottom:12px;
+}
+.pay-number-label{ font-size:12.5px; color:#6b5a44; margin-bottom:6px; }
+.pay-number{
+  font-family:var(--font-display); font-size:30px; font-weight:700; letter-spacing:0.05em;
+  color:var(--lacquer); word-break:break-all; line-height:1.2; margin-bottom:4px;
+}
+.pay-account-name{ font-size:13px; color:#6b5a44; margin-bottom:12px; }
+.pay-copy-btn{
+  width:100%; font-family:var(--font-body); font-weight:700; font-size:16px;
+  color:var(--parchment); background:var(--lacquer); border:none;
+  padding:15px; border-radius:12px; cursor:pointer;
+}
+.pay-copy-btn.copied{ background:#3E6B5C; }
+
+.pay-amount-big{
+  font-family:var(--font-display); font-size:38px; font-weight:700;
+  color:var(--lacquer); text-align:center; margin:4px 0 16px;
+}
+.pay-or{ text-align:center; font-size:12.5px; color:#8a7a5f; margin:14px 0; }
+.pay-qr-toggle{
+  width:100%; background:none; border:1px dashed rgba(110,20,35,0.4);
+  color:#5a4a37; font-size:14px; padding:13px; border-radius:12px; cursor:pointer;
+}
+.pay-qr-wrap{ text-align:center; padding-top:14px; }
+.pay-qr-wrap img{ width:210px; height:210px; border-radius:12px; }
+.pay-qr-hint{ font-size:12px; color:#6b5a44; margin-top:8px; line-height:1.6; }
+
+.pay-line-btn{
+  display:block; width:100%; text-align:center; text-decoration:none;
+  background:#06C755; color:#fff; font-family:var(--font-body); font-weight:700;
+  font-size:16px; padding:16px; border-radius:12px; margin-bottom:10px;
+}
+.pay-done-btn{
+  width:100%; font-family:var(--font-body); font-weight:700; font-size:17px;
+  color:var(--ink); background:linear-gradient(135deg,var(--gold-bright),var(--marigold));
+  border:none; padding:17px; border-radius:12px; cursor:pointer;
+}
+.pay-done-btn:disabled{ opacity:0.6; cursor:default; }
+.pay-name-input{
+  width:100%; padding:15px; border-radius:12px; border:1px solid rgba(110,20,35,0.3);
+  background:#fff; color:#2A1D14; font-family:var(--font-body); font-size:16px;
+  margin-bottom:12px; box-sizing:border-box;
+}
+.pay-confirm{
+  text-align:center; padding:24px 18px; background:rgba(62,107,92,0.15);
+  border:1px solid rgba(62,107,92,0.4); border-radius:16px;
+}
+.pay-confirm .tick{ font-size:38px; margin-bottom:10px; }
+.pay-confirm h4{ font-family:var(--font-display); font-size:19px; color:#2A1D14; margin-bottom:8px; }
+.pay-confirm p{ font-size:14px; color:#3b2f22; line-height:1.7; }
+.pay-exact-note{ font-size:12px; color:var(--lacquer); text-align:center; line-height:1.6; margin:-8px 0 16px; font-weight:600; }
+.pay-optional-help{ font-size:12.5px; color:#6b5a44; text-align:center; margin:16px 0 8px; }
