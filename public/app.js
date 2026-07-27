@@ -104,6 +104,23 @@ const STRINGS = {
     tarot_numbers_label: "Today's numbers from this card",
     tarot_caveat: 'Card meanings follow traditional tarot. Turning the card number into lottery numbers is this app\'s own method — for fun, not prophecy.',
     visits_line: (total, unique) => `${total.toLocaleString()} visits · ${unique.toLocaleString()} visitors`,
+    welcome_title: "Let's make this yours",
+    welcome_sub: 'Tell us your name and the day you were born — your readings, colours and numbers will be tailored to you.',
+    welcome_name_label: 'What should we call you?',
+    welcome_name_placeholder: 'Your name',
+    welcome_day_label: 'Which day of the week were you born?',
+    welcome_day_hint: 'In Thai tradition your birth day sets your lucky colour and your birthday Buddha.',
+    welcome_save: 'Start my readings',
+    welcome_skip: 'Skip for now',
+    welcome_privacy: 'Stored only for your own visits. No email, no phone, no sign-up.',
+    greeting_morning: (n) => `Good morning, ${n}`,
+    greeting_afternoon: (n) => `Good afternoon, ${n}`,
+    greeting_evening: (n) => `Good evening, ${n}`,
+    pb_born: (day, color) => `Born on ${day} · your colour is ${color}`,
+    pb_buddha: (b) => `Your birthday Buddha: ${b}`,
+    pb_no_day: 'Add your birth day for lucky colours',
+    pb_edit: 'Edit',
+    dont_know_day: "I don't know",
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -209,6 +226,23 @@ const STRINGS = {
     tarot_numbers_label: 'เลขประจำวันจากไพ่ใบนี้',
     tarot_caveat: 'ความหมายไพ่อ้างอิงตามตำราทาโรต์ดั้งเดิม ส่วนการแปลงเลขไพ่เป็นเลขนำโชคเป็นวิธีของแอปนี้เอง มีไว้เพื่อความสนุก ไม่ใช่คำพยากรณ์',
     visits_line: (total, unique) => `เข้าชม ${total.toLocaleString()} ครั้ง · ผู้เข้าชม ${unique.toLocaleString()} คน`,
+    welcome_title: 'มาทำให้เป็นของคุณกันเถอะ',
+    welcome_sub: 'บอกชื่อและวันเกิดของคุณ แล้วคำทำนาย สีมงคล และเลขนำโชคจะถูกปรับให้เหมาะกับคุณ',
+    welcome_name_label: 'ให้เราเรียกคุณว่าอะไรดี?',
+    welcome_name_placeholder: 'ชื่อของคุณ',
+    welcome_day_label: 'คุณเกิดวันอะไร?',
+    welcome_day_hint: 'ตามความเชื่อไทย วันเกิดของคุณกำหนดสีมงคลและพระประจำวันเกิด',
+    welcome_save: 'เริ่มดูดวงของฉัน',
+    welcome_skip: 'ข้ามไปก่อน',
+    welcome_privacy: 'เก็บไว้สำหรับการเข้าชมของคุณเท่านั้น ไม่ต้องใช้อีเมล เบอร์โทร หรือสมัครสมาชิก',
+    greeting_morning: (n) => `อรุณสวัสดิ์ คุณ${n}`,
+    greeting_afternoon: (n) => `สวัสดีตอนบ่าย คุณ${n}`,
+    greeting_evening: (n) => `สวัสดีตอนเย็น คุณ${n}`,
+    pb_born: (day, color) => `เกิด${day} · สีมงคลของคุณคือ${color}`,
+    pb_buddha: (b) => `พระประจำวันเกิดของคุณ: ${b}`,
+    pb_no_day: 'เพิ่มวันเกิดเพื่อดูสีมงคล',
+    pb_edit: 'แก้ไข',
+    dont_know_day: 'ไม่ทราบ',
   },
 };
 
@@ -259,6 +293,8 @@ function setLang(lang) {
   loadJournal();
   loadDailyTarot();
   loadVisits();
+  renderPersonalBanner();
+  renderDayPicker();
   // Note: a currently-displayed dream/module result stays in whatever
   // language it was fetched in until the next action - re-translating
   // live server content isn't attempted here.
@@ -1132,3 +1168,194 @@ async function loadVisits() {
 
 loadDailyTarot();
 loadVisits();
+
+/* ================= personalisation ================= */
+let userProfile = null;
+let userBirthDay = null;
+let birthDayList = [];
+let selectedDayIndex = null;
+
+async function loadBirthDayOptions() {
+  if (birthDayList.length) return birthDayList;
+  try {
+    const res = await fetch('/api/birthdays');
+    const data = await res.json();
+    birthDayList = data.days || [];
+  } catch (e) {}
+  return birthDayList;
+}
+
+async function renderDayPicker() {
+  const picker = document.getElementById('day-picker');
+  if (!picker) return;
+  const days = await loadBirthDayOptions();
+
+  picker.innerHTML =
+    days
+      .map((d) => {
+        const label = currentLang === 'th' ? d.name_th.replace('วัน', '') : d.name_en.slice(0, 3);
+        return `<div class="day-opt" data-day="${d.index}">
+          <div class="day-dot" style="background:${d.hex}"></div>
+          <div class="lbl">${escapeHtml(label)}</div>
+        </div>`;
+      })
+      .join('') +
+    `<div class="day-opt" data-day=""><div class="day-dot" style="background:rgba(244,233,208,0.15)"></div><div class="lbl">${t('dont_know_day')}</div></div>`;
+
+  picker.querySelectorAll('.day-opt').forEach((opt) => {
+    opt.addEventListener('click', () => {
+      picker.querySelectorAll('.day-opt').forEach((o) => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      const v = opt.dataset.day;
+      selectedDayIndex = v === '' ? null : parseInt(v, 10);
+    });
+  });
+}
+
+function greetingFor(name) {
+  const h = new Date().getHours();
+  if (h < 12) return t('greeting_morning', name);
+  if (h < 18) return t('greeting_afternoon', name);
+  return t('greeting_evening', name);
+}
+
+function renderPersonalBanner() {
+  const banner = document.getElementById('personal-banner');
+  if (!banner) return;
+
+  if (!userProfile || !userProfile.displayName) {
+    banner.classList.add('hidden');
+    return;
+  }
+
+  const name = userProfile.displayName;
+  const initial = name.trim().charAt(0).toUpperCase();
+
+  if (userBirthDay) {
+    // Tint the whole banner with their traditional birth-day colour -
+    // this is what makes it feel built for them specifically.
+    banner.style.setProperty('--personal-color', userBirthDay.hex);
+  } else {
+    banner.style.removeProperty('--personal-color');
+  }
+
+  const dayName = userBirthDay ? (currentLang === 'th' ? userBirthDay.name_th : userBirthDay.name_en) : null;
+  const colorName = userBirthDay ? (currentLang === 'th' ? userBirthDay.color_th : userBirthDay.color_en) : null;
+  const buddha = userBirthDay ? (currentLang === 'th' ? userBirthDay.buddha_th : userBirthDay.buddha_en) : null;
+
+  banner.innerHTML = `
+    <div class="pb-avatar">${escapeHtml(initial)}</div>
+    <div class="pb-text">
+      <div class="pb-greeting">${escapeHtml(greetingFor(name))}</div>
+      <div class="pb-detail">
+        ${userBirthDay ? escapeHtml(t('pb_born', dayName, colorName)) + '<br>' + escapeHtml(t('pb_buddha', buddha)) : escapeHtml(t('pb_no_day'))}
+      </div>
+    </div>
+    <button class="pb-edit" id="pb-edit-btn">${t('pb_edit')}</button>
+  `;
+  banner.classList.remove('hidden');
+
+  const editBtn = document.getElementById('pb-edit-btn');
+  if (editBtn) editBtn.addEventListener('click', () => openWelcome(true));
+}
+
+async function loadProfile() {
+  try {
+    const res = await fetch('/api/profile');
+    const data = await res.json();
+    if (data.hasProfile) {
+      userProfile = data.profile;
+      userBirthDay = data.birthDay;
+      renderPersonalBanner();
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+
+async function openWelcome(isEdit = false) {
+  const overlay = document.getElementById('welcome-overlay');
+  if (!overlay) return;
+  await renderDayPicker();
+
+  // Pre-fill when editing an existing profile.
+  if (isEdit && userProfile) {
+    const nameInput = document.getElementById('welcome-name');
+    if (nameInput) nameInput.value = userProfile.displayName || '';
+    selectedDayIndex = userProfile.birthDayIndex;
+    const picker = document.getElementById('day-picker');
+    if (picker && selectedDayIndex !== null && selectedDayIndex !== undefined) {
+      const match = picker.querySelector(`.day-opt[data-day="${selectedDayIndex}"]`);
+      if (match) match.classList.add('selected');
+    }
+  }
+
+  overlay.classList.remove('hidden');
+}
+
+function closeWelcome() {
+  const overlay = document.getElementById('welcome-overlay');
+  if (overlay) overlay.classList.add('hidden');
+}
+
+async function saveWelcome() {
+  const nameInput = document.getElementById('welcome-name');
+  const saveBtn = document.getElementById('welcome-save');
+  const name = (nameInput ? nameInput.value : '').trim();
+  if (!name) {
+    if (nameInput) nameInput.focus();
+    return;
+  }
+  if (saveBtn) saveBtn.disabled = true;
+
+  try {
+    const res = await fetch('/api/profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ displayName: name, birthDayIndex: selectedDayIndex }),
+    });
+    const data = await res.json();
+    if (data.saved) {
+      userProfile = data.profile;
+      userBirthDay = data.birthDay;
+      localStorage.setItem('fortunaOnboarded', '1');
+      renderPersonalBanner();
+      closeWelcome();
+      // Refresh personalised content so numbers/readings reflect them now.
+      loadDailyTarot();
+      loadToday();
+    }
+  } catch (e) {}
+  if (saveBtn) saveBtn.disabled = false;
+}
+
+async function initPersonalisation() {
+  const hasProfile = await loadProfile();
+  const skipped = localStorage.getItem('fortunaOnboarded');
+  // Only prompt on a genuinely first visit - never nag someone who
+  // already answered or deliberately skipped.
+  if (!hasProfile && !skipped) {
+    setTimeout(() => openWelcome(false), 700);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saveBtn = document.getElementById('welcome-save');
+  const skipBtn = document.getElementById('welcome-skip');
+  const nameInput = document.getElementById('welcome-name');
+
+  if (saveBtn) saveBtn.addEventListener('click', saveWelcome);
+  if (skipBtn) {
+    skipBtn.addEventListener('click', () => {
+      localStorage.setItem('fortunaOnboarded', '1');
+      closeWelcome();
+    });
+  }
+  if (nameInput) {
+    nameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') saveWelcome();
+    });
+  }
+});
+
+initPersonalisation();

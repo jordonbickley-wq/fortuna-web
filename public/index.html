@@ -10,7 +10,28 @@
 </head>
 <body>
 
+<div class="welcome-overlay hidden" id="welcome-overlay">
+  <div class="welcome-modal">
+    <div class="welcome-mark">✦</div>
+    <h2 data-i18n="welcome_title">Let's make this yours</h2>
+    <p data-i18n="welcome_sub">Tell us your name and the day you were born — your readings, colours and numbers will be tailored to you.</p>
+
+    <label class="welcome-label" data-i18n="welcome_name_label">What should we call you?</label>
+    <input type="text" id="welcome-name" maxlength="40" placeholder="Your name" data-i18n-placeholder="welcome_name_placeholder">
+
+    <label class="welcome-label" data-i18n="welcome_day_label">Which day of the week were you born?</label>
+    <div class="day-picker" id="day-picker"></div>
+    <p class="welcome-hint" data-i18n="welcome_day_hint">In Thai tradition your birth day sets your lucky colour and your birthday Buddha.</p>
+
+    <button class="welcome-go" id="welcome-save" data-i18n="welcome_save">Start my readings</button>
+    <button class="welcome-skip" id="welcome-skip" data-i18n="welcome_skip">Skip for now</button>
+    <p class="welcome-privacy" data-i18n="welcome_privacy">Stored only for your own visits. No email, no phone, no sign-up.</p>
+  </div>
+</div>
+
 <div class="wrap">
+
+  <div class="personal-banner hidden" id="personal-banner"></div>
 
   <nav>
     <div class="logo">

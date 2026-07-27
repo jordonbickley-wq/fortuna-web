@@ -19,6 +19,7 @@ const { createRateLimiter } = require('./lib/rateLimiter');
 const { getMoonPhase } = require('./lib/moonPhase');
 const drawResults = require('./lib/drawResults');
 const tarot = require('./lib/tarot');
+const birthdays = require('./config/birthday.json');
 
 // 20 requests per minute per IP on the free-text endpoints - generous for
 // a real user clicking around, tight enough to blunt casual spam/scraping.
@@ -756,6 +757,48 @@ app.get('/api/tarot/daily', (req, res) => {
 
 app.get('/api/visits', (req, res) => {
   res.json(store.getVisitStats());
+});
+
+// ---------- visitor profile & personalisation ----------
+
+app.get('/api/profile', (req, res) => {
+  const userId = currentUserId(req);
+  const profile = store.getProfile(userId);
+  if (!profile) return res.json({ hasProfile: false });
+
+  const birthDay =
+    profile.birthDayIndex !== null && profile.birthDayIndex !== undefined
+      ? birthdays[profile.birthDayIndex]
+      : null;
+
+  res.json({ hasProfile: true, profile, birthDay });
+});
+
+app.post('/api/profile', readingLimiter, (req, res) => {
+  const userId = currentUserId(req);
+  const displayName = (req.body.displayName || '').trim().slice(0, 40);
+  const rawIndex = req.body.birthDayIndex;
+  const birthDayIndex = rawIndex === null || rawIndex === undefined || rawIndex === '' ? null : parseInt(rawIndex, 10);
+
+  if (!displayName) return res.status(400).json({ error: 'Name required' });
+
+  const profile = store.saveProfile({ userId, displayName, birthDayIndex });
+  const birthDay =
+    profile.birthDayIndex !== null && profile.birthDayIndex !== undefined
+      ? birthdays[profile.birthDayIndex]
+      : null;
+
+  res.json({ saved: true, profile, birthDay });
+});
+
+app.post('/api/profile/clear', readingLimiter, (req, res) => {
+  store.clearProfile(currentUserId(req));
+  res.json({ cleared: true });
+});
+
+// Full list of days for the onboarding picker.
+app.get('/api/birthdays', (req, res) => {
+  res.json({ days: birthdays });
 });
 
 app.listen(PORT, () => {
