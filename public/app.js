@@ -197,6 +197,7 @@ const STRINGS = {
     donate_any_amount: 'Any amount is welcome',
     donate_no_unlock: 'Nothing is locked. You do not need to give anything to use the app.',
     donate_copy: 'Copy number', donate_copied: '✓ Copied',
+    nav_donate: 'Support', tb_donate: 'Support',
     official_heading: 'Check the Official Results',
     official_sub: 'Results are published by the Government Lottery Office on the 1st and 16th',
     official_body: 'We do not republish prize numbers here. Always check the official announcement — it is the only source that counts when claiming a prize.',
@@ -409,6 +410,7 @@ const STRINGS = {
     donate_any_amount: 'ให้เท่าไหร่ก็ได้ตามศรัทธา',
     donate_no_unlock: 'ไม่มีอะไรถูกล็อก คุณไม่จำเป็นต้องบริจาคเพื่อใช้งานแอปนี้',
     donate_copy: 'คัดลอกเบอร์', donate_copied: '✓ คัดลอกแล้ว',
+    nav_donate: 'สนับสนุน', tb_donate: 'สนับสนุน',
     official_heading: 'ตรวจผลรางวัลอย่างเป็นทางการ',
     official_sub: 'ผลรางวัลประกาศโดยสำนักงานสลากกินแบ่งรัฐบาล ทุกวันที่ 1 และ 16',
     official_body: 'เราไม่ได้เผยแพร่หมายเลขรางวัลซ้ำที่นี่ กรุณาตรวจกับประกาศอย่างเป็นทางการเสมอ เพราะเป็นแหล่งเดียวที่ใช้อ้างอิงในการขึ้นเงินรางวัลได้',
@@ -478,6 +480,8 @@ function setLang(lang) {
   loadAuspiciousActivities();
   loadSpreadOptions();
   loadBlessingRoom();
+  loadDonation();
+  renderContact();
   if (selectedActivity) runAuspicious();
   // Note: a currently-displayed dream/module result stays in whatever
   // language it was fetched in until the next action - re-translating
@@ -1185,6 +1189,7 @@ loadSiteConfig().then(() => {
   loadJournal();
   renderShop();
   renderContact();
+  loadDonation();
 });
 loadMe();
 loadDraw();
@@ -2337,15 +2342,34 @@ loadBlessingRoom();
    Deliberately NOT a paywall. Everything on the site is free; this is a
    plain, warm ask that says so explicitly. No unlock state, no approval
    step, no reference amounts - which also means no admin work. */
+
+async function loadDonation() {
+  const host = document.getElementById('donate-container');
+  if (!host) return;
+  try {
+    const res = await fetch('/api/blessing-room');
+    const data = await res.json();
+    if (data.donationMode && data.donation) {
+      renderDonationPanel(data.donation);
+    } else {
+      // Not in donation mode - hide the section entirely rather than
+      // leaving an empty gap on the page.
+      const section = document.getElementById('donate');
+      if (section) section.style.display = 'none';
+    }
+  } catch (e) {}
+}
+
 function renderDonationPanel(donation) {
-  const host = document.getElementById('donation-slot');
+  // Prefer the standalone section; fall back to the blessing-room slot.
+  const host = document.getElementById('donate-container') || document.getElementById('donation-slot');
   if (!host) return;
 
   const hasNumber = Boolean(donation.promptPayNumber);
   const amounts = donation.suggestedAmounts || [];
 
   host.innerHTML = `
-    <div class="donate-card">
+    <div class="donate-card standalone">
       <div class="donate-heart">🙏</div>
       <div class="donate-title">${t('donate_title')}</div>
       <p class="donate-body">${t('donate_body')}</p>
