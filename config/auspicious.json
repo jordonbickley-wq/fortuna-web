@@ -1,0 +1,266 @@
+[
+  {
+    "key": "wedding",
+    "icon": "💍",
+    "name_en": "Wedding / engagement",
+    "name_th": "แต่งงาน / หมั้น",
+    "scores": [
+      3,
+      4,
+      1,
+      4,
+      5,
+      5,
+      1
+    ],
+    "notes_en": {
+      "4": "Thursday is the teacher's day (วันครู) and is traditionally the most auspicious for ceremonies.",
+      "5": "Friday is associated with love and beauty — long favoured for weddings.",
+      "3": "Wednesday suits agreements and joining families.",
+      "1": "Monday is gentle and harmonious, an acceptable choice.",
+      "0": "Sunday is workable but is more associated with authority than union.",
+      "2": "Tuesday carries a combative energy and is usually avoided for weddings.",
+      "6": "Saturday is traditionally considered harsh and is generally avoided for celebrations."
+    },
+    "notes_th": {
+      "4": "วันพฤหัสบดีเป็นวันครู ถือเป็นวันมงคลที่สุดสำหรับงานพิธี",
+      "5": "วันศุกร์เกี่ยวข้องกับความรักและความงาม เป็นที่นิยมสำหรับงานแต่งงานมานาน",
+      "3": "วันพุธเหมาะกับการตกลงและการรวมครอบครัว",
+      "1": "วันจันทร์อ่อนโยนและกลมเกลียว เป็นตัวเลือกที่ใช้ได้",
+      "0": "วันอาทิตย์พอใช้ได้ แต่เกี่ยวข้องกับอำนาจมากกว่าการรวมกัน",
+      "2": "วันอังคารมีพลังแข็งกร้าว มักหลีกเลี่ยงสำหรับงานแต่งงาน",
+      "6": "วันเสาร์ถือว่าแรง มักหลีกเลี่ยงสำหรับงานมงคล"
+    }
+  },
+  {
+    "key": "business",
+    "icon": "🏪",
+    "name_en": "Opening a business",
+    "name_th": "เปิดกิจการ / เปิดร้าน",
+    "scores": [
+      4,
+      3,
+      3,
+      5,
+      5,
+      3,
+      1
+    ],
+    "notes_en": {
+      "3": "Wednesday governs trade and commerce — the classic day to open a shop.",
+      "4": "Thursday brings blessing and good standing to a new venture.",
+      "0": "Sunday supports authority and visibility for a launch.",
+      "1": "Monday is a calm, steady start.",
+      "2": "Tuesday brings drive, useful for a competitive market.",
+      "5": "Friday is pleasant but more social than commercial.",
+      "6": "Saturday is traditionally avoided for new beginnings."
+    },
+    "notes_th": {
+      "3": "วันพุธเป็นวันแห่งการค้าขาย เป็นวันคลาสสิกสำหรับเปิดร้าน",
+      "4": "วันพฤหัสบดีนำพรและความน่าเชื่อถือมาสู่กิจการใหม่",
+      "0": "วันอาทิตย์เสริมอำนาจและความโดดเด่นในการเปิดตัว",
+      "1": "วันจันทร์เป็นการเริ่มต้นที่สงบและมั่นคง",
+      "2": "วันอังคารให้พลังผลักดัน เหมาะกับตลาดที่มีการแข่งขัน",
+      "5": "วันศุกร์เป็นวันที่ดี แต่เน้นสังคมมากกว่าการค้า",
+      "6": "วันเสาร์มักหลีกเลี่ยงสำหรับการเริ่มต้นใหม่"
+    }
+  },
+  {
+    "key": "moving",
+    "icon": "🏠",
+    "name_en": "Moving house",
+    "name_th": "ย้ายบ้าน / ขึ้นบ้านใหม่",
+    "scores": [
+      3,
+      5,
+      2,
+      4,
+      5,
+      3,
+      1
+    ],
+    "notes_en": {
+      "1": "Monday favours travel and relocation — a traditional choice for moving.",
+      "4": "Thursday blesses a new home and those who will live in it.",
+      "3": "Wednesday supports settling in and connecting with neighbours.",
+      "0": "Sunday is acceptable, good for establishing yourself.",
+      "5": "Friday works if you want a warm, sociable home.",
+      "2": "Tuesday's restless energy is less suited to settling down.",
+      "6": "Saturday is traditionally avoided for entering a new home."
+    },
+    "notes_th": {
+      "1": "วันจันทร์เหมาะกับการเดินทางและการย้ายที่ เป็นวันดั้งเดิมสำหรับการย้ายบ้าน",
+      "4": "วันพฤหัสบดีให้พรแก่บ้านใหม่และผู้ที่จะอยู่อาศัย",
+      "3": "วันพุธเสริมการปรับตัวและการเข้ากับเพื่อนบ้าน",
+      "0": "วันอาทิตย์ใช้ได้ เหมาะกับการตั้งหลักปักฐาน",
+      "5": "วันศุกร์เหมาะถ้าอยากได้บ้านที่อบอุ่นและเป็นกันเอง",
+      "2": "พลังกระสับกระส่ายของวันอังคารไม่ค่อยเหมาะกับการลงหลักปักฐาน",
+      "6": "วันเสาร์มักหลีกเลี่ยงสำหรับการเข้าบ้านใหม่"
+    }
+  },
+  {
+    "key": "car",
+    "icon": "🚗",
+    "name_en": "Collecting a new car",
+    "name_th": "ออกรถใหม่",
+    "scores": [
+      4,
+      4,
+      3,
+      4,
+      5,
+      4,
+      2
+    ],
+    "notes_en": {
+      "4": "Thursday is the most widely chosen day for collecting a vehicle.",
+      "0": "Sunday supports pride and safe ownership.",
+      "1": "Monday favours journeys and smooth travel.",
+      "3": "Wednesday is good for anything involving movement.",
+      "5": "Friday is a pleasant, well-regarded choice.",
+      "2": "Tuesday is bold but its energy can feel reckless on the road.",
+      "6": "Saturday is generally avoided for a major purchase."
+    },
+    "notes_th": {
+      "4": "วันพฤหัสบดีเป็นวันที่นิยมที่สุดสำหรับการออกรถ",
+      "0": "วันอาทิตย์เสริมความภาคภูมิใจและความปลอดภัยในการเป็นเจ้าของ",
+      "1": "วันจันทร์เหมาะกับการเดินทางและความราบรื่น",
+      "3": "วันพุธดีสำหรับทุกเรื่องที่เกี่ยวกับการเคลื่อนที่",
+      "5": "วันศุกร์เป็นตัวเลือกที่ดีและได้รับความนิยม",
+      "2": "วันอังคารกล้าหาญ แต่พลังอาจดูประมาทเมื่ออยู่บนถนน",
+      "6": "วันเสาร์มักหลีกเลี่ยงสำหรับการซื้อของชิ้นใหญ่"
+    }
+  },
+  {
+    "key": "contract",
+    "icon": "📝",
+    "name_en": "Signing a contract",
+    "name_th": "เซ็นสัญญา / ทำข้อตกลง",
+    "scores": [
+      4,
+      3,
+      3,
+      5,
+      5,
+      3,
+      2
+    ],
+    "notes_en": {
+      "3": "Wednesday rules communication and agreements — ideal for signing.",
+      "4": "Thursday brings integrity and good faith to an agreement.",
+      "0": "Sunday supports authority in negotiation.",
+      "2": "Tuesday helps if you need to negotiate firmly.",
+      "1": "Monday is calm and cooperative.",
+      "5": "Friday is amicable but less focused on detail.",
+      "6": "Saturday is traditionally avoided for binding commitments."
+    },
+    "notes_th": {
+      "3": "วันพุธเป็นวันแห่งการสื่อสารและข้อตกลง เหมาะที่สุดสำหรับการเซ็นสัญญา",
+      "4": "วันพฤหัสบดีนำความสุจริตและความจริงใจมาสู่ข้อตกลง",
+      "0": "วันอาทิตย์เสริมอำนาจในการเจรจา",
+      "2": "วันอังคารช่วยได้ถ้าต้องเจรจาอย่างแข็งขัน",
+      "1": "วันจันทร์สงบและประนีประนอม",
+      "5": "วันศุกร์เป็นมิตร แต่ไม่ค่อยเน้นรายละเอียด",
+      "6": "วันเสาร์มักหลีกเลี่ยงสำหรับข้อผูกมัด"
+    }
+  },
+  {
+    "key": "merit",
+    "icon": "🙏",
+    "name_en": "Merit-making / temple visit",
+    "name_th": "ทำบุญ / ไปวัด",
+    "scores": [
+      4,
+      4,
+      4,
+      4,
+      5,
+      4,
+      4
+    ],
+    "notes_en": {
+      "4": "Thursday, the teacher's day, is especially favoured for merit-making.",
+      "6": "Saturday suits protective rites and clearing misfortune.",
+      "0": "Sunday is a good day for offerings and reflection.",
+      "1": "Monday suits gentle merit and dedication to family.",
+      "2": "Tuesday suits rites of courage and protection.",
+      "3": "Wednesday suits offering alms.",
+      "5": "Friday suits merit dedicated to loved ones."
+    },
+    "notes_th": {
+      "4": "วันพฤหัสบดีซึ่งเป็นวันครู เหมาะเป็นพิเศษสำหรับการทำบุญ",
+      "6": "วันเสาร์เหมาะกับพิธีสะเดาะเคราะห์และแก้ปีชง",
+      "0": "วันอาทิตย์เป็นวันที่ดีสำหรับการถวายและใคร่ครวญ",
+      "1": "วันจันทร์เหมาะกับการทำบุญอ่อนโยนและอุทิศให้ครอบครัว",
+      "2": "วันอังคารเหมาะกับพิธีเสริมความกล้าและการปกป้อง",
+      "3": "วันพุธเหมาะกับการตักบาตร",
+      "5": "วันศุกร์เหมาะกับการทำบุญอุทิศให้คนที่รัก"
+    }
+  },
+  {
+    "key": "haircut",
+    "icon": "💇",
+    "name_en": "Haircut",
+    "name_th": "ตัดผม",
+    "scores": [
+      2,
+      2,
+      4,
+      1,
+      5,
+      4,
+      3
+    ],
+    "notes_en": {
+      "4": "Thursday is widely held to be the best day for cutting hair.",
+      "2": "Tuesday is a traditional and well-regarded choice.",
+      "5": "Friday supports beauty and appearance.",
+      "6": "Saturday is acceptable.",
+      "0": "Sunday is traditionally discouraged by some for cutting hair.",
+      "1": "Monday is a neutral choice.",
+      "3": "Wednesday is the day most commonly avoided for haircuts in Thai custom."
+    },
+    "notes_th": {
+      "4": "วันพฤหัสบดีถือกันว่าเป็นวันที่ดีที่สุดสำหรับการตัดผม",
+      "2": "วันอังคารเป็นตัวเลือกดั้งเดิมที่ได้รับความนิยม",
+      "5": "วันศุกร์เสริมความสวยงามและบุคลิก",
+      "6": "วันเสาร์พอใช้ได้",
+      "0": "วันอาทิตย์บางความเชื่อไม่แนะนำให้ตัดผม",
+      "1": "วันจันทร์เป็นกลาง",
+      "3": "วันพุธเป็นวันที่คนไทยนิยมหลีกเลี่ยงการตัดผมมากที่สุด"
+    }
+  },
+  {
+    "key": "travel",
+    "icon": "✈️",
+    "name_en": "Starting a journey",
+    "name_th": "เริ่มออกเดินทาง",
+    "scores": [
+      3,
+      5,
+      3,
+      4,
+      5,
+      4,
+      2
+    ],
+    "notes_en": {
+      "1": "Monday is the classic day to begin a journey.",
+      "4": "Thursday blesses safe passage.",
+      "3": "Wednesday supports movement and smooth logistics.",
+      "5": "Friday suits pleasant, sociable trips.",
+      "0": "Sunday is acceptable for setting out.",
+      "2": "Tuesday is energetic but can bring friction on the road.",
+      "6": "Saturday is traditionally the least favoured for departure."
+    },
+    "notes_th": {
+      "1": "วันจันทร์เป็นวันคลาสสิกสำหรับการเริ่มออกเดินทาง",
+      "4": "วันพฤหัสบดีให้พรเรื่องการเดินทางปลอดภัย",
+      "3": "วันพุธเสริมการเคลื่อนที่และความราบรื่น",
+      "5": "วันศุกร์เหมาะกับการเดินทางเพื่อพักผ่อนและสังสรรค์",
+      "0": "วันอาทิตย์พอใช้ได้สำหรับการออกเดินทาง",
+      "2": "วันอังคารมีพลัง แต่อาจเจออุปสรรคระหว่างทาง",
+      "6": "วันเสาร์เป็นวันที่นิยมน้อยที่สุดสำหรับการออกเดินทาง"
+    }
+  }
+]

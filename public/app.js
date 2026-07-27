@@ -121,6 +121,25 @@ const STRINGS = {
     pb_no_day: 'Add your birth day for lucky colours',
     pb_edit: 'Edit',
     dont_know_day: "I don't know",
+    nav_auspicious: 'Lucky Dates',
+    ausp_heading: 'Auspicious Dates (ฤกษ์)',
+    ausp_sub: 'Pick what you\'re planning and see which days are favoured',
+    ausp_pick_prompt: 'Choose an activity above to see your best dates.',
+    ausp_best_for: (name) => `Best upcoming dates for ${name}`,
+    ausp_caveat: 'Based on traditional Thai day-of-week suitability. A real ฤกษ์ from an astrologer also weighs your birth chart and the lunar calendar — treat this as guidance, not a substitute for a consultation.',
+    ausp_today: 'Today', ausp_tomorrow: 'Tomorrow',
+    ausp_in_days: (n) => `in ${n} days`,
+    premium_title: 'Unlock the full calendar',
+    premium_body: 'See 12 best dates across the next 60 days, every date scored with the traditional reasoning behind it.',
+    premium_spread_title: 'Unlock full tarot spreads',
+    premium_spread_body: 'Multi-card readings for love, work and life direction — drawn fresh for your question.',
+    premium_btn: 'Unlock',
+    nav_spreads: 'Spreads',
+    spread_heading: 'Full Tarot Spreads',
+    spread_sub: 'Multiple cards for the questions that need more than one',
+    spread_draw: 'Draw the cards',
+    spread_again: 'Draw again',
+    spread_pick_prompt: 'Choose a spread above.',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -243,6 +262,25 @@ const STRINGS = {
     pb_no_day: 'เพิ่มวันเกิดเพื่อดูสีมงคล',
     pb_edit: 'แก้ไข',
     dont_know_day: 'ไม่ทราบ',
+    nav_auspicious: 'ฤกษ์มงคล',
+    ausp_heading: 'ฤกษ์มงคล — หาวันดี',
+    ausp_sub: 'เลือกสิ่งที่คุณจะทำ แล้วดูว่าวันไหนเป็นวันดี',
+    ausp_pick_prompt: 'เลือกกิจกรรมด้านบนเพื่อดูวันมงคลของคุณ',
+    ausp_best_for: (name) => `วันมงคลที่ใกล้ที่สุดสำหรับ${name}`,
+    ausp_caveat: 'คำนวณจากความเชื่อเรื่องวันประจำสัปดาห์แบบไทยดั้งเดิม ฤกษ์จริงจากหมอดูจะดูดวงชะตาและปฏิทินจันทรคติของคุณด้วย ใช้เป็นแนวทาง ไม่ใช่แทนการดูฤกษ์จริง',
+    ausp_today: 'วันนี้', ausp_tomorrow: 'พรุ่งนี้',
+    ausp_in_days: (n) => `อีก ${n} วัน`,
+    premium_title: 'ปลดล็อกปฏิทินฉบับเต็ม',
+    premium_body: 'ดูวันมงคล 12 วันใน 60 วันข้างหน้า พร้อมคะแนนและเหตุผลตามตำราดั้งเดิมทุกวัน',
+    premium_spread_title: 'ปลดล็อกการเปิดไพ่แบบเต็ม',
+    premium_spread_body: 'เปิดไพ่หลายใบสำหรับเรื่องความรัก การงาน และทิศทางชีวิต สับใหม่ทุกครั้งตามคำถามของคุณ',
+    premium_btn: 'ปลดล็อก',
+    nav_spreads: 'เปิดไพ่',
+    spread_heading: 'เปิดไพ่แบบเต็ม',
+    spread_sub: 'ไพ่หลายใบสำหรับคำถามที่ลึกกว่าเดิม',
+    spread_draw: 'เปิดไพ่',
+    spread_again: 'เปิดใหม่',
+    spread_pick_prompt: 'เลือกรูปแบบการเปิดไพ่ด้านบน',
   },
 };
 
@@ -295,6 +333,9 @@ function setLang(lang) {
   loadVisits();
   renderPersonalBanner();
   renderDayPicker();
+  loadAuspiciousActivities();
+  loadSpreadOptions();
+  if (selectedActivity) runAuspicious();
   // Note: a currently-displayed dream/module result stays in whatever
   // language it was fetched in until the next action - re-translating
   // live server content isn't attempted here.
@@ -1359,3 +1400,178 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 initPersonalisation();
+
+/* ================= auspicious dates (ฤกษ์) ================= */
+let auspActivities = [];
+let selectedActivity = null;
+
+function scoreClass(s) {
+  return s >= 4 ? '' : s === 3 ? 'mid' : 'low';
+}
+
+function relativeDay(daysAway) {
+  if (daysAway === 0) return t('ausp_today');
+  if (daysAway === 1) return t('ausp_tomorrow');
+  return t('ausp_in_days', daysAway);
+}
+
+async function loadAuspiciousActivities() {
+  const picker = document.getElementById('ausp-picker');
+  if (!picker) return;
+  try {
+    if (!auspActivities.length) {
+      const res = await fetch('/api/auspicious/activities');
+      const data = await res.json();
+      auspActivities = data.activities || [];
+    }
+    picker.innerHTML = auspActivities
+      .map((a) => {
+        const name = currentLang === 'th' ? a.name_th : a.name_en;
+        const sel = selectedActivity === a.key ? 'selected' : '';
+        return `<div class="ausp-opt ${sel}" data-activity="${a.key}">
+          <span class="ic">${a.icon}</span>
+          <span class="nm">${escapeHtml(name)}</span>
+        </div>`;
+      })
+      .join('');
+
+    picker.querySelectorAll('.ausp-opt').forEach((opt) => {
+      opt.addEventListener('click', () => {
+        selectedActivity = opt.dataset.activity;
+        picker.querySelectorAll('.ausp-opt').forEach((o) => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        runAuspicious();
+      });
+    });
+
+    const out = document.getElementById('ausp-result');
+    if (out && !selectedActivity) {
+      out.innerHTML = `<p style="text-align:center;font-size:12.5px;color:var(--parchment-dim);padding:14px;">${t('ausp_pick_prompt')}</p>`;
+    }
+  } catch (e) {}
+}
+
+async function runAuspicious() {
+  const out = document.getElementById('ausp-result');
+  if (!out || !selectedActivity) return;
+
+  const res = await fetch('/api/auspicious', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ activity: selectedActivity }),
+  });
+  const data = await res.json();
+  if (data.error) return;
+
+  const actName = currentLang === 'th' ? data.activity.name_th : data.activity.name_en;
+
+  const rows = data.best
+    .map((d, i) => {
+      const note = currentLang === 'th' ? d.note_th : d.note_en;
+      return `
+      <div class="ausp-date ${i === 0 ? 'top' : ''}">
+        <div class="ausp-score ${scoreClass(d.score)}">${d.score}</div>
+        <div class="ausp-date-info">
+          <div class="ausp-date-main">${escapeHtml(d.date)} · ${escapeHtml(relativeDay(d.daysAway))}</div>
+          <div class="ausp-date-note">${escapeHtml(note)}</div>
+        </div>
+      </div>`;
+    })
+    .join('');
+
+  const lockHtml = data.hasPremium
+    ? ''
+    : `<div class="premium-lock">
+         <div class="lk">🔒</div>
+         <h4>${t('premium_title')}</h4>
+         <p>${t('premium_body')}</p>
+         ${data.paymentsAvailable ? `<button class="premium-btn" onclick="document.getElementById('dream').scrollIntoView({behavior:'smooth'})">${t('premium_btn')}</button>` : ''}
+       </div>`;
+
+  out.innerHTML = `
+    <div style="font-family:var(--font-display);font-size:15px;margin-bottom:12px;">${escapeHtml(t('ausp_best_for', actName))}</div>
+    ${rows}
+    ${lockHtml}
+    <p class="ausp-caveat">${t('ausp_caveat')}</p>
+  `;
+}
+
+/* ================= tarot spreads ================= */
+let spreadList = [];
+let selectedSpread = 'three';
+
+async function loadSpreadOptions() {
+  const picker = document.getElementById('spread-picker');
+  if (!picker) return;
+  try {
+    if (!spreadList.length) {
+      const res = await fetch('/api/tarot/spreads');
+      const data = await res.json();
+      spreadList = data.spreads || [];
+    }
+    picker.innerHTML =
+      spreadList
+        .map((s) => {
+          const name = currentLang === 'th' ? s.name_th : s.name_en;
+          const sel = selectedSpread === s.key ? 'selected' : '';
+          return `<div class="spread-opt ${sel}" data-spread="${s.key}">${escapeHtml(name)}<span class="cnt">${s.cardCount}</span></div>`;
+        })
+        .join('') + `<button class="spread-go" id="spread-go-btn" style="margin-top:12px;">${t('spread_draw')}</button>`;
+
+    picker.querySelectorAll('.spread-opt').forEach((opt) => {
+      opt.addEventListener('click', () => {
+        selectedSpread = opt.dataset.spread;
+        picker.querySelectorAll('.spread-opt').forEach((o) => o.classList.remove('selected'));
+        opt.classList.add('selected');
+      });
+    });
+    const goBtn = document.getElementById('spread-go-btn');
+    if (goBtn) goBtn.addEventListener('click', drawSpread);
+  } catch (e) {}
+}
+
+async function drawSpread() {
+  const out = document.getElementById('spread-result');
+  if (!out) return;
+
+  const res = await fetch('/api/tarot/spread', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ spread: selectedSpread }),
+  });
+  const data = await res.json();
+
+  if (data.locked) {
+    out.innerHTML = `
+      <div class="premium-lock">
+        <div class="lk">🔮</div>
+        <h4>${t('premium_spread_title')}</h4>
+        <p>${t('premium_spread_body')}</p>
+        ${data.paymentsAvailable ? `<button class="premium-btn" onclick="document.getElementById('dream').scrollIntoView({behavior:'smooth'})">${t('premium_btn')}</button>` : ''}
+      </div>`;
+    return;
+  }
+
+  out.innerHTML = `<div class="spread-grid">${data.cards
+    .map((c) => {
+      const posLabel = currentLang === 'th' ? c.position.label_th : c.position.label_en;
+      const name = currentLang === 'th' ? c.name_th : c.name_en;
+      const meaning = currentLang === 'th' ? c.reading.meaning_th : c.reading.meaning_en;
+      const isRev = c.orientation === 'reversed';
+      return `
+      <div class="spread-item">
+        <div class="spread-pos">${escapeHtml(posLabel)}</div>
+        <div class="spread-mini-card ${isRev ? 'is-reversed' : ''}">
+          <div class="sm-num">${c.roman}</div>
+          <div class="sm-sym">${c.symbol}</div>
+          <div class="sm-name">${escapeHtml(name)}</div>
+        </div>
+        <div class="spread-orient ${c.orientation}">${isRev ? t('tarot_reversed') : t('tarot_upright')}</div>
+        <div class="spread-meaning">${escapeHtml(meaning)}</div>
+      </div>`;
+    })
+    .join('')}</div>`;
+}
+
+loadAuspiciousActivities();
+loadSpreadOptions();

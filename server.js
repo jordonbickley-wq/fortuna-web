@@ -20,6 +20,7 @@ const { getMoonPhase } = require('./lib/moonPhase');
 const drawResults = require('./lib/drawResults');
 const tarot = require('./lib/tarot');
 const birthdays = require('./config/birthday.json');
+const auspicious = require('./lib/auspicious');
 
 // 20 requests per minute per IP on the free-text endpoints - generous for
 // a real user clicking around, tight enough to blunt casual spam/scraping.
@@ -799,6 +800,61 @@ app.post('/api/profile/clear', readingLimiter, (req, res) => {
 // Full list of days for the onboarding picker.
 app.get('/api/birthdays', (req, res) => {
   res.json({ days: birthdays });
+});
+
+// ---------- auspicious dates (ฤกษ์) ----------
+// Free tier gives the next 3 best dates; the full 60-day calendar with
+// reasoning is part of the premium pass. Real value either way - the free
+// answer is genuinely useful, which is what makes the upgrade fair rather
+// than a tease.
+
+app.get('/api/auspicious/activities', (req, res) => {
+  res.json({ activities: auspicious.listActivities() });
+});
+
+app.post('/api/auspicious', readingLimiter, (req, res) => {
+  const key = (req.body.activity || '').trim();
+  const userId = currentUserId(req);
+  const hasPremium = store.hasUnlockedDraw(userId, currentDrawDate());
+
+  const result = auspicious.bestDates(key, 60, hasPremium ? 12 : 3);
+  if (!result) return res.status(400).json({ error: 'Unknown activity' });
+
+  res.json({
+    activity: {
+      key: result.activity.key,
+      icon: result.activity.icon,
+      name_en: result.activity.name_en,
+      name_th: result.activity.name_th,
+    },
+    best: result.best,
+    hasPremium,
+    freeLimit: 3,
+    paymentsAvailable: isOmiseConfigured() || Boolean(site.manualPayment && site.manualPayment.enabled),
+  });
+});
+
+// ---------- tarot spreads (premium) ----------
+
+app.get('/api/tarot/spreads', (req, res) => {
+  res.json({ spreads: tarot.listSpreads() });
+});
+
+app.post('/api/tarot/spread', readingLimiter, (req, res) => {
+  const userId = currentUserId(req);
+  const hasPremium = store.hasUnlockedDraw(userId, currentDrawDate());
+
+  if (!hasPremium) {
+    return res.json({
+      locked: true,
+      paymentsAvailable: isOmiseConfigured() || Boolean(site.manualPayment && site.manualPayment.enabled),
+    });
+  }
+
+  const key = (req.body.spread || 'three').trim();
+  const result = tarot.drawSpread(key);
+  if (!result) return res.status(400).json({ error: 'Unknown spread' });
+  res.json({ locked: false, ...result });
 });
 
 app.listen(PORT, () => {
