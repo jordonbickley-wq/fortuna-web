@@ -1,16 +1,20 @@
 /* =============================================================
    Service worker
-   Two jobs: make the app open instantly on repeat visits, and
-   degrade gracefully on a bad mobile connection.
 
-   Deliberate caching policy:
-   - the shell (html/css/js/icons) is cached and served cache-first
-   - API responses are NEVER cached. Draw results, tarot cards and
-     payment state must always be live; a stale lottery result or a
-     cached "not yet unlocked" would be worse than a slow load.
+   Caching policy, and why:
+   - shell (html/css/js) -> stale-while-revalidate. Fast on repeat
+     visits, but always refreshes in the background so a deploy shows
+     up on the next load rather than never.
+   - API responses      -> never cached. Draw dates, tarot cards and
+     payment state must always be live.
+   - QR / payment images -> never cached. These are the one thing that
+     MUST be current: serving a stale PromptPay QR would send money to
+     the wrong place. Worth the extra request every time.
    ============================================================= */
 
-const CACHE = 'fortuna-shell-v1';
+// Bump this string on any deploy that changes cached assets - it wipes
+// the previous cache entirely.
+const CACHE = 'fortuna-shell-v3';
 
 const SHELL = [
   '/',
@@ -19,25 +23,30 @@ const SHELL = [
   '/background.js',
   '/rub.js',
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
 ];
+
+// Anything payment-related is fetched fresh, always.
+const NEVER_CACHE = [/promptpay/i, /line-contact/i, /qr/i];
+
+function isNeverCached(pathname) {
+  return NEVER_CACHE.some((re) => re.test(pathname));
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) =>
-      // addAll fails the whole install if any single file 404s, so add
-      // them individually and tolerate misses.
-      Promise.all(SHELL.map((url) => cache.add(url).catch(() => null)))
-    ).then(() => self.skipWaiting())
+    caches
+      .open(CACHE)
+      .then((cache) => Promise.all(SHELL.map((url) => cache.add(url).catch(() => null))))
+      .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    caches
+      .keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
@@ -46,15 +55,19 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
 
   const url = new URL(req.url);
-  if (url.origin !== self.location.origin) return; // leave fonts/CDNs alone
+  if (url.origin !== self.location.origin) return;
 
-  // Never serve API data from cache - see note at top.
-  if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/admin') || url.pathname.startsWith('/auth')) {
+  // Live data and payment images: straight to the network.
+  if (
+    url.pathname.startsWith('/api/') ||
+    url.pathname.startsWith('/admin') ||
+    url.pathname.startsWith('/auth') ||
+    isNeverCached(url.pathname)
+  ) {
     return;
   }
 
-  // Navigations: try the network first so content stays fresh, fall back
-  // to the cached shell when offline.
+  // Navigations: network first, cached shell as the offline fallback.
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req)
@@ -68,18 +81,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets: cache-first for instant repeat loads.
+  // Static assets: serve cached copy immediately, but refresh it in the
+  // background so the next load has the new version.
   event.respondWith(
-    caches.match(req).then(
-      (cached) =>
-        cached ||
-        fetch(req).then((res) => {
+    caches.match(req).then((cached) => {
+      const network = fetch(req)
+        .then((res) => {
           if (res && res.status === 200) {
             const copy = res.clone();
             caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
           }
           return res;
         })
-    )
+        .catch(() => cached);
+      return cached || network;
+    })
   );
 });
