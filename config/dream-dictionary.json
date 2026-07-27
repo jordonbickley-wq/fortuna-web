@@ -13,7 +13,8 @@
       "65",
       "5"
     ],
-    "interpretation_en": "Dreaming of a snake traditionally points to fortune on its way — or sometimes a rival entering your life."
+    "interpretation_en": "Dreaming of a snake traditionally points to fortune on its way — or sometimes a rival entering your life.",
+    "category": "classic"
   },
   {
     "id": "teeth_falling",
@@ -28,7 +29,8 @@
       "90",
       "9"
     ],
-    "interpretation_en": "Losing or breaking teeth in a dream is traditionally tied to worry about a family member's health, or news from someone close to you."
+    "interpretation_en": "Losing or breaking teeth in a dream is traditionally tied to worry about a family member's health, or news from someone close to you.",
+    "category": "classic"
   },
   {
     "id": "water",
@@ -44,7 +46,8 @@
       "32",
       "2"
     ],
-    "interpretation_en": "Water in a dream generally signals good fortune and smooth sailing. Clear water means good luck; murky water suggests a small obstacle first."
+    "interpretation_en": "Water in a dream generally signals good fortune and smooth sailing. Clear water means good luck; murky water suggests a small obstacle first.",
+    "category": "classic"
   },
   {
     "id": "flying",
@@ -59,7 +62,8 @@
       "91",
       "1"
     ],
-    "interpretation_en": "Dreaming that you can fly usually points to freedom on the way, or success you've been working toward."
+    "interpretation_en": "Dreaming that you can fly usually points to freedom on the way, or success you've been working toward.",
+    "category": "classic"
   },
   {
     "id": "finding_money",
@@ -75,7 +79,8 @@
       "87",
       "7"
     ],
-    "interpretation_en": "Finding money in a dream is traditionally said to mean a small loss is coming, or a reminder to be careful with money."
+    "interpretation_en": "Finding money in a dream is traditionally said to mean a small loss is coming, or a reminder to be careful with money.",
+    "category": "classic"
   },
   {
     "id": "dead_relative",
@@ -91,7 +96,8 @@
       "54",
       "4"
     ],
-    "interpretation_en": "Seeing a deceased relative is traditionally said to mean they're visiting to bring luck, or sending you a message."
+    "interpretation_en": "Seeing a deceased relative is traditionally said to mean they're visiting to bring luck, or sending you a message.",
+    "category": "classic"
   },
   {
     "id": "wedding",
@@ -106,7 +112,8 @@
       "21",
       "1"
     ],
-    "interpretation_en": "Dreaming of a wedding points to a big change coming in your life — not necessarily related to romance."
+    "interpretation_en": "Dreaming of a wedding points to a big change coming in your life — not necessarily related to romance.",
+    "category": "classic"
   },
   {
     "id": "chased",
@@ -121,7 +128,8 @@
       "63",
       "3"
     ],
-    "interpretation_en": "Being chased in a dream often reflects stress, or something in real life you're avoiding."
+    "interpretation_en": "Being chased in a dream often reflects stress, or something in real life you're avoiding.",
+    "category": "classic"
   },
   {
     "id": "elephant",
@@ -135,7 +143,8 @@
       "98",
       "8"
     ],
-    "interpretation_en": "Seeing an elephant traditionally points to abundance and prestige — possibly good news at work."
+    "interpretation_en": "Seeing an elephant traditionally points to abundance and prestige — possibly good news at work.",
+    "category": "classic"
   },
   {
     "id": "fire",
@@ -150,7 +159,8 @@
       "76",
       "6"
     ],
-    "interpretation_en": "Fire can go two ways in a dream: anger burning out of control, or fortune arriving as fast as flames catch."
+    "interpretation_en": "Fire can go two ways in a dream: anger burning out of control, or fortune arriving as fast as flames catch.",
+    "category": "classic"
   },
   {
     "id": "fish",
@@ -164,7 +174,8 @@
       "43",
       "3"
     ],
-    "interpretation_en": "Seeing fish traditionally signals abundance and good fortune around money."
+    "interpretation_en": "Seeing fish traditionally signals abundance and good fortune around money.",
+    "category": "classic"
   },
   {
     "id": "falling",
@@ -179,7 +190,8 @@
       "05",
       "0"
     ],
-    "interpretation_en": "Falling from a height often reflects anxiety about your status or stability in life."
+    "interpretation_en": "Falling from a height often reflects anxiety about your status or stability in life.",
+    "category": "classic"
   },
   {
     "id": "house",
@@ -194,7 +206,8 @@
       "41",
       "4"
     ],
-    "interpretation_en": "Dreaming of a house usually points to stability in your life, or a change in living situation on the way."
+    "interpretation_en": "Dreaming of a house usually points to stability in your life, or a change in living situation on the way.",
+    "category": "classic"
   },
   {
     "id": "car",
@@ -209,7 +222,8 @@
       "82",
       "2"
     ],
-    "interpretation_en": "Dreaming of a car or driving usually points to progress in your life, or a journey on the way."
+    "interpretation_en": "Dreaming of a car or driving usually points to progress in your life, or a journey on the way.",
+    "category": "classic"
   },
   {
     "id": "baby",
@@ -225,7 +239,8 @@
       "10",
       "1"
     ],
-    "interpretation_en": "Dreaming of a baby usually points to a fresh start, a new opportunity, or innocence entering your life."
+    "interpretation_en": "Dreaming of a baby usually points to a fresh start, a new opportunity, or innocence entering your life.",
+    "category": "classic"
   },
   {
     "id": "monk",
@@ -240,7 +255,8 @@
       "93",
       "3"
     ],
-    "interpretation_en": "Dreaming of a monk traditionally points to a blessing and good fortune on the way — a good sign."
+    "interpretation_en": "Dreaming of a monk traditionally points to a blessing and good fortune on the way — a good sign.",
+    "category": "classic"
   },
   {
     "id": "hair_falling",
@@ -255,7 +271,8 @@
       "06",
       "6"
     ],
-    "interpretation_en": "Dreaming that your hair is falling out often reflects worry about your image, or the loss of something you value."
+    "interpretation_en": "Dreaming that your hair is falling out often reflects worry about your image, or the loss of something you value.",
+    "category": "classic"
   },
   {
     "id": "funeral",
@@ -269,7 +286,8 @@
       "72",
       "7"
     ],
-    "interpretation_en": "Dreaming of a funeral traditionally means the opposite of what it looks like — often pointing to a fresh start or long life for the person you dreamed of."
+    "interpretation_en": "Dreaming of a funeral traditionally means the opposite of what it looks like — often pointing to a fresh start or long life for the person you dreamed of.",
+    "category": "classic"
   },
   {
     "id": "police",
@@ -283,7 +301,8 @@
       "84",
       "8"
     ],
-    "interpretation_en": "Dreaming of police usually points to a matter involving rules or justice entering your life."
+    "interpretation_en": "Dreaming of police usually points to a matter involving rules or justice entering your life.",
+    "category": "classic"
   },
   {
     "id": "egg",
@@ -297,7 +316,8 @@
       "20",
       "2"
     ],
-    "interpretation_en": "Dreaming of eggs traditionally points to a new opportunity or abundance about to begin."
+    "interpretation_en": "Dreaming of eggs traditionally points to a new opportunity or abundance about to begin.",
+    "category": "classic"
   },
   {
     "id": "bird",
@@ -311,7 +331,8 @@
       "71",
       "1"
     ],
-    "interpretation_en": "Dreaming of a bird usually points to good news on the way, or a longing for freedom."
+    "interpretation_en": "Dreaming of a bird usually points to good news on the way, or a longing for freedom.",
+    "category": "classic"
   },
   {
     "id": "dog",
@@ -326,7 +347,8 @@
       "85",
       "5"
     ],
-    "interpretation_en": "Dreaming of a dog traditionally points to friendship and loyalty — someone is looking out for you."
+    "interpretation_en": "Dreaming of a dog traditionally points to friendship and loyalty — someone is looking out for you.",
+    "category": "classic"
   },
   {
     "id": "cat",
@@ -340,7 +362,8 @@
       "64",
       "4"
     ],
-    "interpretation_en": "Dreaming of a cat often points to independence, or a secret about to come to light."
+    "interpretation_en": "Dreaming of a cat often points to independence, or a secret about to come to light.",
+    "category": "classic"
   },
   {
     "id": "rain",
@@ -354,7 +377,8 @@
       "32",
       "3"
     ],
-    "interpretation_en": "Dreaming of rain usually points to washing away something negative, or emotional relief on the way."
+    "interpretation_en": "Dreaming of rain usually points to washing away something negative, or emotional relief on the way.",
+    "category": "classic"
   },
   {
     "id": "gold_jewelry",
@@ -370,7 +394,8 @@
       "97",
       "9"
     ],
-    "interpretation_en": "Dreaming of gold or jewelry traditionally points to wealth and prestige on the way."
+    "interpretation_en": "Dreaming of gold or jewelry traditionally points to wealth and prestige on the way.",
+    "category": "classic"
   },
   {
     "id": "thief",
@@ -385,7 +410,8 @@
       "53",
       "5"
     ],
-    "interpretation_en": "Dreaming of a thief or being robbed is usually a warning to be careful with money or who you trust."
+    "interpretation_en": "Dreaming of a thief or being robbed is usually a warning to be careful with money or who you trust.",
+    "category": "classic"
   },
   {
     "id": "pregnant",
@@ -400,7 +426,8 @@
       "80",
       "8"
     ],
-    "interpretation_en": "Dreaming of pregnancy usually points to a project or new idea that's growing and taking shape."
+    "interpretation_en": "Dreaming of pregnancy usually points to a project or new idea that's growing and taking shape.",
+    "category": "classic"
   },
   {
     "id": "airplane",
@@ -415,7 +442,8 @@
       "61",
       "6"
     ],
-    "interpretation_en": "Dreaming of a plane or flying in one usually points to ambition, or a long journey on the way."
+    "interpretation_en": "Dreaming of a plane or flying in one usually points to ambition, or a long journey on the way.",
+    "category": "classic"
   },
   {
     "id": "spider",
@@ -429,6 +457,1100 @@
       "92",
       "2"
     ],
-    "interpretation_en": "Dreaming of a spider usually points to creativity, or a complicated situation you're tangled up in."
+    "interpretation_en": "Dreaming of a spider usually points to creativity, or a complicated situation you're tangled up in.",
+    "category": "classic"
+  },
+  {
+    "id": "tiger",
+    "category": "animals",
+    "emoji": "🐅",
+    "keywords": [
+      "เสือ"
+    ],
+    "interpretation": "ฝันเห็นเสือ หมายถึงผู้มีอำนาจหรือคู่แข่งที่แข็งแกร่งกำลังเข้ามา ระวังแต่อย่ากลัว",
+    "interpretation_en": "Seeing a tiger points to a powerful figure or strong rival entering your life.",
+    "luckyNumbers": [
+      "37",
+      "73",
+      "6"
+    ]
+  },
+  {
+    "id": "buffalo",
+    "category": "animals",
+    "emoji": "🐃",
+    "keywords": [
+      "ควาย",
+      "วัว"
+    ],
+    "interpretation": "ฝันเห็นควายหรือวัว สื่อถึงความขยันอดทนและทรัพย์สินที่จะงอกเงย",
+    "interpretation_en": "A buffalo or cow speaks of hard work and property that will grow.",
+    "luckyNumbers": [
+      "06",
+      "60",
+      "7"
+    ]
+  },
+  {
+    "id": "chicken",
+    "category": "animals",
+    "emoji": "🐔",
+    "keywords": [
+      "ไก่"
+    ],
+    "interpretation": "ฝันเห็นไก่ มักหมายถึงข่าวสารที่กำลังจะมาถึง หรือเรื่องในครอบครัว",
+    "interpretation_en": "Chickens usually point to news on the way, or a family matter.",
+    "luckyNumbers": [
+      "37",
+      "73",
+      "6"
+    ]
+  },
+  {
+    "id": "pig",
+    "category": "animals",
+    "emoji": "🐖",
+    "keywords": [
+      "หมู"
+    ],
+    "interpretation": "ฝันเห็นหมู ตำนานว่าหมายถึงความอุดมสมบูรณ์และโชคด้านการเงิน",
+    "interpretation_en": "A pig traditionally signals abundance and financial luck.",
+    "luckyNumbers": [
+      "08",
+      "80",
+      "0"
+    ]
+  },
+  {
+    "id": "horse",
+    "category": "animals",
+    "emoji": "🐎",
+    "keywords": [
+      "ม้า"
+    ],
+    "interpretation": "ฝันเห็นม้า หมายถึงการเดินทางหรือความก้าวหน้าที่รวดเร็ว",
+    "interpretation_en": "A horse points to travel or swift progress.",
+    "luckyNumbers": [
+      "85",
+      "58",
+      "7"
+    ]
+  },
+  {
+    "id": "monkey",
+    "category": "animals",
+    "emoji": "🐒",
+    "keywords": [
+      "ลิง"
+    ],
+    "interpretation": "ฝันเห็นลิง มักเตือนเรื่องคนเจ้าเล่ห์หรือเรื่องวุ่นวายรอบตัว",
+    "interpretation_en": "A monkey often warns of a cunning person or chaos around you.",
+    "luckyNumbers": [
+      "66",
+      "0"
+    ]
+  },
+  {
+    "id": "turtle",
+    "category": "animals",
+    "emoji": "🐢",
+    "keywords": [
+      "เต่า"
+    ],
+    "interpretation": "ฝันเห็นเต่า หมายถึงอายุยืน ความมั่นคง และโชคที่มาช้าแต่แน่นอน",
+    "interpretation_en": "A turtle means longevity, stability, and luck that comes slowly but surely.",
+    "luckyNumbers": [
+      "84",
+      "48",
+      "5"
+    ]
+  },
+  {
+    "id": "crocodile",
+    "category": "animals",
+    "emoji": "🐊",
+    "keywords": [
+      "จระเข้"
+    ],
+    "interpretation": "ฝันเห็นจระเข้ เตือนถึงอันตรายที่ซ่อนอยู่ หรือคนที่ไว้ใจไม่ได้",
+    "interpretation_en": "A crocodile warns of hidden danger, or someone not to be trusted.",
+    "luckyNumbers": [
+      "17",
+      "71",
+      "3"
+    ]
+  },
+  {
+    "id": "butterfly",
+    "category": "animals",
+    "emoji": "🦋",
+    "keywords": [
+      "ผีเสื้อ"
+    ],
+    "interpretation": "ฝันเห็นผีเสื้อ หมายถึงการเปลี่ยนแปลงที่สวยงามกำลังจะเกิดขึ้น",
+    "interpretation_en": "A butterfly means a beautiful transformation is coming.",
+    "luckyNumbers": [
+      "20",
+      "02",
+      "4"
+    ]
+  },
+  {
+    "id": "ant",
+    "category": "animals",
+    "emoji": "🐜",
+    "keywords": [
+      "มด"
+    ],
+    "interpretation": "ฝันเห็นมด สื่อถึงความขยันและการสะสมทีละน้อยจนมั่งคั่ง",
+    "interpretation_en": "Ants speak of diligence and wealth built little by little.",
+    "luckyNumbers": [
+      "20",
+      "02",
+      "6"
+    ]
+  },
+  {
+    "id": "bee",
+    "category": "animals",
+    "emoji": "🐝",
+    "keywords": [
+      "ผึ้ง"
+    ],
+    "interpretation": "ฝันเห็นผึ้ง หมายถึงงานที่กำลังให้ผล และความร่วมมือที่ดี",
+    "interpretation_en": "Bees mean work that's bearing fruit, and good cooperation.",
+    "luckyNumbers": [
+      "45",
+      "54",
+      "5"
+    ]
+  },
+  {
+    "id": "naga",
+    "category": "animals",
+    "emoji": "🐉",
+    "keywords": [
+      "นาค",
+      "พญานาค",
+      "มังกร"
+    ],
+    "interpretation": "ฝันเห็นพญานาค เป็นฝันมงคลสูง หมายถึงบารมีและโชคใหญ่",
+    "interpretation_en": "Seeing a naga is highly auspicious — great fortune and standing.",
+    "luckyNumbers": [
+      "76",
+      "67",
+      "9"
+    ]
+  },
+  {
+    "id": "frog",
+    "category": "animals",
+    "emoji": "🐸",
+    "keywords": [
+      "กบ"
+    ],
+    "interpretation": "ฝันเห็นกบ มักหมายถึงข่าวดีเรื่องฝนฟ้าและความชุ่มชื้นในชีวิต",
+    "interpretation_en": "A frog usually means good news and renewed ease in life.",
+    "luckyNumbers": [
+      "72",
+      "27",
+      "6"
+    ]
+  },
+  {
+    "id": "parents",
+    "category": "people",
+    "emoji": "👴",
+    "keywords": [
+      "พ่อ",
+      "แม่",
+      "พ่อแม่",
+      "บุพการี"
+    ],
+    "interpretation": "ฝันเห็นพ่อแม่ หมายถึงการได้รับการปกป้องและคำแนะนำที่ดี",
+    "interpretation_en": "Dreaming of your parents means protection and good guidance.",
+    "luckyNumbers": [
+      "26",
+      "62",
+      "8"
+    ]
+  },
+  {
+    "id": "lover",
+    "category": "people",
+    "emoji": "💑",
+    "keywords": [
+      "แฟน",
+      "คนรัก",
+      "คู่รัก"
+    ],
+    "interpretation": "ฝันเห็นคนรัก สะท้อนความรู้สึกที่ยังค้างคาหรือความสัมพันธ์ที่กำลังเปลี่ยน",
+    "interpretation_en": "Dreaming of a lover reflects unresolved feelings or a shifting relationship.",
+    "luckyNumbers": [
+      "71",
+      "17",
+      "0"
+    ]
+  },
+  {
+    "id": "child",
+    "category": "people",
+    "emoji": "🧒",
+    "keywords": [
+      "เด็ก",
+      "ลูก"
+    ],
+    "interpretation": "ฝันเห็นเด็ก หมายถึงความรับผิดชอบใหม่หรือเรื่องที่ต้องดูแล",
+    "interpretation_en": "A child means a new responsibility or something needing care.",
+    "luckyNumbers": [
+      "37",
+      "73",
+      "0"
+    ]
+  },
+  {
+    "id": "elder",
+    "category": "people",
+    "emoji": "🧓",
+    "keywords": [
+      "คนแก่",
+      "ผู้เฒ่า",
+      "ยาย",
+      "ปู่",
+      "ตา"
+    ],
+    "interpretation": "ฝันเห็นผู้สูงอายุ มักหมายถึงคำเตือนหรือปัญญาจากผู้ใหญ่",
+    "interpretation_en": "An elder usually brings a warning or wisdom from someone older.",
+    "luckyNumbers": [
+      "78",
+      "87",
+      "4"
+    ]
+  },
+  {
+    "id": "teacher",
+    "category": "people",
+    "emoji": "👩‍🏫",
+    "keywords": [
+      "ครู",
+      "อาจารย์"
+    ],
+    "interpretation": "ฝันเห็นครู หมายถึงบทเรียนที่กำลังจะได้เรียนรู้",
+    "interpretation_en": "A teacher means a lesson you're about to learn.",
+    "luckyNumbers": [
+      "16",
+      "61",
+      "9"
+    ]
+  },
+  {
+    "id": "soldier",
+    "category": "people",
+    "emoji": "🎖️",
+    "keywords": [
+      "ทหาร",
+      "ตำรวจทหาร"
+    ],
+    "interpretation": "ฝันเห็นทหาร สื่อถึงการปกป้องหรือความขัดแย้งที่ต้องเผชิญ",
+    "interpretation_en": "A soldier speaks of protection, or a conflict to face.",
+    "luckyNumbers": [
+      "68",
+      "86",
+      "2"
+    ]
+  },
+  {
+    "id": "friend",
+    "category": "people",
+    "emoji": "🤝",
+    "keywords": [
+      "เพื่อน"
+    ],
+    "interpretation": "ฝันเห็นเพื่อน มักหมายถึงความช่วยเหลือที่กำลังมาถึง",
+    "interpretation_en": "A friend usually means help is on the way.",
+    "luckyNumbers": [
+      "88",
+      "0"
+    ]
+  },
+  {
+    "id": "stranger",
+    "category": "people",
+    "emoji": "👤",
+    "keywords": [
+      "คนแปลกหน้า",
+      "คนไม่รู้จัก"
+    ],
+    "interpretation": "ฝันเห็นคนแปลกหน้า หมายถึงโอกาสหรือคนใหม่ที่จะเข้ามาในชีวิต",
+    "interpretation_en": "A stranger means a new opportunity or person entering your life.",
+    "luckyNumbers": [
+      "03",
+      "30",
+      "7"
+    ]
+  },
+  {
+    "id": "crowd",
+    "category": "people",
+    "emoji": "👥",
+    "keywords": [
+      "ฝูงชน",
+      "คนเยอะ"
+    ],
+    "interpretation": "ฝันเห็นฝูงชน สะท้อนความรู้สึกกดดันจากสายตาคนรอบข้าง",
+    "interpretation_en": "A crowd reflects pressure from how others see you.",
+    "luckyNumbers": [
+      "52",
+      "25",
+      "1"
+    ]
+  },
+  {
+    "id": "temple",
+    "category": "places",
+    "emoji": "🛕",
+    "keywords": [
+      "วัด",
+      "โบสถ์"
+    ],
+    "interpretation": "ฝันเห็นวัด เป็นฝันมงคล หมายถึงบุญกุศลและความสงบใจ",
+    "interpretation_en": "A temple is auspicious — merit and peace of mind.",
+    "luckyNumbers": [
+      "61",
+      "16",
+      "5"
+    ]
+  },
+  {
+    "id": "buddha_image",
+    "category": "places",
+    "emoji": "🧘",
+    "keywords": [
+      "พระพุทธรูป",
+      "องค์พระ"
+    ],
+    "interpretation": "ฝันเห็นพระพุทธรูป เป็นมงคลสูง หมายถึงที่พึ่งและการคุ้มครอง",
+    "interpretation_en": "A Buddha image is highly auspicious — refuge and protection.",
+    "luckyNumbers": [
+      "41",
+      "14",
+      "8"
+    ]
+  },
+  {
+    "id": "sea",
+    "category": "places",
+    "emoji": "🌊",
+    "keywords": [
+      "ทะเล",
+      "มหาสมุทร"
+    ],
+    "interpretation": "ฝันเห็นทะเล หมายถึงอารมณ์ที่กว้างใหญ่และโอกาสที่เปิดกว้าง",
+    "interpretation_en": "The sea means vast emotion and wide-open opportunity.",
+    "luckyNumbers": [
+      "47",
+      "74",
+      "2"
+    ]
+  },
+  {
+    "id": "mountain",
+    "category": "places",
+    "emoji": "⛰️",
+    "keywords": [
+      "ภูเขา",
+      "เขา"
+    ],
+    "interpretation": "ฝันเห็นภูเขา สื่อถึงเป้าหมายใหญ่หรืออุปสรรคที่ต้องข้ามให้ได้",
+    "interpretation_en": "A mountain means a big goal, or an obstacle to climb.",
+    "luckyNumbers": [
+      "25",
+      "52",
+      "3"
+    ]
+  },
+  {
+    "id": "river",
+    "category": "places",
+    "emoji": "🏞️",
+    "keywords": [
+      "แม่น้ำ",
+      "ลำธาร",
+      "คลอง"
+    ],
+    "interpretation": "ฝันเห็นแม่น้ำ หมายถึงชีวิตที่ไหลไปข้างหน้าและโชคที่ไหลมา",
+    "interpretation_en": "A river means life flowing forward, and fortune flowing in.",
+    "luckyNumbers": [
+      "16",
+      "61",
+      "0"
+    ]
+  },
+  {
+    "id": "forest",
+    "category": "places",
+    "emoji": "🌳",
+    "keywords": [
+      "ป่า",
+      "ต้นไม้"
+    ],
+    "interpretation": "ฝันเห็นป่าหรือต้นไม้ หมายถึงการเติบโตและรากฐานที่มั่นคง",
+    "interpretation_en": "A forest or tree means growth and steady roots.",
+    "luckyNumbers": [
+      "29",
+      "92",
+      "7"
+    ]
+  },
+  {
+    "id": "market",
+    "category": "places",
+    "emoji": "🏪",
+    "keywords": [
+      "ตลาด"
+    ],
+    "interpretation": "ฝันเห็นตลาด สื่อถึงการค้าขายและโอกาสทำเงิน",
+    "interpretation_en": "A market speaks of trade and chances to make money.",
+    "luckyNumbers": [
+      "01",
+      "10",
+      "2"
+    ]
+  },
+  {
+    "id": "school",
+    "category": "places",
+    "emoji": "🏫",
+    "keywords": [
+      "โรงเรียน",
+      "มหาวิทยาลัย"
+    ],
+    "interpretation": "ฝันเห็นโรงเรียน หมายถึงบทเรียนหรือเรื่องเก่าที่ยังค้างคา",
+    "interpretation_en": "A school means a lesson, or unfinished business from the past.",
+    "luckyNumbers": [
+      "74",
+      "47",
+      "9"
+    ]
+  },
+  {
+    "id": "hospital",
+    "category": "places",
+    "emoji": "🏥",
+    "keywords": [
+      "โรงพยาบาล",
+      "หมอ"
+    ],
+    "interpretation": "ฝันเห็นโรงพยาบาล เตือนให้ดูแลสุขภาพตัวเองและคนใกล้ชิด",
+    "interpretation_en": "A hospital reminds you to care for your health and those close to you.",
+    "luckyNumbers": [
+      "50",
+      "05",
+      "7"
+    ]
+  },
+  {
+    "id": "road",
+    "category": "places",
+    "emoji": "🛣️",
+    "keywords": [
+      "ถนน",
+      "ทาง"
+    ],
+    "interpretation": "ฝันเห็นถนน หมายถึงเส้นทางชีวิตและการตัดสินใจที่กำลังจะมาถึง",
+    "interpretation_en": "A road means your life path and a decision approaching.",
+    "luckyNumbers": [
+      "64",
+      "46",
+      "6"
+    ]
+  },
+  {
+    "id": "bridge",
+    "category": "places",
+    "emoji": "🌉",
+    "keywords": [
+      "สะพาน"
+    ],
+    "interpretation": "ฝันเห็นสะพาน หมายถึงการข้ามผ่านช่วงหนึ่งไปสู่อีกช่วงหนึ่ง",
+    "interpretation_en": "A bridge means crossing from one stage of life to the next.",
+    "luckyNumbers": [
+      "84",
+      "48",
+      "7"
+    ]
+  },
+  {
+    "id": "boat",
+    "category": "objects",
+    "emoji": "⛵",
+    "keywords": [
+      "เรือ"
+    ],
+    "interpretation": "ฝันเห็นเรือ หมายถึงการเดินทางและการฝ่าคลื่นลมในชีวิต",
+    "interpretation_en": "A boat means a journey, and weathering life's waves.",
+    "luckyNumbers": [
+      "19",
+      "91",
+      "9"
+    ]
+  },
+  {
+    "id": "train",
+    "category": "objects",
+    "emoji": "🚆",
+    "keywords": [
+      "รถไฟ"
+    ],
+    "interpretation": "ฝันเห็นรถไฟ สื่อถึงเส้นทางที่ถูกกำหนดไว้แล้วและจังหวะเวลา",
+    "interpretation_en": "A train speaks of a set path and timing.",
+    "luckyNumbers": [
+      "11",
+      "8"
+    ]
+  },
+  {
+    "id": "key",
+    "category": "objects",
+    "emoji": "🔑",
+    "keywords": [
+      "กุญแจ"
+    ],
+    "interpretation": "ฝันเห็นกุญแจ หมายถึงทางออกของปัญหาที่กำลังจะพบ",
+    "interpretation_en": "A key means the solution to a problem is near.",
+    "luckyNumbers": [
+      "70",
+      "07",
+      "4"
+    ]
+  },
+  {
+    "id": "door",
+    "category": "objects",
+    "emoji": "🚪",
+    "keywords": [
+      "ประตู"
+    ],
+    "interpretation": "ฝันเห็นประตู หมายถึงโอกาสใหม่ที่กำลังจะเปิด",
+    "interpretation_en": "A door means a new opportunity about to open.",
+    "luckyNumbers": [
+      "66",
+      "7"
+    ]
+  },
+  {
+    "id": "stairs",
+    "category": "objects",
+    "emoji": "🪜",
+    "keywords": [
+      "บันได"
+    ],
+    "interpretation": "ฝันเห็นบันได หมายถึงความก้าวหน้าทีละขั้นในชีวิต",
+    "interpretation_en": "Stairs mean step-by-step progress.",
+    "luckyNumbers": [
+      "92",
+      "29",
+      "5"
+    ]
+  },
+  {
+    "id": "mirror",
+    "category": "objects",
+    "emoji": "🪞",
+    "keywords": [
+      "กระจก"
+    ],
+    "interpretation": "ฝันเห็นกระจก สะท้อนการมองตัวเองและความจริงที่ต้องยอมรับ",
+    "interpretation_en": "A mirror reflects self-examination and a truth to accept.",
+    "luckyNumbers": [
+      "83",
+      "38",
+      "2"
+    ]
+  },
+  {
+    "id": "clock",
+    "category": "objects",
+    "emoji": "⏰",
+    "keywords": [
+      "นาฬิกา"
+    ],
+    "interpretation": "ฝันเห็นนาฬิกา เตือนเรื่องเวลาที่กำลังจะหมดหรือจังหวะสำคัญ",
+    "interpretation_en": "A clock warns of time running short, or an important moment.",
+    "luckyNumbers": [
+      "63",
+      "36",
+      "7"
+    ]
+  },
+  {
+    "id": "book",
+    "category": "objects",
+    "emoji": "📖",
+    "keywords": [
+      "หนังสือ"
+    ],
+    "interpretation": "ฝันเห็นหนังสือ หมายถึงความรู้และคำตอบที่กำลังจะได้รับ",
+    "interpretation_en": "A book means knowledge and an answer coming.",
+    "luckyNumbers": [
+      "11",
+      "8"
+    ]
+  },
+  {
+    "id": "letter",
+    "category": "objects",
+    "emoji": "✉️",
+    "keywords": [
+      "จดหมาย",
+      "ซองจดหมาย"
+    ],
+    "interpretation": "ฝันเห็นจดหมาย หมายถึงข่าวสารที่กำลังจะมาถึง",
+    "interpretation_en": "A letter means news on the way.",
+    "luckyNumbers": [
+      "03",
+      "30",
+      "6"
+    ]
+  },
+  {
+    "id": "phone",
+    "category": "objects",
+    "emoji": "📱",
+    "keywords": [
+      "โทรศัพท์",
+      "มือถือ"
+    ],
+    "interpretation": "ฝันเห็นโทรศัพท์ หมายถึงการติดต่อที่กำลังจะเกิดขึ้น",
+    "interpretation_en": "A phone means contact about to happen.",
+    "luckyNumbers": [
+      "96",
+      "69",
+      "3"
+    ]
+  },
+  {
+    "id": "clothes",
+    "category": "objects",
+    "emoji": "👗",
+    "keywords": [
+      "เสื้อผ้า",
+      "ชุด"
+    ],
+    "interpretation": "ฝันเห็นเสื้อผ้า สื่อถึงภาพลักษณ์และบทบาทที่กำลังเปลี่ยน",
+    "interpretation_en": "Clothes speak of your image and a changing role.",
+    "luckyNumbers": [
+      "04",
+      "40",
+      "3"
+    ]
+  },
+  {
+    "id": "shoes",
+    "category": "objects",
+    "emoji": "👟",
+    "keywords": [
+      "รองเท้า"
+    ],
+    "interpretation": "ฝันเห็นรองเท้า หมายถึงเส้นทางที่กำลังจะเดินและการเตรียมพร้อม",
+    "interpretation_en": "Shoes mean the path ahead and being ready for it.",
+    "luckyNumbers": [
+      "24",
+      "42",
+      "0"
+    ]
+  },
+  {
+    "id": "ring",
+    "category": "objects",
+    "emoji": "💍",
+    "keywords": [
+      "แหวน"
+    ],
+    "interpretation": "ฝันเห็นแหวน หมายถึงคำมั่นสัญญาหรือความผูกพันที่กำลังจะเกิด",
+    "interpretation_en": "A ring means a promise or bond about to form.",
+    "luckyNumbers": [
+      "49",
+      "94",
+      "2"
+    ]
+  },
+  {
+    "id": "necklace",
+    "category": "objects",
+    "emoji": "📿",
+    "keywords": [
+      "สร้อย",
+      "สร้อยคอ"
+    ],
+    "interpretation": "ฝันเห็นสร้อย หมายถึงคุณค่าที่ได้รับและเกียรติที่กำลังมา",
+    "interpretation_en": "A necklace means value received and honour coming.",
+    "luckyNumbers": [
+      "88",
+      "6"
+    ]
+  },
+  {
+    "id": "boat_sink",
+    "category": "objects",
+    "emoji": "🆘",
+    "keywords": [
+      "เรือล่ม",
+      "เรือจม"
+    ],
+    "interpretation": "ฝันเรือล่ม เตือนถึงแผนที่อาจไม่เป็นไปตามคาด ควรมีทางสำรอง",
+    "interpretation_en": "A sinking boat warns a plan may not go as hoped — have a backup.",
+    "luckyNumbers": [
+      "64",
+      "46",
+      "2"
+    ]
+  },
+  {
+    "id": "moon_dream",
+    "category": "nature",
+    "emoji": "🌕",
+    "keywords": [
+      "พระจันทร์",
+      "ดวงจันทร์",
+      "จันทร์"
+    ],
+    "interpretation": "ฝันเห็นพระจันทร์ หมายถึงความงามที่ซ่อนอยู่และสัญชาตญาณที่แม่นยำ",
+    "interpretation_en": "The moon means hidden beauty and sharp intuition.",
+    "luckyNumbers": [
+      "84",
+      "48",
+      "5"
+    ]
+  },
+  {
+    "id": "sun_dream",
+    "category": "nature",
+    "emoji": "☀️",
+    "keywords": [
+      "พระอาทิตย์",
+      "ดวงอาทิตย์",
+      "ตะวัน"
+    ],
+    "interpretation": "ฝันเห็นพระอาทิตย์ เป็นมงคล หมายถึงความสำเร็จและชื่อเสียง",
+    "interpretation_en": "The sun is auspicious — success and recognition.",
+    "luckyNumbers": [
+      "90",
+      "09",
+      "3"
+    ]
+  },
+  {
+    "id": "star",
+    "category": "nature",
+    "emoji": "⭐",
+    "keywords": [
+      "ดาว",
+      "ดวงดาว"
+    ],
+    "interpretation": "ฝันเห็นดาว หมายถึงความหวังและเป้าหมายที่ชัดเจนขึ้น",
+    "interpretation_en": "Stars mean hope and a goal becoming clearer.",
+    "luckyNumbers": [
+      "57",
+      "75",
+      "9"
+    ]
+  },
+  {
+    "id": "lightning",
+    "category": "nature",
+    "emoji": "🌩️",
+    "keywords": [
+      "ฟ้าผ่า",
+      "ฟ้าร้อง"
+    ],
+    "interpretation": "ฝันเห็นฟ้าผ่า หมายถึงข่าวกะทันหันหรือการเปลี่ยนแปลงที่รวดเร็ว",
+    "interpretation_en": "Lightning means sudden news or rapid change.",
+    "luckyNumbers": [
+      "83",
+      "38",
+      "5"
+    ]
+  },
+  {
+    "id": "storm",
+    "category": "nature",
+    "emoji": "🌪️",
+    "keywords": [
+      "พายุ",
+      "ลมแรง"
+    ],
+    "interpretation": "ฝันเห็นพายุ สื่อถึงช่วงวุ่นวายที่จะผ่านไป ตั้งสติไว้",
+    "interpretation_en": "A storm means a chaotic spell that will pass — stay steady.",
+    "luckyNumbers": [
+      "48",
+      "84",
+      "7"
+    ]
+  },
+  {
+    "id": "flower",
+    "category": "nature",
+    "emoji": "🌸",
+    "keywords": [
+      "ดอกไม้"
+    ],
+    "interpretation": "ฝันเห็นดอกไม้ หมายถึงความสุขและเรื่องดีที่กำลังผลิบาน",
+    "interpretation_en": "Flowers mean happiness and good things blossoming.",
+    "luckyNumbers": [
+      "19",
+      "91",
+      "8"
+    ]
+  },
+  {
+    "id": "fruit",
+    "category": "nature",
+    "emoji": "🍎",
+    "keywords": [
+      "ผลไม้"
+    ],
+    "interpretation": "ฝันเห็นผลไม้ หมายถึงผลของความพยายามที่กำลังจะได้เก็บเกี่ยว",
+    "interpretation_en": "Fruit means the reward of your effort is ready to harvest.",
+    "luckyNumbers": [
+      "66",
+      "2"
+    ]
+  },
+  {
+    "id": "rice",
+    "category": "nature",
+    "emoji": "🌾",
+    "keywords": [
+      "ข้าว",
+      "นาข้าว"
+    ],
+    "interpretation": "ฝันเห็นข้าว เป็นมงคล หมายถึงความอุดมสมบูรณ์และไม่ขาดแคลน",
+    "interpretation_en": "Rice is auspicious — abundance and never going without.",
+    "luckyNumbers": [
+      "83",
+      "38",
+      "0"
+    ]
+  },
+  {
+    "id": "exam",
+    "category": "events",
+    "emoji": "📝",
+    "keywords": [
+      "สอบ",
+      "การสอบ"
+    ],
+    "interpretation": "ฝันว่าสอบ สะท้อนความกดดันและการถูกประเมินในชีวิตจริง",
+    "interpretation_en": "An exam reflects pressure and being judged in real life.",
+    "luckyNumbers": [
+      "28",
+      "82",
+      "0"
+    ]
+  },
+  {
+    "id": "late",
+    "category": "events",
+    "emoji": "⏳",
+    "keywords": [
+      "สาย",
+      "ไปสาย",
+      "ตกรถ"
+    ],
+    "interpretation": "ฝันว่าไปสาย สื่อถึงความกังวลว่าจะพลาดโอกาสสำคัญ",
+    "interpretation_en": "Being late reflects worry about missing an important chance.",
+    "luckyNumbers": [
+      "50",
+      "05",
+      "9"
+    ]
+  },
+  {
+    "id": "lost",
+    "category": "events",
+    "emoji": "🧭",
+    "keywords": [
+      "หลงทาง",
+      "หาทางไม่เจอ"
+    ],
+    "interpretation": "ฝันว่าหลงทาง หมายถึงความไม่แน่ใจในทิศทางชีวิตตอนนี้",
+    "interpretation_en": "Being lost means uncertainty about your direction right now.",
+    "luckyNumbers": [
+      "22",
+      "3"
+    ]
+  },
+  {
+    "id": "naked",
+    "category": "events",
+    "emoji": "🙈",
+    "keywords": [
+      "เปลือย",
+      "ไม่ใส่เสื้อผ้า"
+    ],
+    "interpretation": "ฝันว่าเปลือยกาย สะท้อนความรู้สึกเปราะบางหรือกลัวถูกจับได้",
+    "interpretation_en": "Being naked reflects vulnerability or fear of being found out.",
+    "luckyNumbers": [
+      "72",
+      "27",
+      "5"
+    ]
+  },
+  {
+    "id": "crying",
+    "category": "events",
+    "emoji": "😢",
+    "keywords": [
+      "ร้องไห้",
+      "น้ำตา"
+    ],
+    "interpretation": "ฝันว่าร้องไห้ ตำนานว่ากลับกัน มักหมายถึงความโล่งใจที่กำลังจะมา",
+    "interpretation_en": "Crying is traditionally reversed — relief is usually on the way.",
+    "luckyNumbers": [
+      "98",
+      "89",
+      "0"
+    ]
+  },
+  {
+    "id": "laughing",
+    "category": "events",
+    "emoji": "😄",
+    "keywords": [
+      "หัวเราะ"
+    ],
+    "interpretation": "ฝันว่าหัวเราะ หมายถึงความสุขที่แท้จริงกำลังจะมาถึง",
+    "interpretation_en": "Laughing means real happiness approaching.",
+    "luckyNumbers": [
+      "62",
+      "26",
+      "9"
+    ]
+  },
+  {
+    "id": "swimming",
+    "category": "events",
+    "emoji": "🏊",
+    "keywords": [
+      "ว่ายน้ำ"
+    ],
+    "interpretation": "ฝันว่าว่ายน้ำ หมายถึงการจัดการอารมณ์ได้ดีและผ่านอุปสรรคไปได้",
+    "interpretation_en": "Swimming means handling your emotions well and getting through.",
+    "luckyNumbers": [
+      "71",
+      "17",
+      "2"
+    ]
+  },
+  {
+    "id": "climbing",
+    "category": "events",
+    "emoji": "🧗",
+    "keywords": [
+      "ปีน",
+      "ปีนเขา",
+      "ไต่"
+    ],
+    "interpretation": "ฝันว่าปีนป่าย หมายถึงความพยายามไต่เต้าที่กำลังจะเห็นผล",
+    "interpretation_en": "Climbing means effort to rise that's about to pay off.",
+    "luckyNumbers": [
+      "11",
+      "1"
+    ]
+  },
+  {
+    "id": "eating",
+    "category": "events",
+    "emoji": "🍚",
+    "keywords": [
+      "กินข้าว",
+      "กิน",
+      "อาหาร"
+    ],
+    "interpretation": "ฝันว่ากินอาหาร หมายถึงความพอใจและสิ่งที่กำลังหล่อเลี้ยงชีวิตคุณ",
+    "interpretation_en": "Eating means satisfaction and what's nourishing you now.",
+    "luckyNumbers": [
+      "84",
+      "48",
+      "9"
+    ]
+  },
+  {
+    "id": "bathing",
+    "category": "events",
+    "emoji": "🚿",
+    "keywords": [
+      "อาบน้ำ"
+    ],
+    "interpretation": "ฝันว่าอาบน้ำ หมายถึงการชำระล้างเรื่องไม่ดีและเริ่มต้นใหม่",
+    "interpretation_en": "Bathing means washing away the bad and starting fresh.",
+    "luckyNumbers": [
+      "09",
+      "90",
+      "9"
+    ]
+  },
+  {
+    "id": "ordination",
+    "category": "events",
+    "emoji": "🙏",
+    "keywords": [
+      "บวช",
+      "งานบวช"
+    ],
+    "interpretation": "ฝันเรื่องบวช เป็นมงคล หมายถึงบุญและการเปลี่ยนแปลงทางจิตใจ",
+    "interpretation_en": "An ordination is auspicious — merit and inner change.",
+    "luckyNumbers": [
+      "88",
+      "7"
+    ]
+  },
+  {
+    "id": "blood",
+    "category": "events",
+    "emoji": "🩸",
+    "keywords": [
+      "เลือด"
+    ],
+    "interpretation": "ฝันเห็นเลือด ตำนานว่าหมายถึงญาติพี่น้องหรือเรื่องเงินที่กำลังจะมา",
+    "interpretation_en": "Blood traditionally points to family matters, or money coming.",
+    "luckyNumbers": [
+      "13",
+      "31",
+      "8"
+    ]
+  },
+  {
+    "id": "wound",
+    "category": "events",
+    "emoji": "🩹",
+    "keywords": [
+      "แผล",
+      "บาดเจ็บ"
+    ],
+    "interpretation": "ฝันว่ามีแผล สื่อถึงความเจ็บที่ยังไม่หายและต้องการเวลา",
+    "interpretation_en": "A wound speaks of hurt not yet healed, needing time.",
+    "luckyNumbers": [
+      "36",
+      "63",
+      "9"
+    ]
+  },
+  {
+    "id": "wedding_guest",
+    "category": "events",
+    "emoji": "🎊",
+    "keywords": [
+      "ไปงานแต่ง",
+      "งานเลี้ยง"
+    ],
+    "interpretation": "ฝันไปงานเลี้ยง หมายถึงข่าวดีจากคนรอบข้างที่กำลังจะมาถึง",
+    "interpretation_en": "Attending a celebration means good news from those around you.",
+    "luckyNumbers": [
+      "30",
+      "03",
+      "5"
+    ]
   }
 ]

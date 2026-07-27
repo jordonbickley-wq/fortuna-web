@@ -153,6 +153,16 @@ const STRINGS = {
     pay_amount_exact_label: 'Send exactly this amount',
     pay_exact_note: 'The odd satang is your reference — it lets us match your payment automatically, so please send this exact figure.',
     pay_line_optional: 'Having trouble? You can also reach us here:',
+    cat_all: 'All',
+    symbol_count: (n) => `${n} dream symbols`,
+    nomatch_title: 'That symbol isn\'t in our book yet',
+    nomatch_body: 'Our dream book is still growing. Try browsing the categories below — or describe another part of the dream. Your personal number for today is still yours.',
+    nomatch_browse: 'Browse dream categories',
+    install_title: 'Add to your home screen',
+    install_body: 'Get one-tap access with an icon on your phone, just like an app.',
+    install_btn: 'Add now',
+    install_later: 'Not now',
+    install_ios_hint: 'Tap the Share button below, then choose "Add to Home Screen".',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -307,6 +317,16 @@ const STRINGS = {
     pay_amount_exact_label: 'โอนยอดนี้เป๊ะๆ',
     pay_exact_note: 'เศษสตางค์คือรหัสอ้างอิงของคุณ ช่วยให้เราจับคู่การโอนได้ทันที กรุณาโอนยอดนี้ให้ตรงเป๊ะ',
     pay_line_optional: 'มีปัญหาใช่ไหม? ติดต่อเราได้ที่นี่:',
+    cat_all: 'ทั้งหมด',
+    symbol_count: (n) => `${n} สัญลักษณ์ความฝัน`,
+    nomatch_title: 'ยังไม่มีสัญลักษณ์นี้ในตำรา',
+    nomatch_body: 'ตำราทำนายฝันของเรายังเพิ่มขึ้นเรื่อยๆ ลองเลือกจากหมวดหมู่ด้านล่าง หรือเล่าส่วนอื่นของความฝันดู เลขประจำตัววันนี้ของคุณยังอยู่เหมือนเดิม',
+    nomatch_browse: 'ดูหมวดหมู่ความฝัน',
+    install_title: 'เพิ่มลงหน้าจอโฮม',
+    install_body: 'เปิดได้ในแตะเดียว มีไอคอนบนมือถือเหมือนแอปจริง',
+    install_btn: 'เพิ่มเลย',
+    install_later: 'ไว้ทีหลัง',
+    install_ios_hint: 'กดปุ่มแชร์ด้านล่าง แล้วเลือก "เพิ่มไปยังหน้าจอโฮม"',
   },
 };
 
@@ -445,11 +465,22 @@ function renderResult(data) {
   if (!matched) {
     resultCard.innerHTML = `
       <div class="result-tag">${t('reading_tag_solo')}</div>
-      <div class="result-headline">${t('no_match_headline')}</div>
-      <div class="result-body">${t('no_match_body')}</div>
-      <div class="medallions">${medallion(personalNumber, 'personal')}</div>
+      <div class="nomatch-box">
+        <div class="nm-icon">🔮</div>
+        <div class="result-headline">${t('nomatch_title')}</div>
+        <p>${t('nomatch_body')}</p>
+        <div class="medallions" style="justify-content:center;">${medallion(personalNumber, 'personal')}</div>
+        <button class="nomatch-cta" id="nomatch-browse">${t('nomatch_browse')}</button>
+      </div>
     `;
     resultCard.classList.remove('hidden');
+    const browseBtn = document.getElementById('nomatch-browse');
+    if (browseBtn) {
+      browseBtn.addEventListener('click', () => {
+        const tabs = document.getElementById('cat-tabs');
+        if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
     return;
   }
 
@@ -929,28 +960,78 @@ function renderTemples() {
 }
 
 /* ================= symbol browse grid ================= */
+let allSymbols = [];
+let symbolCategories = [];
+let activeCategory = 'all';
+
 async function loadSymbolGrid() {
   const grid = document.getElementById('symbol-grid');
   if (!grid) return;
   try {
-    const res = await fetch('/api/dream/symbols');
-    const data = await res.json();
-    grid.innerHTML = data.symbols
-      .map((s) => {
-        const label = currentLang === 'th' ? s.label_th : s.label_en;
-        const keyword = currentLang === 'th' ? s.keyword : s.keyword_en;
-        return `<button class="symbol-chip" data-keyword="${escapeHtml(keyword)}"><span class="emoji">${s.emoji}</span>${escapeHtml(label)}</button>`;
+    if (!allSymbols.length) {
+      const res = await fetch('/api/dream/symbols');
+      const data = await res.json();
+      allSymbols = data.symbols || [];
+      symbolCategories = data.categories || [];
+    }
+    renderCategoryTabs();
+    renderSymbolChips();
+  } catch (e) {}
+}
+
+function renderCategoryTabs() {
+  const tabs = document.getElementById('cat-tabs');
+  if (!tabs) return;
+
+  const allTab = `<div class="cat-tab ${activeCategory === 'all' ? 'active' : ''}" data-cat="all">
+      <span class="ce">✦</span>${t('cat_all')}</div>`;
+
+  tabs.innerHTML =
+    allTab +
+    symbolCategories
+      .map((c) => {
+        const name = currentLang === 'th' ? c.name_th : c.name_en;
+        return `<div class="cat-tab ${activeCategory === c.key ? 'active' : ''}" data-cat="${c.key}">
+          <span class="ce">${c.emoji}</span>${escapeHtml(name)}</div>`;
       })
       .join('');
 
-    grid.querySelectorAll('.symbol-chip').forEach((chip) => {
-      chip.addEventListener('click', () => {
-        dreamInput.value = chip.dataset.keyword;
-        revealDream(chip.dataset.keyword);
-        resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      });
+  tabs.querySelectorAll('.cat-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      activeCategory = tab.dataset.cat;
+      renderCategoryTabs();
+      renderSymbolChips();
     });
-  } catch (e) {}
+  });
+}
+
+function renderSymbolChips() {
+  const grid = document.getElementById('symbol-grid');
+  const countEl = document.getElementById('symbol-count');
+  if (!grid) return;
+
+  const list = activeCategory === 'all' ? allSymbols : allSymbols.filter((s) => s.category === activeCategory);
+
+  grid.innerHTML = list
+    .map((s) => {
+      const label = currentLang === 'th' ? s.label_th : s.label_en;
+      const keyword = currentLang === 'th' ? s.keyword : s.keyword_en;
+      return `<button class="symbol-chip" data-keyword="${escapeHtml(keyword)}">
+        <span class="emoji">${s.emoji}</span>
+        <span class="slabel">${escapeHtml(label)}</span>
+      </button>`;
+    })
+    .join('');
+
+  if (countEl) countEl.textContent = t('symbol_count', list.length);
+
+  grid.querySelectorAll('.symbol-chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      dreamInput.value = chip.dataset.keyword;
+      revealDream(chip.dataset.keyword);
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
 }
 
 /* ================= init ================= */
@@ -1714,3 +1795,80 @@ function showPaymentConfirmed(containerId) {
     </div>
   `;
 }
+
+/* ================= install prompt =================
+   Offers "add to home screen" once the visitor has actually used the
+   site, rather than interrupting them the moment they arrive. Dismissal
+   is remembered so it never nags. */
+let deferredInstall = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstall = e;
+  maybeShowInstallBar();
+});
+
+function isStandalone() {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true
+  );
+}
+
+function isIos() {
+  return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+}
+
+function maybeShowInstallBar() {
+  if (isStandalone()) return;                                   // already installed
+  if (localStorage.getItem('fortunaInstallDismissed')) return;  // they said no once
+  if (document.getElementById('install-bar')) return;
+
+  // Only offer after they've engaged - an install prompt shown to someone
+  // who hasn't seen the site yet just gets dismissed.
+  const seen = parseInt(localStorage.getItem('fortunaVisitCount') || '0', 10);
+  if (seen < 2) return;
+
+  const iosOnly = isIos() && !deferredInstall;
+  if (!deferredInstall && !iosOnly) return;
+
+  const bar = document.createElement('div');
+  bar.id = 'install-bar';
+  bar.className = 'install-bar';
+  bar.innerHTML = `
+    <img src="/icons/icon-96.png" alt="" class="ib-icon">
+    <div class="ib-text">
+      <div class="ib-title">${t('install_title')}</div>
+      <div class="ib-body">${iosOnly ? t('install_ios_hint') : t('install_body')}</div>
+    </div>
+    ${iosOnly ? '' : `<button class="ib-go" id="ib-go">${t('install_btn')}</button>`}
+    <button class="ib-close" id="ib-close" aria-label="close">✕</button>
+  `;
+  document.body.appendChild(bar);
+
+  const goBtn = document.getElementById('ib-go');
+  if (goBtn) {
+    goBtn.addEventListener('click', async () => {
+      if (!deferredInstall) return;
+      deferredInstall.prompt();
+      try {
+        await deferredInstall.userChoice;
+      } catch (e) {}
+      deferredInstall = null;
+      bar.remove();
+    });
+  }
+
+  document.getElementById('ib-close').addEventListener('click', () => {
+    localStorage.setItem('fortunaInstallDismissed', '1');
+    bar.remove();
+  });
+}
+
+// Track how many times they've opened the site, so the install offer
+// waits until they're actually interested.
+(function trackVisits() {
+  const n = parseInt(localStorage.getItem('fortunaVisitCount') || '0', 10) + 1;
+  localStorage.setItem('fortunaVisitCount', String(n));
+  if (isIos()) setTimeout(maybeShowInstallBar, 4000);
+})();

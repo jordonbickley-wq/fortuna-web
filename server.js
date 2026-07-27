@@ -492,16 +492,36 @@ const SYMBOL_DISPLAY = {
   spider: { emoji: '🕷️', label_en: 'Spider', label_th: 'แมงมุม' },
 };
 
+
+// Themed groupings for the dream-symbol browser, so ~100 symbols can be
+// explored rather than dumped as one undifferentiated wall.
+const SYMBOL_CATEGORIES = [
+  { key: 'classic', emoji: '🌙', name_en: 'Classic omens', name_th: 'ฝันคลาสสิก' },
+  { key: 'animals', emoji: '🐉', name_en: 'Animals', name_th: 'สัตว์' },
+  { key: 'people', emoji: '👤', name_en: 'People', name_th: 'ผู้คน' },
+  { key: 'places', emoji: '🛕', name_en: 'Places', name_th: 'สถานที่' },
+  { key: 'objects', emoji: '🔑', name_en: 'Objects', name_th: 'สิ่งของ' },
+  { key: 'nature', emoji: '🌸', name_en: 'Nature & sky', name_th: 'ธรรมชาติ' },
+  { key: 'events', emoji: '✨', name_en: 'Events & feelings', name_th: 'เหตุการณ์' },
+];
+
 app.get('/api/dream/symbols', (req, res) => {
-  const symbols = dictionary.map((entry) => ({
-    id: entry.id,
-    keyword: entry.keywords[0],
-    keyword_en: entry.keywords.find((k) => /^[a-zA-Z ]+$/.test(k)) || entry.keywords[0],
-    emoji: (SYMBOL_DISPLAY[entry.id] || {}).emoji || '✨',
-    label_en: (SYMBOL_DISPLAY[entry.id] || {}).label_en || entry.id,
-    label_th: (SYMBOL_DISPLAY[entry.id] || {}).label_th || entry.id,
-  }));
-  res.json({ symbols });
+  const symbols = dictionary.map((entry) => {
+    const disp = SYMBOL_DISPLAY[entry.id] || {};
+    // Newer entries carry their own emoji and use the Thai keyword as the
+    // label; the original 29 have curated labels in SYMBOL_DISPLAY.
+    const thaiKeyword = entry.keywords.find((k) => !/^[a-zA-Z ]+$/.test(k)) || entry.keywords[0];
+    return {
+      id: entry.id,
+      category: entry.category || 'classic',
+      keyword: thaiKeyword,
+      keyword_en: entry.keywords.find((k) => /^[a-zA-Z ]+$/.test(k)) || thaiKeyword,
+      emoji: disp.emoji || entry.emoji || '✨',
+      label_en: disp.label_en || entry.id.replace(/_/g, ' '),
+      label_th: disp.label_th || thaiKeyword,
+    };
+  });
+  res.json({ symbols, categories: SYMBOL_CATEGORIES });
 });
 
 app.get('/api/stats', (req, res) => {
