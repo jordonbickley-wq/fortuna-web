@@ -1,31 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fortuna — Dream Reading & Lucky Numbers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#160F0A">
+<title>โชคดี Fortuna — ทำนายฝัน เลขมงคล ตรวจหวย</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
+<!-- Living background: generative canvas + traditional-motif pattern.
+     Both sit behind everything and never intercept taps. -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="bg-pattern" aria-hidden="true"></div>
+<div class="bg-vignette" aria-hidden="true"></div>
+
 <div class="welcome-overlay hidden" id="welcome-overlay">
   <div class="welcome-modal">
     <div class="welcome-mark">✦</div>
-    <h2 data-i18n="welcome_title">Let's make this yours</h2>
-    <p data-i18n="welcome_sub">Tell us your name and the day you were born — your readings, colours and numbers will be tailored to you.</p>
+    <h2 data-i18n="welcome_title">มาทำให้เป็นของคุณกันเถอะ</h2>
+    <p data-i18n="welcome_sub">บอกชื่อและวันเกิดของคุณ แล้วคำทำนาย สีมงคล และเลขนำโชคจะถูกปรับให้เหมาะกับคุณ</p>
 
-    <label class="welcome-label" data-i18n="welcome_name_label">What should we call you?</label>
-    <input type="text" id="welcome-name" maxlength="40" placeholder="Your name" data-i18n-placeholder="welcome_name_placeholder">
+    <label class="welcome-label" data-i18n="welcome_name_label">ให้เราเรียกคุณว่าอะไรดี?</label>
+    <input type="text" id="welcome-name" maxlength="40" placeholder="ชื่อของคุณ" data-i18n-placeholder="welcome_name_placeholder">
 
-    <label class="welcome-label" data-i18n="welcome_day_label">Which day of the week were you born?</label>
+    <label class="welcome-label" data-i18n="welcome_day_label">คุณเกิดวันอะไร?</label>
     <div class="day-picker" id="day-picker"></div>
-    <p class="welcome-hint" data-i18n="welcome_day_hint">In Thai tradition your birth day sets your lucky colour and your birthday Buddha.</p>
+    <p class="welcome-hint" data-i18n="welcome_day_hint">ตามความเชื่อไทย วันเกิดของคุณกำหนดสีมงคลและพระประจำวันเกิด</p>
 
-    <button class="welcome-go" id="welcome-save" data-i18n="welcome_save">Start my readings</button>
-    <button class="welcome-skip" id="welcome-skip" data-i18n="welcome_skip">Skip for now</button>
-    <p class="welcome-privacy" data-i18n="welcome_privacy">Stored only for your own visits. No email, no phone, no sign-up.</p>
+    <button class="welcome-go" id="welcome-save" data-i18n="welcome_save">เริ่มดูดวงของฉัน</button>
+    <button class="welcome-skip" id="welcome-skip" data-i18n="welcome_skip">ข้ามไปก่อน</button>
+    <p class="welcome-privacy" data-i18n="welcome_privacy">เก็บไว้สำหรับการเข้าชมของคุณเท่านั้น ไม่ต้องใช้อีเมล เบอร์โทร หรือสมัครสมาชิก</p>
   </div>
 </div>
 
@@ -39,12 +46,12 @@
       <div class="logo-word">Fortu<span>na</span></div>
     </div>
     <div class="nav-links">
-      <a href="#dream" data-i18n="nav_dream">Dream</a>
-      <a href="#tarot" data-i18n="nav_tarot">Tarot</a>
-      <a href="#checker" data-i18n="nav_checker">Check</a>
-      <a href="#journal" data-i18n="nav_journal">Journal</a>
-      <a href="#modules" data-i18n="nav_modules">Modules</a>
-      <a href="#shop" data-i18n="nav_shop">Shop</a>
+      <a href="#dream" data-i18n="nav_dream">ทำนายฝัน</a>
+      <a href="#tarot" data-i18n="nav_tarot">ไพ่ทาโรต์</a>
+      <a href="#checker" data-i18n="nav_checker">ตรวจหวย</a>
+      <a href="#journal" data-i18n="nav_journal">สมุดความฝัน</a>
+      <a href="#modules" data-i18n="nav_modules">ฟีเจอร์</a>
+      <a href="#shop" data-i18n="nav_shop">ร้านค้า</a>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
       <div id="lang-toggle" style="display:flex; border:1px solid rgba(201,162,39,0.35); border-radius:999px; overflow:hidden;">
@@ -52,24 +59,24 @@
         <button id="lang-th-btn" style="padding:8px 14px; font-size:12.5px; font-weight:600; border:none; cursor:pointer; background:transparent; color:var(--parchment-dim);">TH</button>
       </div>
       <div id="auth-area">
-        <button class="nav-cta" id="login-btn">Sign in with LINE</button>
+        <button class="nav-cta" id="login-btn">เข้าสู่ระบบด้วย LINE</button>
       </div>
     </div>
   </nav>
 
   <section class="hero" id="dream">
-    <div class="eyebrow" data-i18n="hero_eyebrow">Dream reading · Lucky numbers · Fortune</div>
-    <h1 data-i18n-html="hero_h1">What did you dream<br>about <em>last night?</em></h1>
-    <p data-i18n="hero_p">Type your dream and get an instant reading, plus your personal lucky numbers before the next Government Lottery draw.</p>
+    <div class="eyebrow" data-i18n="hero_eyebrow">ทำนายฝัน · เลขมงคล · เสริมดวง</div>
+    <h1 data-i18n-html="hero_h1">คืนนี้คุณฝันเห็น<br><em>อะไร?</em></h1>
+    <p data-i18n="hero_p">พิมพ์ความฝันของคุณ แล้วรับคำทำนายพร้อมเลขนำโชคประจำตัว ก่อนหวยรัฐบาลออกงวดหน้า</p>
 
     <div class="fortune-card">
       <div class="fortune-card-inner">
-        <input type="text" id="dream-input" placeholder="e.g. I dreamed about a big snake..." data-i18n-placeholder="dream_input_placeholder">
-        <button class="predict-btn" id="reveal-btn" data-i18n="reveal_btn">Reveal ✦</button>
+        <input type="text" id="dream-input" placeholder="เช่น เมื่อคืนฝันเห็นงูใหญ่มาก..." data-i18n-placeholder="dream_input_placeholder">
+        <button class="predict-btn" id="reveal-btn" data-i18n="reveal_btn">ทำนาย ✦</button>
       </div>
     </div>
 
-    <p class="symbol-grid-label" data-i18n="symbol_grid_label">Or pick a category</p>
+    <p class="symbol-grid-label" data-i18n="symbol_grid_label">หรือเลือกจากหมวดหมู่ความฝัน</p>
     <div class="symbol-grid" id="symbol-grid"></div>
 
     <p class="hint hidden" id="login-hint"></p>
@@ -77,16 +84,16 @@
     <div class="result hidden" id="result-card"></div>
 
     <div class="stats-strip">
-      <div class="stat-pill"><div class="stat-num" id="stat-dreams">—</div><div class="stat-label" data-i18n="stat_dreams">dreams read today</div></div>
-      <div class="stat-pill"><div class="stat-num" id="stat-unlocks">—</div><div class="stat-label" data-i18n="stat_unlocks">draw passes unlocked</div></div>
-      <div class="stat-pill"><div class="stat-num" id="stat-days">—</div><div class="stat-label" data-i18n="stat_days">days to next draw</div></div>
+      <div class="stat-pill"><div class="stat-num" id="stat-dreams">—</div><div class="stat-label" data-i18n="stat_dreams">ฝันที่ถูกทำนายวันนี้</div></div>
+      <div class="stat-pill"><div class="stat-num" id="stat-unlocks">—</div><div class="stat-label" data-i18n="stat_unlocks">คนที่ปลดล็อกงวดนี้</div></div>
+      <div class="stat-pill"><div class="stat-num" id="stat-days">—</div><div class="stat-label" data-i18n="stat_days">วันก่อนหวยออก</div></div>
     </div>
   </section>
 
   <section class="today-strip">
     <div class="section-head">
-      <h2 data-i18n="today_heading">Today's Fortune</h2>
-      <p data-i18n="today_sub">A quick daily read before you go about your day</p>
+      <h2 data-i18n="today_heading">ดวงประจำวันนี้</h2>
+      <p data-i18n="today_sub">เช็กดวงสั้นๆ ก่อนเริ่มวันของคุณ</p>
     </div>
     <div class="today-grid">
       <div class="today-card">
@@ -119,7 +126,7 @@
 
   <section class="modules" id="modules">
     <div class="section-head">
-      <h2 data-i18n="modules_heading">Everything luck, in one place</h2>
+      <h2 data-i18n="modules_heading">ครบเรื่องเลขมงคลในที่เดียว</h2>
       <p data-i18n="modules_sub">Tap "Try it" on any card</p>
     </div>
     <div class="module-grid">
@@ -195,22 +202,22 @@
 
   <section class="tarot" id="tarot">
     <div class="section-head">
-      <h2 data-i18n="tarot_heading">Your Card for Today</h2>
-      <p data-i18n="tarot_sub">One card, drawn for you — it stays the same all day</p>
+      <h2 data-i18n="tarot_heading">ไพ่ประจำวันของคุณ</h2>
+      <p data-i18n="tarot_sub">ไพ่หนึ่งใบที่เปิดให้คุณ — จะเป็นใบเดิมตลอดทั้งวัน</p>
     </div>
     <div id="tarot-container"></div>
   </section>
 
   <section class="checker" id="checker">
     <div class="section-head">
-      <h2 data-i18n="checker_heading">Check Your Lottery Ticket</h2>
-      <p data-i18n="checker_sub">Official Government Lottery results — free, no sign-up</p>
+      <h2 data-i18n="checker_heading">ตรวจสลากกินแบ่งรัฐบาล</h2>
+      <p data-i18n="checker_sub">ผลรางวัลอย่างเป็นทางการ — ฟรี ไม่ต้องสมัครสมาชิก</p>
     </div>
     <div class="checker-card">
       <div id="latest-result"></div>
       <div class="checker-input-row">
         <input type="text" id="ticket-input" maxlength="8" placeholder="123456" data-i18n-placeholder="ticket_placeholder">
-        <button class="predict-btn" id="check-ticket-btn" data-i18n="check_ticket_btn">Check</button>
+        <button class="predict-btn" id="check-ticket-btn" data-i18n="check_ticket_btn">ตรวจ</button>
       </div>
       <div id="ticket-result"></div>
     </div>
@@ -218,8 +225,8 @@
 
   <section class="journal" id="journal">
     <div class="section-head">
-      <h2 data-i18n="journal_heading">My Dream Journal</h2>
-      <p data-i18n="journal_sub">Saved dreams, checked against real results after each draw</p>
+      <h2 data-i18n="journal_heading">สมุดความฝันของฉัน</h2>
+      <p data-i18n="journal_sub">ความฝันที่บันทึกไว้ ตรวจกับผลรางวัลจริงหลังหวยออก</p>
     </div>
     <div class="journal-card">
       <div id="journal-summary"></div>
@@ -229,8 +236,8 @@
 
   <section class="shop" id="shop">
     <div class="section-head">
-      <h2 data-i18n="shop_heading">Shop Lucky Items</h2>
-      <p data-i18n="shop_sub">Traditional amulets and charms</p>
+      <h2 data-i18n="shop_heading">ร้านค้าของมงคล</h2>
+      <p data-i18n="shop_sub">วัตถุมงคลและเครื่องรางแบบดั้งเดิม</p>
     </div>
     <div class="shop-grid" id="shop-grid"></div>
   </section>
@@ -256,8 +263,8 @@
   </section>
 
   <footer>
-    <div class="tagline" data-i18n="footer_tagline">Fortuna — your everyday luck companion</div>
-    <div class="draw-note" id="footer-draw">Next Government Lottery draw: —</div>
+    <div class="tagline" data-i18n="footer_tagline">โชคดี — เพื่อนคู่ใจสายมูทุกวัน</div>
+    <div class="draw-note" id="footer-draw">หวยรัฐบาลงวดหน้า: —</div>
   </footer>
   <p style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:6px;" data-i18n="footer_disclaimer">
     This app references Thailand's official Government Lottery (สลากกินแบ่งรัฐบาล) only.
@@ -266,6 +273,7 @@
 
 </div>
 
+<script src="/background.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>

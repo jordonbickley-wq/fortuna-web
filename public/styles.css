@@ -433,3 +433,71 @@ footer .draw-note{ font-size:13px; color:var(--gold-bright); }
 .pb-detail{ font-size:12px; color:var(--parchment-dim); line-height:1.55; }
 .pb-edit{ background:none; border:1px solid rgba(201,162,39,0.3); color:var(--parchment-dim); font-size:11.5px; padding:7px 14px; border-radius:999px; cursor:pointer; white-space:nowrap; }
 .pb-edit:hover{ border-color:rgba(201,162,39,0.6); color:var(--parchment); }
+
+/* =============================================================
+   LIVING BACKGROUND
+   Three stacked layers behind all content:
+   1. #bg-canvas    - generative embers + incense smoke (background.js)
+   2. .bg-pattern   - original Thai-inspired geometric motif, tiled
+   3. .bg-vignette  - darkened edges so text stays readable over it
+   All are pointer-events:none and aria-hidden.
+   ============================================================= */
+#bg-canvas{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+}
+
+/* An original geometric motif drawn with CSS gradients - diamond lattice
+   and lotus-petal arcs, echoing traditional Thai temple ornament without
+   reproducing any existing artwork. */
+.bg-pattern{
+  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.055;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(201,162,39,0.5) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(-45deg, rgba(201,162,39,0.5) 0 1px, transparent 1px 26px),
+    radial-gradient(circle at 50% 0%, rgba(232,135,58,0.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 0% 50%, rgba(232,135,58,0.35) 0 2px, transparent 3px);
+  background-size:52px 52px, 52px 52px, 52px 52px, 52px 52px;
+  animation:patternDrift 90s linear infinite;
+}
+@keyframes patternDrift{
+  from{ background-position:0 0, 0 0, 0 0, 0 0; }
+  to{ background-position:52px 52px, -52px 52px, 52px 52px, 52px 52px; }
+}
+
+/* Slowly breathing light pools - adds depth behind the canvas particles. */
+.bg-vignette{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(201,162,39,0.10), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(110,20,35,0.22), transparent 70%),
+    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 45%, rgba(11,7,5,0.55) 100%);
+  animation:vignetteBreathe 16s ease-in-out infinite;
+}
+@keyframes vignetteBreathe{
+  0%,100%{ opacity:0.85; }
+  50%{ opacity:1; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .bg-pattern, .bg-vignette{ animation:none; }
+}
+
+/* Content must sit above all three background layers. */
+.wrap, .welcome-overlay, nav{ position:relative; z-index:1; }
+
+/* Cards get a touch of backdrop blur so the moving background reads as
+   depth behind them rather than noise through them. */
+.result, .checker-card, .journal-card, .trend-card, .tarot-card,
+.module-card, .product-card, .temple-card, .today-card, .stat-pill,
+.fortune-card, .personal-banner{
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+}
+
+/* Thai typography: use the Thai serif/sans pairing when the page is in
+   Thai, so Thai script renders properly rather than falling back. */
+html[lang="th"]{
+  --font-display:'Noto Serif Thai', 'Fraunces', serif;
+  --font-body:'IBM Plex Sans Thai', 'IBM Plex Sans', sans-serif;
+}
+html[lang="th"] .hero h1 em,
+html[lang="th"] .tarot-name .en{ font-style:normal; }
