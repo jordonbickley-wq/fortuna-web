@@ -837,3 +837,59 @@ html[lang="th"] .tarot-name .en{ font-style:normal; }
 .day-chant .dc-count{ font-family:var(--font-display); font-size:34px; font-weight:700; color:var(--gold-bright); }
 .day-chant .dc-count-label{ font-size:12px; color:var(--parchment-dim); margin-top:2px; }
 .prayer-source{ font-size:11px; color:var(--parchment-dim); line-height:1.6; text-align:center; margin-top:14px; opacity:0.85; position:relative; z-index:1; }
+
+/* ---------- STICKY BOTTOM TAB BAR (mobile) ----------
+   The top nav links are hidden below 720px, which previously left phone
+   users with nothing but scrolling. This gives the five things people
+   actually come for, always one tap away. */
+.tabbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:70;
+  display:none; justify-content:space-around; align-items:stretch;
+  background:rgba(16,11,7,0.94); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-top:1px solid rgba(201,162,39,0.28);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+@media (max-width:720px){ .tabbar{ display:flex; } body{ padding-bottom:74px; } }
+
+.tb-item{
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:3px; padding:9px 2px 8px; text-decoration:none; color:var(--parchment-dim);
+  transition:color .15s ease; min-height:56px;
+}
+.tb-ico{ font-size:19px; line-height:1; }
+.tb-lbl{ font-size:9.5px; font-weight:600; letter-spacing:0.01em; }
+.tb-item.active{ color:var(--gold-bright); }
+.tb-item.active .tb-ico{ filter:drop-shadow(0 0 8px rgba(228,193,88,0.6)); }
+.tb-vip .tb-ico{ color:var(--gold-bright); }
+.tb-item:active{ background:rgba(201,162,39,0.1); }
+
+/* Keep the install prompt clear of the tab bar */
+@media (max-width:720px){ .install-bar{ bottom:82px; } }
+
+/* ---------- CATEGORY CARDS (browse entry point) ---------- */
+.cat-cards{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px; max-width:620px; margin:0 auto 8px;
+}
+.cat-card{
+  position:relative; display:flex; flex-direction:column; align-items:center; gap:8px;
+  background:linear-gradient(165deg, rgba(244,233,208,0.08), rgba(244,233,208,0.02));
+  border:1px solid rgba(201,162,39,0.32); border-radius:18px;
+  padding:20px 12px; cursor:pointer; overflow:hidden;
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.cat-card::before{
+  content:''; position:absolute; inset:5px; border:1px solid rgba(201,162,39,0.16);
+  border-radius:13px; pointer-events:none;
+}
+.cat-card:hover{
+  transform:translateY(-3px); border-color:rgba(201,162,39,0.75);
+  box-shadow:0 12px 26px -12px rgba(201,162,39,0.6);
+}
+.cc-emoji{ font-size:32px; line-height:1; filter:drop-shadow(0 3px 10px rgba(201,162,39,0.4)); }
+.cc-name{ font-family:var(--font-display); font-size:13.5px; color:var(--parchment); text-align:center; line-height:1.3; }
+.cc-count{
+  font-size:10.5px; color:var(--ink); background:linear-gradient(135deg,var(--gold-bright),var(--marigold));
+  padding:2px 9px; border-radius:999px; font-weight:700;
+}
+.cat-tab.back{ background:rgba(244,233,208,0.02); border-style:dashed; }

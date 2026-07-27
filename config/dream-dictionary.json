@@ -1552,5 +1552,282 @@
       "03",
       "5"
     ]
+  },
+  {
+    "id": "scorpion",
+    "category": "animals",
+    "emoji": "🦂",
+    "keywords": [
+      "แมงป่อง"
+    ],
+    "interpretation": "ฝันเห็นแมงป่อง เตือนถึงคนที่แฝงตัวเป็นมิตรแต่อาจมีพิษ ระวังคำพูดลับหลัง",
+    "interpretation_en": "A scorpion warns of someone posing as a friend who may carry a sting — watch for talk behind your back.",
+    "luckyNumbers": [
+      "69",
+      "96",
+      "7"
+    ]
+  },
+  {
+    "id": "centipede",
+    "category": "animals",
+    "emoji": "🐛",
+    "keywords": [
+      "ตะขาบ"
+    ],
+    "interpretation": "ฝันเห็นตะขาบ สื่อถึงอุปสรรคเล็กๆ ที่กวนใจ แต่ผ่านไปได้",
+    "interpretation_en": "A centipede means small nagging obstacles that will pass.",
+    "luckyNumbers": [
+      "47",
+      "74",
+      "7"
+    ]
+  },
+  {
+    "id": "rat",
+    "category": "animals",
+    "emoji": "🐀",
+    "keywords": [
+      "หนู"
+    ],
+    "interpretation": "ฝันเห็นหนู เตือนเรื่องรายจ่ายรั่วไหลหรือคนใกล้ตัวที่ไม่ซื่อ",
+    "interpretation_en": "A rat warns of money leaking away, or someone close being dishonest.",
+    "luckyNumbers": [
+      "22",
+      "6"
+    ]
+  },
+  {
+    "id": "bat",
+    "category": "animals",
+    "emoji": "🦇",
+    "keywords": [
+      "ค้างคาว"
+    ],
+    "interpretation": "ฝันเห็นค้างคาว ตำนานจีนถือเป็นมงคล หมายถึงโชคที่มาในที่มืด",
+    "interpretation_en": "A bat is auspicious in Chinese belief — fortune arriving from an unexpected place.",
+    "luckyNumbers": [
+      "83",
+      "38",
+      "9"
+    ]
+  },
+  {
+    "id": "owl",
+    "category": "animals",
+    "emoji": "🦉",
+    "keywords": [
+      "นกฮูก",
+      "นกเค้าแมว"
+    ],
+    "interpretation": "ฝันเห็นนกฮูก หมายถึงปัญญาและการมองเห็นสิ่งที่คนอื่นมองข้าม",
+    "interpretation_en": "An owl means wisdom, and seeing what others miss.",
+    "luckyNumbers": [
+      "28",
+      "82",
+      "3"
+    ]
+  },
+  {
+    "id": "cobweb",
+    "category": "objects",
+    "emoji": "🕸️",
+    "keywords": [
+      "ใยแมงมุม"
+    ],
+    "interpretation": "ฝันเห็นใยแมงมุม สื่อถึงเรื่องเก่าที่ยังพันอยู่และควรสะสาง",
+    "interpretation_en": "A cobweb means old matters still tangled that need clearing.",
+    "luckyNumbers": [
+      "70",
+      "07",
+      "7"
+    ]
+  },
+  {
+    "id": "snake_bite",
+    "category": "classic",
+    "emoji": "🐍",
+    "keywords": [
+      "งูกัด",
+      "ถูกงูกัด"
+    ],
+    "interpretation": "ฝันถูกงูกัด ตำนานว่าเป็นฝันดี หมายถึงเนื้อคู่หรือโชคใหญ่กำลังมา",
+    "interpretation_en": "Being bitten by a snake is traditionally a good dream — a destined partner or great fortune coming.",
+    "luckyNumbers": [
+      "59",
+      "95",
+      "0"
+    ]
+  },
+  {
+    "id": "teeth_grow",
+    "category": "classic",
+    "emoji": "🦷",
+    "keywords": [
+      "ฟันงอก",
+      "ฟันขึ้น"
+    ],
+    "interpretation": "ฝันฟันงอกใหม่ หมายถึงการเริ่มต้นใหม่และสุขภาพที่ดีขึ้น",
+    "interpretation_en": "New teeth growing means a fresh start and improving health.",
+    "luckyNumbers": [
+      "26",
+      "62",
+      "7"
+    ]
+  },
+  {
+    "id": "white_cloth",
+    "category": "objects",
+    "emoji": "🧧",
+    "keywords": [
+      "ผ้าขาว",
+      "ผ้า"
+    ],
+    "interpretation": "ฝันเห็นผ้าขาว สื่อถึงความบริสุทธิ์และการเริ่มต้นที่สะอาด",
+    "interpretation_en": "White cloth means purity and a clean beginning.",
+    "luckyNumbers": [
+      "37",
+      "73",
+      "9"
+    ]
+  },
+  {
+    "id": "candle",
+    "category": "objects",
+    "emoji": "🕯️",
+    "keywords": [
+      "เทียน",
+      "จุดเทียน"
+    ],
+    "interpretation": "ฝันเห็นเทียน หมายถึงความหวังและแสงสว่างในเรื่องที่มืดมน",
+    "interpretation_en": "A candle means hope, and light in a dark matter.",
+    "luckyNumbers": [
+      "71",
+      "17",
+      "2"
+    ]
+  },
+  {
+    "id": "umbrella",
+    "category": "objects",
+    "emoji": "☂️",
+    "keywords": [
+      "ร่ม"
+    ],
+    "interpretation": "ฝันเห็นร่ม หมายถึงมีผู้ใหญ่คอยปกป้องคุ้มครอง",
+    "interpretation_en": "An umbrella means an elder or protector watching over you.",
+    "luckyNumbers": [
+      "12",
+      "21",
+      "8"
+    ]
+  },
+  {
+    "id": "well",
+    "category": "places",
+    "emoji": "🕳️",
+    "keywords": [
+      "บ่อน้ำ",
+      "บ่อ"
+    ],
+    "interpretation": "ฝันเห็นบ่อน้ำ สื่อถึงแหล่งทรัพย์ที่ยังไม่ถูกใช้",
+    "interpretation_en": "A well means a source of wealth not yet drawn upon.",
+    "luckyNumbers": [
+      "94",
+      "49",
+      "9"
+    ]
+  },
+  {
+    "id": "cave",
+    "category": "places",
+    "emoji": "🕋",
+    "keywords": [
+      "ถ้ำ"
+    ],
+    "interpretation": "ฝันเห็นถ้ำ หมายถึงความลับหรือสิ่งที่ซ่อนอยู่กำลังจะถูกเปิดเผย",
+    "interpretation_en": "A cave means a secret or hidden thing about to be revealed.",
+    "luckyNumbers": [
+      "46",
+      "64",
+      "6"
+    ]
+  },
+  {
+    "id": "waterfall",
+    "category": "nature",
+    "emoji": "💦",
+    "keywords": [
+      "น้ำตก"
+    ],
+    "interpretation": "ฝันเห็นน้ำตก หมายถึงโชคลาภที่ไหลมาอย่างต่อเนื่อง",
+    "interpretation_en": "A waterfall means fortune flowing in continuously.",
+    "luckyNumbers": [
+      "47",
+      "74",
+      "2"
+    ]
+  },
+  {
+    "id": "rainbow",
+    "category": "nature",
+    "emoji": "🌈",
+    "keywords": [
+      "รุ้ง",
+      "สายรุ้ง"
+    ],
+    "interpretation": "ฝันเห็นรุ้ง เป็นมงคล หมายถึงความหวังหลังผ่านช่วงยากลำบาก",
+    "interpretation_en": "A rainbow is auspicious — hope after a hard spell.",
+    "luckyNumbers": [
+      "99",
+      "8"
+    ]
+  },
+  {
+    "id": "gold_bar",
+    "category": "objects",
+    "emoji": "🪙",
+    "keywords": [
+      "ทองคำแท่ง",
+      "ทองแท่ง"
+    ],
+    "interpretation": "ฝันเห็นทองคำแท่ง หมายถึงทรัพย์ก้อนใหญ่ที่กำลังจะมาถึง",
+    "interpretation_en": "A gold bar means a substantial sum on its way.",
+    "luckyNumbers": [
+      "98",
+      "89",
+      "0"
+    ]
+  },
+  {
+    "id": "winning",
+    "category": "events",
+    "emoji": "🎉",
+    "keywords": [
+      "ถูกรางวัล",
+      "ถูกหวย"
+    ],
+    "interpretation": "ฝันว่าถูกรางวัล ตำนานว่ามักกลับกัน แต่สื่อถึงความหวังที่แรงกล้า",
+    "interpretation_en": "Dreaming of winning is often said to reverse — but it reflects strong hope.",
+    "luckyNumbers": [
+      "05",
+      "50",
+      "6"
+    ]
+  },
+  {
+    "id": "falling_tooth_hand",
+    "category": "classic",
+    "emoji": "🤲",
+    "keywords": [
+      "ฟันหลุดมือ"
+    ],
+    "interpretation": "ฝันฟันหลุดมาอยู่ในมือ ตำนานว่าหมายถึงจะได้รับข่าวจากญาติห่างๆ",
+    "interpretation_en": "Catching a fallen tooth traditionally means news from a distant relative.",
+    "luckyNumbers": [
+      "95",
+      "59",
+      "3"
+    ]
   }
 ]

@@ -180,6 +180,8 @@ const STRINGS = {
     day_chant_today_label: "Today's chant",
     chant_times: 'times',
     prayer_source_note: 'The short prayers above are reproduced as commonly chanted. For the full text of your birth-day chant, ask at your local temple or use a printed prayer book — we give the name and count rather than a partial version.',
+    cat_back: 'All categories',
+    tb_dream: 'Dream', tb_tarot: 'Tarot', tb_check: 'Check', tb_vip: 'Blessing', tb_journal: 'Journal',
   },
   th: {
     nav_dream: 'ทำนายฝัน', nav_modules: 'ฟีเจอร์', nav_shop: 'ร้านค้า', nav_temples: 'วัดเลขเด็ด',
@@ -361,6 +363,8 @@ const STRINGS = {
     day_chant_today_label: 'บทสวดประจำวันนี้',
     chant_times: 'จบ',
     prayer_source_note: 'บทสวดสั้นด้านบนคัดมาตามที่สวดกันทั่วไป สำหรับบทสวดประจำวันเกิดฉบับเต็ม กรุณาสอบถามที่วัดใกล้บ้านหรือใช้หนังสือสวดมนต์ เราแสดงชื่อบทและจำนวนจบแทนการลงข้อความไม่ครบ',
+    cat_back: 'ทุกหมวด',
+    tb_dream: 'ฝัน', tb_tarot: 'ไพ่', tb_check: 'ตรวจหวย', tb_vip: 'ห้องมงคล', tb_journal: 'สมุด',
   },
 };
 
@@ -997,7 +1001,7 @@ function renderTemples() {
 /* ================= symbol browse grid ================= */
 let allSymbols = [];
 let symbolCategories = [];
-let activeCategory = 'all';
+let activeCategory = null; // null = show category cards, not 117 symbols at once
 
 async function loadSymbolGrid() {
   const grid = document.getElementById('symbol-grid');
@@ -1018,11 +1022,36 @@ function renderCategoryTabs() {
   const tabs = document.getElementById('cat-tabs');
   if (!tabs) return;
 
-  const allTab = `<div class="cat-tab ${activeCategory === 'all' ? 'active' : ''}" data-cat="all">
-      <span class="ce">✦</span>${t('cat_all')}</div>`;
+  // No category chosen yet: show large category cards rather than
+  // dumping 117 symbols on the page at once.
+  if (activeCategory === null) {
+    tabs.className = 'cat-cards';
+    tabs.innerHTML = symbolCategories
+      .map((c) => {
+        const name = currentLang === 'th' ? c.name_th : c.name_en;
+        const count = allSymbols.filter((s) => s.category === c.key).length;
+        return `<button class="cat-card" data-cat="${c.key}">
+          <span class="cc-emoji">${c.emoji}</span>
+          <span class="cc-name">${escapeHtml(name)}</span>
+          <span class="cc-count">${count}</span>
+        </button>`;
+      })
+      .join('');
 
+    tabs.querySelectorAll('.cat-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        activeCategory = card.dataset.cat;
+        renderCategoryTabs();
+        renderSymbolChips();
+      });
+    });
+    return;
+  }
+
+  // A category is open: compact tabs plus a way back to the overview.
+  tabs.className = 'cat-tabs';
   tabs.innerHTML =
-    allTab +
+    `<div class="cat-tab back" data-cat="__back"><span class="ce">←</span>${t('cat_back')}</div>` +
     symbolCategories
       .map((c) => {
         const name = currentLang === 'th' ? c.name_th : c.name_en;
@@ -1033,7 +1062,7 @@ function renderCategoryTabs() {
 
   tabs.querySelectorAll('.cat-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
-      activeCategory = tab.dataset.cat;
+      activeCategory = tab.dataset.cat === '__back' ? null : tab.dataset.cat;
       renderCategoryTabs();
       renderSymbolChips();
     });
@@ -1045,7 +1074,12 @@ function renderSymbolChips() {
   const countEl = document.getElementById('symbol-count');
   if (!grid) return;
 
-  const list = activeCategory === 'all' ? allSymbols : allSymbols.filter((s) => s.category === activeCategory);
+  if (activeCategory === null) {
+    grid.innerHTML = '';
+    if (countEl) countEl.textContent = t('symbol_count', allSymbols.length);
+    return;
+  }
+  const list = allSymbols.filter((s) => s.category === activeCategory);
 
   grid.innerHTML = list
     .map((s) => {
@@ -2078,3 +2112,54 @@ async function submitBlessingClaim() {
 }
 
 loadBlessingRoom();
+
+/* ================= bottom tab bar =================
+   Highlights whichever section is currently on screen, so the bar acts
+   as a position indicator rather than just a set of links. */
+(function initTabBar() {
+  const bar = document.getElementById('tabbar');
+  if (!bar) return;
+
+  const items = Array.from(bar.querySelectorAll('.tb-item'));
+  const targets = items
+    .map((el) => ({ el, section: document.getElementById(el.dataset.target) }))
+    .filter((t) => t.section);
+
+  function setActive(id) {
+    items.forEach((el) => el.classList.toggle('active', el.dataset.target === id));
+  }
+
+  if ('IntersectionObserver' in window) {
+    const seen = new Map();
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => seen.set(e.target.id, e.intersectionRatio));
+        // Pick whichever tracked section is most visible right now.
+        let bestId = null;
+        let bestRatio = 0;
+        seen.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+        if (bestId && bestRatio > 0.12) setActive(bestId);
+      },
+      { threshold: [0, 0.15, 0.35, 0.6, 0.9] }
+    );
+    targets.forEach((t) => io.observe(t.section));
+  }
+
+  // Smooth scroll that accounts for the sticky top nav.
+  items.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      const section = document.getElementById(el.dataset.target);
+      if (!section) return;
+      e.preventDefault();
+      const navH = 68;
+      const y = section.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setActive(el.dataset.target);
+    });
+  });
+})();

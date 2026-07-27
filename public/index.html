@@ -57,12 +57,10 @@
     </div>
     <div class="nav-links">
       <a href="#dream" data-i18n="nav_dream">ทำนายฝัน</a>
-      <a href="#blessing" data-i18n="nav_blessing" class="nav-vip">✦ ห้องมงคล</a>
       <a href="#tarot" data-i18n="nav_tarot">ไพ่ทาโรต์</a>
-      <a href="#auspicious" data-i18n="nav_auspicious">ฤกษ์มงคล</a>
       <a href="#checker" data-i18n="nav_checker">ตรวจหวย</a>
-      <a href="#journal" data-i18n="nav_journal">สมุดความฝัน</a>
-      <a href="#modules" data-i18n="nav_modules">ฟีเจอร์</a>
+      <a href="#blessing" data-i18n="nav_blessing" class="nav-vip">✦ ห้องมงคล</a>
+      <a href="#auspicious" data-i18n="nav_auspicious">ฤกษ์มงคล</a>
       <a href="#shop" data-i18n="nav_shop">ร้านค้า</a>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
@@ -104,8 +102,38 @@
     </div>
   </section>
 
-  <section class="blessing" id="blessing">
-    <div id="blessing-container"></div>
+
+
+
+
+
+
+
+
+
+
+
+  <section class="tarot" id="tarot">
+    <div class="section-head">
+      <h2 data-i18n="tarot_heading">ไพ่ประจำวันของคุณ</h2>
+      <p data-i18n="tarot_sub">ไพ่หนึ่งใบที่เปิดให้คุณ — จะเป็นใบเดิมตลอดทั้งวัน</p>
+    </div>
+    <div id="tarot-container"></div>
+  </section>
+
+  <section class="checker" id="checker">
+    <div class="section-head">
+      <h2 data-i18n="checker_heading">ตรวจสลากกินแบ่งรัฐบาล</h2>
+      <p data-i18n="checker_sub">ผลรางวัลอย่างเป็นทางการ — ฟรี ไม่ต้องสมัครสมาชิก</p>
+    </div>
+    <div class="checker-card">
+      <div id="latest-result"></div>
+      <div class="checker-input-row">
+        <input type="text" id="ticket-input" maxlength="8" placeholder="123456" data-i18n-placeholder="ticket_placeholder">
+        <button class="predict-btn" id="check-ticket-btn" data-i18n="check_ticket_btn">ตรวจ</button>
+      </div>
+      <div id="ticket-result"></div>
+    </div>
   </section>
 
   <section class="today-strip">
@@ -139,6 +167,32 @@
           <p id="countdown-sub">—</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="blessing" id="blessing">
+    <div id="blessing-container"></div>
+  </section>
+
+  <section class="auspicious" id="auspicious">
+    <div class="section-head">
+      <h2 data-i18n="ausp_heading">ฤกษ์มงคล — หาวันดี</h2>
+      <p data-i18n="ausp_sub">เลือกสิ่งที่คุณจะทำ แล้วดูว่าวันไหนเป็นวันดี</p>
+    </div>
+    <div class="ausp-card">
+      <div class="ausp-picker" id="ausp-picker"></div>
+      <div id="ausp-result"></div>
+    </div>
+  </section>
+
+  <section class="journal" id="journal">
+    <div class="section-head">
+      <h2 data-i18n="journal_heading">สมุดความฝันของฉัน</h2>
+      <p data-i18n="journal_sub">ความฝันที่บันทึกไว้ ตรวจกับผลรางวัลจริงหลังหวยออก</p>
+    </div>
+    <div class="journal-card">
+      <div id="journal-summary"></div>
+      <div id="journal-list"></div>
     </div>
   </section>
 
@@ -218,25 +272,6 @@
     </div>
   </section>
 
-  <section class="tarot" id="tarot">
-    <div class="section-head">
-      <h2 data-i18n="tarot_heading">ไพ่ประจำวันของคุณ</h2>
-      <p data-i18n="tarot_sub">ไพ่หนึ่งใบที่เปิดให้คุณ — จะเป็นใบเดิมตลอดทั้งวัน</p>
-    </div>
-    <div id="tarot-container"></div>
-  </section>
-
-  <section class="auspicious" id="auspicious">
-    <div class="section-head">
-      <h2 data-i18n="ausp_heading">ฤกษ์มงคล — หาวันดี</h2>
-      <p data-i18n="ausp_sub">เลือกสิ่งที่คุณจะทำ แล้วดูว่าวันไหนเป็นวันดี</p>
-    </div>
-    <div class="ausp-card">
-      <div class="ausp-picker" id="ausp-picker"></div>
-      <div id="ausp-result"></div>
-    </div>
-  </section>
-
   <section class="spreads" id="spreads">
     <div class="section-head">
       <h2 data-i18n="spread_heading">เปิดไพ่แบบเต็ม</h2>
@@ -248,38 +283,20 @@
     </div>
   </section>
 
-  <section class="checker" id="checker">
-    <div class="section-head">
-      <h2 data-i18n="checker_heading">ตรวจสลากกินแบ่งรัฐบาล</h2>
-      <p data-i18n="checker_sub">ผลรางวัลอย่างเป็นทางการ — ฟรี ไม่ต้องสมัครสมาชิก</p>
-    </div>
-    <div class="checker-card">
-      <div id="latest-result"></div>
-      <div class="checker-input-row">
-        <input type="text" id="ticket-input" maxlength="8" placeholder="123456" data-i18n-placeholder="ticket_placeholder">
-        <button class="predict-btn" id="check-ticket-btn" data-i18n="check_ticket_btn">ตรวจ</button>
-      </div>
-      <div id="ticket-result"></div>
-    </div>
-  </section>
-
-  <section class="journal" id="journal">
-    <div class="section-head">
-      <h2 data-i18n="journal_heading">สมุดความฝันของฉัน</h2>
-      <p data-i18n="journal_sub">ความฝันที่บันทึกไว้ ตรวจกับผลรางวัลจริงหลังหวยออก</p>
-    </div>
-    <div class="journal-card">
-      <div id="journal-summary"></div>
-      <div id="journal-list"></div>
-    </div>
-  </section>
-
   <section class="shop" id="shop">
     <div class="section-head">
       <h2 data-i18n="shop_heading">ร้านค้าของมงคล</h2>
       <p data-i18n="shop_sub">วัตถุมงคลและเครื่องรางแบบดั้งเดิม</p>
     </div>
     <div class="shop-grid" id="shop-grid"></div>
+  </section>
+
+  <section class="temples" id="temples">
+    <div class="section-head">
+      <h2 data-i18n="temples_heading">Where Thais Go for Lucky Numbers</h2>
+      <p data-i18n="temples_sub">Five real, well-known pilgrimage sites — not a guarantee of anything, just cultural context</p>
+    </div>
+    <div class="temple-grid" id="temple-grid"></div>
   </section>
 
   <section class="trends" id="trends">
@@ -294,14 +311,6 @@
     </div>
   </section>
 
-  <section class="temples" id="temples">
-    <div class="section-head">
-      <h2 data-i18n="temples_heading">Where Thais Go for Lucky Numbers</h2>
-      <p data-i18n="temples_sub">Five real, well-known pilgrimage sites — not a guarantee of anything, just cultural context</p>
-    </div>
-    <div class="temple-grid" id="temple-grid"></div>
-  </section>
-
   <footer>
     <div class="tagline" data-i18n="footer_tagline">โชคดี — เพื่อนคู่ใจสายมูทุกวัน</div>
     <div class="draw-note" id="footer-draw">หวยรัฐบาลงวดหน้า: —</div>
@@ -312,6 +321,27 @@
   <p id="visit-counter" style="text-align:center;font-size:11px;color:var(--parchment-dim,#999);padding-bottom:20px;opacity:0.7;"></p>
 
 </div>
+
+
+<!-- Sticky bottom bar: the primary way to move around on a phone, where
+     the top nav links are hidden. Mirrors how a native app behaves. -->
+<nav class="tabbar" id="tabbar" aria-label="Main">
+  <a href="#dream" class="tb-item" data-target="dream">
+    <span class="tb-ico">🌙</span><span class="tb-lbl" data-i18n="tb_dream">ฝัน</span>
+  </a>
+  <a href="#tarot" class="tb-item" data-target="tarot">
+    <span class="tb-ico">🔮</span><span class="tb-lbl" data-i18n="tb_tarot">ไพ่</span>
+  </a>
+  <a href="#checker" class="tb-item" data-target="checker">
+    <span class="tb-ico">🎟️</span><span class="tb-lbl" data-i18n="tb_check">ตรวจหวย</span>
+  </a>
+  <a href="#blessing" class="tb-item tb-vip" data-target="blessing">
+    <span class="tb-ico">✦</span><span class="tb-lbl" data-i18n="tb_vip">ห้องมงคล</span>
+  </a>
+  <a href="#journal" class="tb-item" data-target="journal">
+    <span class="tb-ico">📓</span><span class="tb-lbl" data-i18n="tb_journal">สมุด</span>
+  </a>
+</nav>
 
 <script>
   // Register the service worker so the app opens instantly on repeat
